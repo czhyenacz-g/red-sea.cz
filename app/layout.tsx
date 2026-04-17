@@ -27,7 +27,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="cs">
-      <body className="bg-gray-900 text-white antialiased">
+      <body className="bg-white text-white antialiased">
         {children}
         <Analytics />
         {GOATCOUNTER_CODE && (
