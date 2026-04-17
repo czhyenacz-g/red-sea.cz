@@ -1,7 +1,11 @@
-# Starter — instrukce pro Claude
+# Red Sea CZ — instrukce pro Claude
 
-Tento repozitář je šablona pro rychlé zakládání nových Next.js projektů.
-Hynek řekne název a nápad → Claude udělá vše ostatní.
+B2B prezentace pro velkoobchodní distribuci akvarijní techniky [Red Sea Fish](https://redseafish.com/) na českém trhu.
+
+## Zdroje obsahu
+
+- **Produkty a specifikace**: https://redseafish.com/
+- **České popisky**: https://www.morskeakvarium.eu/ — máme povoleno přebírat popisky produktů z tohoto webu
 
 ---
 
