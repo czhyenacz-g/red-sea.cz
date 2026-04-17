@@ -20,8 +20,15 @@ export function Header() {
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center gap-8 py-4">
-          <Link href="/" className="shrink-0">
+          <Link href="/" className="shrink-0 flex items-center gap-3">
             <RedSeaLogo />
+            <span className="hidden sm:block w-px h-8 bg-gray-200" />
+            <span
+              className="hidden sm:block text-sm font-bold tracking-tight"
+              style={{ color: "#153156", fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif", letterSpacing: "-0.01em" }}
+            >
+              red-sea.cz
+            </span>
           </Link>
           <nav className="hidden lg:flex items-center gap-1 flex-1">
             {NAV_ITEMS.map((item) => (
