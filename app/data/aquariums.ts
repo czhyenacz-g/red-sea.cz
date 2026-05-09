@@ -11,6 +11,7 @@ export type AquariumProduct = {
   slug: string;
   name: string;
   series: string;
+  groupSlug: string;
   featured?: boolean;
   volume?: string;
   status: AquariumStatus;
@@ -26,22 +27,42 @@ export type AquariumProduct = {
   specs: Array<{ label: string; value: string }>;
 };
 
-const REEFER_G3_COPY = [
-  "Reef-ready systems with redesigned flow system.",
-  "Hydrodynamically superior piping and up to 50% more circulation.",
-  "Popular REEFER features with extended warranty up to 5 years.",
-  "Customizable with preferred equipment.",
-];
+export type AquariumGroup = {
+  slug: string;
+  name: string;
+  source?: {
+    status: "provided-text" | "verified" | "placeholder";
+    note?: string;
+    url?: string;
+  };
+  description: string;
+  products: AquariumProduct[];
+};
+
+const MAX_NANO_DESCRIPTION =
+  "Rear filtration chamber, can be sold without cabinet, equipped with LED light, pump and skimmer, prepared for ReefATO and NanoMat accessories. [i]";
+
+const MAX_NANO_GROUP_DESCRIPTION =
+  "Rear filtration chamber, can be sold without cabinet, equipped with LED light, pump and skimmer, prepared for ReefATO and NanoMat accessories, available in four types, in white and black finish. [i]";
+
+const REEFER_G3_GROUP_DESCRIPTION =
+  "Reef-ready systems with redesigned flow system, hydrodynamically superior piping, up to 50% more water circulation, customizable with preferred equipment, extended warranty up to 5 years. [i]";
 
 const REEFER_G3_HIGHLIGHTS = [
-  "17 models ranging from 60 to 210 cm width",
+  "Reef-ready systems [i]",
+  "Redesigned flow system [i]",
+  "Hydrodynamically superior piping [i]",
+  "Up to 50% more water circulation [i]",
+  "Customizable with preferred equipment [i]",
+  "Extended warranty up to 5 years [i]",
+];
+
+const REEFER_G3_SERIES_RULES = [
   "Regular and Peninsula designs",
-  "Redesigned flow system",
-  "Hydrodynamically superior piping",
+  "Eurobraced for 425 models and above",
   "ReefMat-ready sumps",
   "Integrated smart ATO",
   "Marine-spec plywood cabinets with leveling feet",
-  "Extended warranty up to 5 years",
 ];
 
 const EMPTY_VARIANTS: Record<CabinetColor, AquariumVariant> = {
@@ -49,21 +70,20 @@ const EMPTY_VARIANTS: Record<CabinetColor, AquariumVariant> = {
   black: { image: null, imageAlt: "Aquarium black cabinet placeholder" },
 };
 
-export const AQUARIUM_CATALOG: AquariumProduct[] = [
+const maxNanoProducts: AquariumProduct[] = [
   {
     slug: "max-nano-g2-cube",
     name: "MAX NANO G2 cube",
     series: "MAX NANO G2",
+    groupSlug: "max-nano-g2",
     volume: "75 l",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text.",
     },
-    shortDescription:
-      "Rear filtration chamber, can be sold without cabinet, equipped with LED light, pump and skimmer, prepared for ReefATO and NanoMat accessories. [i]",
-    longDescription:
-      "Available in four types and in white and black finish. [i]",
+    shortDescription: MAX_NANO_DESCRIPTION,
+    longDescription: "Available in four types and in white and black finish. [i]",
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Volume", value: "75 l" }],
   },
@@ -71,16 +91,15 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "max-nano-g2-peninsula",
     name: "MAX NANO G2 peninsula",
     series: "MAX NANO G2",
+    groupSlug: "max-nano-g2",
     volume: "100 l",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text.",
     },
-    shortDescription:
-      "Rear filtration chamber, can be sold without cabinet, equipped with LED light, pump and skimmer, prepared for ReefATO and NanoMat accessories. [i]",
-    longDescription:
-      "Available in four types and in white and black finish. [i]",
+    shortDescription: MAX_NANO_DESCRIPTION,
+    longDescription: "Available in four types and in white and black finish. [i]",
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Volume", value: "100 l" }],
   },
@@ -88,16 +107,15 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "max-nano-g2-xl",
     name: "MAX NANO G2 XL",
     series: "MAX NANO G2",
+    groupSlug: "max-nano-g2",
     volume: "125 l",
     status: "ready",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and converted image assets.",
     },
-    shortDescription:
-      "Rear filtration chamber, can be sold without cabinet, equipped with LED light, pump and skimmer, prepared for ReefATO and NanoMat accessories. [i]",
-    longDescription:
-      "Available in four types and in white and black finish. [i]",
+    shortDescription: MAX_NANO_DESCRIPTION,
+    longDescription: "Available in four types and in white and black finish. [i]",
     variants: {
       white: {
         image: "/assets/aquariums/max-nano-xl-white.webp",
@@ -114,30 +132,33 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "max-nano-g2-xxl",
     name: "MAX NANO G2 XXL",
     series: "MAX NANO G2",
+    groupSlug: "max-nano-g2",
     volume: "200 l",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text.",
     },
-    shortDescription:
-      "Rear filtration chamber, can be sold without cabinet, equipped with LED light, pump and skimmer, prepared for ReefATO and NanoMat accessories. [i]",
-    longDescription:
-      "Available in four types and in white and black finish. [i]",
+    shortDescription: MAX_NANO_DESCRIPTION,
+    longDescription: "Available in four types and in white and black finish. [i]",
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Volume", value: "200 l" }],
   },
+];
+
+const reefMaxG3Products: AquariumProduct[] = [
   {
     slug: "reefer-max-170-g3",
     name: "REEFER MAX 170 G3",
     series: "REEFER MAX G3",
+    groupSlug: "reefer-max-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -145,13 +166,14 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-max-200-g3",
     name: "REEFER MAX 200 G3",
     series: "REEFER MAX G3",
+    groupSlug: "reefer-max-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -159,13 +181,14 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-max-250-g3",
     name: "REEFER MAX 250 G3",
     series: "REEFER MAX G3",
+    groupSlug: "reefer-max-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -173,13 +196,14 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-max-300-g3",
     name: "REEFER MAX 300 G3",
     series: "REEFER MAX G3",
+    groupSlug: "reefer-max-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -187,13 +211,14 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-max-350-g3",
     name: "REEFER MAX 350 G3",
     series: "REEFER MAX G3",
+    groupSlug: "reefer-max-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -201,13 +226,14 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-max-425-g3",
     name: "REEFER MAX 425 G3",
     series: "REEFER MAX G3",
+    groupSlug: "reefer-max-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: [...REEFER_G3_HIGHLIGHTS, "Eurobraced for 425 models and above"],
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -215,13 +241,14 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-max-525-g3",
     name: "REEFER MAX 525 G3",
     series: "REEFER MAX G3",
+    groupSlug: "reefer-max-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: [...REEFER_G3_HIGHLIGHTS, "Eurobraced for 425 models and above"],
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -229,13 +256,14 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-max-625-g3",
     name: "REEFER MAX 625 G3",
     series: "REEFER MAX G3",
+    groupSlug: "reefer-max-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: [...REEFER_G3_HIGHLIGHTS, "Eurobraced for 425 models and above"],
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -243,83 +271,60 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-max-750-g3",
     name: "REEFER MAX 750 G3",
     series: "REEFER MAX G3",
+    groupSlug: "reefer-max-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: [...REEFER_G3_HIGHLIGHTS, "Eurobraced for 425 models and above"],
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
     variants: EMPTY_VARIANTS,
     specs: [],
   },
-  {
-    slug: "reefer-max-s-550-g3",
-    name: "REEFER MAX S-550 G3",
+];
+
+const reefMaxSProducts: AquariumProduct[] = [
+  "REEFER MAX S-550 G3",
+  "REEFER MAX S-700 G3",
+  "REEFER MAX S-850 G3",
+  "REEFER MAX S-1000 G3",
+].map((name) => {
+  const slug = name
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+
+  return {
+    slug,
+    name,
     series: "REEFER MAX S G3",
-    status: "placeholder",
+    groupSlug: "reefer-max-s-g3",
+    status: "placeholder" as const,
     source: {
-      status: "provided-text",
+      status: "provided-text" as const,
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
-  },
-  {
-    slug: "reefer-max-s-700-g3",
-    name: "REEFER MAX S-700 G3",
-    series: "REEFER MAX S G3",
-    status: "placeholder",
-    source: {
-      status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
-    },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
-    variants: EMPTY_VARIANTS,
-    specs: [],
-  },
-  {
-    slug: "reefer-max-s-850-g3",
-    name: "REEFER MAX S-850 G3",
-    series: "REEFER MAX S G3",
-    status: "placeholder",
-    source: {
-      status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
-    },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
-    variants: EMPTY_VARIANTS,
-    specs: [],
-  },
-  {
-    slug: "reefer-max-s-1000-g3",
-    name: "REEFER MAX S-1000 G3",
-    series: "REEFER MAX S G3",
-    status: "placeholder",
-    source: {
-      status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
-    },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
-    variants: EMPTY_VARIANTS,
-    specs: [],
-  },
+  };
+});
+
+const reefMaxPeninsulaProducts: AquariumProduct[] = [
   {
     slug: "reefer-max-peninsula-350-g3",
     name: "REEFER MAX Peninsula 350 G3",
     series: "REEFER MAX Peninsula G3",
+    groupSlug: "reefer-max-peninsula-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "96 cm" }],
   },
@@ -327,27 +332,32 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-max-peninsula-500-g3",
     name: "REEFER MAX Peninsula 500 G3",
     series: "REEFER MAX Peninsula G3",
+    groupSlug: "reefer-max-peninsula-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "125 cm" }],
   },
+];
+
+const reefMaxSPeninsulaProducts: AquariumProduct[] = [
   {
     slug: "reefer-max-peninsula-s-700-g3",
     name: "REEFER MAX Peninsula S-700 G3",
     series: "REEFER MAX S Peninsula G3",
+    groupSlug: "reefer-max-s-peninsula-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "151 cm" }],
   },
@@ -355,14 +365,70 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-max-peninsula-s-950-g3",
     name: "REEFER MAX Peninsula S-950 G3",
     series: "REEFER MAX S Peninsula G3",
+    groupSlug: "reefer-max-s-peninsula-g3",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: REEFER_G3_COPY.join(" "),
-    highlights: REEFER_G3_HIGHLIGHTS,
+    shortDescription: REEFER_G3_GROUP_DESCRIPTION,
+    highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "200 cm" }],
   },
 ];
+
+export const AQUARIUM_GROUPS: AquariumGroup[] = [
+  {
+    slug: "max-nano-g2",
+    name: "MAX NANO G2",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text.",
+    },
+    description: MAX_NANO_GROUP_DESCRIPTION,
+    products: maxNanoProducts,
+  },
+  {
+    slug: "reefer-max-g3",
+    name: "REEFER MAX G3",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text.",
+    },
+    description: REEFER_G3_GROUP_DESCRIPTION,
+    products: reefMaxG3Products,
+  },
+  {
+    slug: "reefer-max-s-g3",
+    name: "REEFER MAX S G3",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text.",
+    },
+    description: REEFER_G3_GROUP_DESCRIPTION,
+    products: reefMaxSProducts,
+  },
+  {
+    slug: "reefer-max-peninsula-g3",
+    name: "REEFER MAX Peninsula G3",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text.",
+    },
+    description: `${REEFER_G3_GROUP_DESCRIPTION} Regular and Peninsula designs. [i]`,
+    products: reefMaxPeninsulaProducts,
+  },
+  {
+    slug: "reefer-max-s-peninsula-g3",
+    name: "REEFER MAX S Peninsula G3",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text.",
+    },
+    description: `${REEFER_G3_GROUP_DESCRIPTION} Regular and Peninsula designs. [i]`,
+    products: reefMaxSPeninsulaProducts,
+  },
+];
+
+export const AQUARIUM_CATALOG = AQUARIUM_GROUPS.flatMap((group) => group.products);
