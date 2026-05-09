@@ -1,12 +1,20 @@
 import { Header } from "../components/Header";
+import { AquariumColorSwitcher } from "../components/AquariumColorSwitcher";
+import { AQUARIUM_VARIANTS } from "../data/aquariumVariants";
 
 export default function Page() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-slate-950">
       <Header />
-      <main className="flex-1 max-w-7xl mx-auto px-6 py-16 w-full">
-        <h1 className="text-3xl font-bold text-[#153156] mb-4">aquariums</h1>
-        <p className="text-gray-400">Obsah připravujeme.</p>
+      <main className="flex-1 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="mx-auto w-full max-w-7xl">
+          <AquariumColorSwitcher
+            eyebrow="Aquariums"
+            heading="Cabinet color switcher"
+            intro="Pick the cabinet finish to see the aquarium in the right visual context. White cabinets are presented on a dark stage; black cabinets switch to a light stage for maximum contrast."
+            variants={AQUARIUM_VARIANTS}
+          />
+        </div>
       </main>
     </div>
   );
