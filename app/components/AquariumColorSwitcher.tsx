@@ -2,20 +2,10 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
-
-export type CabinetColor = "white" | "black";
-
-export type AquariumVariant = {
-  color: CabinetColor;
-  label: string;
-  title: string;
-  description: string;
-  image: string;
-  imageAlt: string;
-};
+import type { AquariumProduct, CabinetColor } from "../data/aquariums";
 
 type AquariumColorSwitcherProps = {
-  variants: Record<CabinetColor, AquariumVariant>;
+  product: AquariumProduct;
   eyebrow?: string;
   heading: string;
   intro: string;
@@ -26,9 +16,9 @@ const SWITCHER_OPTIONS: Array<{ color: CabinetColor; label: string }> = [
   { color: "black", label: "Black cabinet" },
 ];
 
-export function AquariumColorSwitcher({ variants, eyebrow, heading, intro }: AquariumColorSwitcherProps) {
+export function AquariumColorSwitcher({ product, eyebrow, heading, intro }: AquariumColorSwitcherProps) {
   const [selectedColor, setSelectedColor] = useState<CabinetColor>("white");
-  const selected = useMemo(() => variants[selectedColor], [selectedColor, variants]);
+  const selected = useMemo(() => product.variants[selectedColor], [product.variants, selectedColor]);
 
   const theme =
     selectedColor === "white"
@@ -39,6 +29,8 @@ export function AquariumColorSwitcher({ variants, eyebrow, heading, intro }: Aqu
           button: "border-white/10 bg-white/5 text-white hover:bg-white/10",
           buttonActive: "border-amber-400 bg-amber-400 text-slate-950",
           accent: "text-amber-300",
+          imageBackdrop: "bg-white",
+          imageFrame: "border-white/10",
         }
       : {
           shell: "bg-white text-slate-900",
@@ -47,7 +39,12 @@ export function AquariumColorSwitcher({ variants, eyebrow, heading, intro }: Aqu
           button: "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
           buttonActive: "border-slate-900 bg-slate-900 text-white",
           accent: "text-sky-700",
+          imageBackdrop: "bg-white",
+          imageFrame: "border-slate-200",
         };
+
+  const hasImage = Boolean(selected.image);
+  const imageSrc = selected.image;
 
   return (
     <section className={`overflow-hidden rounded-[2rem] border ${theme.panel} ${theme.shell}`}>
@@ -83,27 +80,50 @@ export function AquariumColorSwitcher({ variants, eyebrow, heading, intro }: Aqu
 
           <div className={`rounded-3xl border p-5 md:p-6 ${theme.panel}`}>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-current/60">Selected variant</p>
-            <h3 className="mt-2 text-2xl font-semibold">{selected.title}</h3>
-            <p className={`mt-3 max-w-xl text-sm leading-6 sm:text-base ${theme.muted}`}>{selected.description}</p>
+            <h3 className="mt-2 text-2xl font-semibold">{product.name}</h3>
+            <p className={`mt-1 text-sm font-medium uppercase tracking-[0.2em] ${theme.muted}`}>{product.series}</p>
+            <p className={`mt-3 max-w-xl text-sm leading-6 sm:text-base ${theme.muted}`}>{product.longDescription ?? product.shortDescription}</p>
+            <dl className="mt-5 grid gap-3 sm:grid-cols-2">
+              {product.specs.map((spec) => (
+                <div key={spec.label} className={`rounded-2xl border px-4 py-3 ${theme.panel}`}>
+                  <dt className={`text-xs font-semibold uppercase tracking-[0.2em] ${theme.muted}`}>{spec.label}</dt>
+                  <dd className="mt-1 text-sm font-medium">{spec.value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
 
         <div className="relative">
           <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/10 via-transparent to-transparent blur-2xl" />
-          <div className={`relative overflow-hidden rounded-[2rem] border p-4 shadow-2xl ${theme.panel}`}>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-black/10">
-              <Image
-                src={selected.image}
-                alt={selected.imageAlt}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 48vw"
-                className="object-contain p-2 sm:p-4"
-              />
+          <div className={`relative overflow-hidden rounded-[2rem] border p-4 shadow-2xl ${theme.panel} ${theme.imageFrame}`}>
+            <div className={`relative aspect-[4/3] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
+              {hasImage && imageSrc ? (
+                <Image
+                  src={imageSrc}
+                  alt={selected.imageAlt}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 48vw"
+                  className="object-contain p-2 sm:p-4"
+                />
+              ) : (
+                <div className={`flex h-full w-full items-center justify-center p-6 text-center ${theme.muted}`}>
+                  <div className="max-w-sm space-y-3">
+                    <div className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border ${theme.panel}`}>
+                      <span className="text-2xl">+</span>
+                    </div>
+                    <p className="text-sm font-medium">Preview coming soon</p>
+                    <p className="text-sm leading-6">
+                      This product is listed in the catalog, but the converted cabinet images are not ready yet.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
             <div className={`mt-4 flex items-center justify-between gap-4 text-sm ${theme.muted}`}>
               <span className="font-medium">Cabinet color</span>
-              <span className="capitalize">{selected.color}</span>
+              <span className="capitalize">{selectedColor}</span>
             </div>
           </div>
         </div>
