@@ -10,9 +10,9 @@ export default function Page() {
           <section className="space-y-4">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">Aquariums</p>
             <div className="max-w-3xl space-y-3">
-              <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Data-driven aquarium catalog</h1>
+              <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Sidebar aquarium explorer</h1>
               <p className="text-base leading-7 text-slate-300 sm:text-lg">
-                Select a product from the catalog, then switch between white and black cabinets. Products without ready assets show a graceful placeholder instead of broken imagery.
+                Select a model on the left, then switch between white and black cabinets on the right. The layout is built to scale with a growing catalog and future product detail pages.
               </p>
             </div>
           </section>

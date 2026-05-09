@@ -14,6 +14,8 @@ export type AquariumProduct = {
   slug: string;
   name: string;
   series: string;
+  volume?: string;
+  featured?: boolean;
   shortDescription: string;
   longDescription?: string;
   variants: Record<CabinetColor, AquariumVariant>;
@@ -25,6 +27,8 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "max-nano-xl",
     name: "MAX NANO XL",
     series: "MAX NANO G2",
+    volume: "Compact",
+    featured: true,
     shortDescription: "Kompaktní reef setup pro menší prostory a showroom prezentace.",
     longDescription:
       "Demonstrační produkt s připravenými white/black variantami. Další modely mohou být doplněny stejným datovým formátem bez změny UI.",
@@ -48,6 +52,7 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "max-nano-cube",
     name: "MAX NANO Cube",
     series: "MAX NANO G2",
+    volume: "Nano",
     shortDescription: "Kostkový formát s placeholder vizuálem pro budoucí assety.",
     variants: {
       white: { image: null, imageAlt: "MAX NANO Cube white cabinet placeholder" },
@@ -62,6 +67,7 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "max-nano-xxl",
     name: "MAX NANO XXL",
     series: "MAX NANO G2",
+    volume: "Large nano",
     shortDescription: "Větší all-in-one varianta s dostatkem prostoru pro prezentaci.",
     variants: {
       white: { image: null, imageAlt: "MAX NANO XXL white cabinet placeholder" },
@@ -76,6 +82,7 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-170",
     name: "REEFER 170",
     series: "REEFER G3",
+    volume: "170",
     shortDescription: "Placeholder pro kompaktní REEFER model.",
     variants: {
       white: { image: null, imageAlt: "REEFER 170 white cabinet placeholder" },
@@ -87,6 +94,7 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-250",
     name: "REEFER 250",
     series: "REEFER G3",
+    volume: "250",
     shortDescription: "Placeholder pro střední model v katalogu.",
     variants: {
       white: { image: null, imageAlt: "REEFER 250 white cabinet placeholder" },
@@ -98,6 +106,7 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-350",
     name: "REEFER 350",
     series: "REEFER G3",
+    volume: "350",
     shortDescription: "Placeholder pro větší domácí reef systém.",
     variants: {
       white: { image: null, imageAlt: "REEFER 350 white cabinet placeholder" },
@@ -109,6 +118,7 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-425",
     name: "REEFER 425",
     series: "REEFER G3",
+    volume: "425",
     shortDescription: "Placeholder pro oblíbený objem s širší sestavou.",
     variants: {
       white: { image: null, imageAlt: "REEFER 425 white cabinet placeholder" },
@@ -120,6 +130,7 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-525",
     name: "REEFER 525",
     series: "REEFER G3",
+    volume: "525",
     shortDescription: "Placeholder pro velký reef setup do showroomu.",
     variants: {
       white: { image: null, imageAlt: "REEFER 525 white cabinet placeholder" },
@@ -131,6 +142,7 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-625",
     name: "REEFER 625",
     series: "REEFER G3",
+    volume: "625",
     shortDescription: "Placeholder pro špičkovou prezentaci s větším sklem.",
     variants: {
       white: { image: null, imageAlt: "REEFER 625 white cabinet placeholder" },
@@ -142,6 +154,7 @@ export const AQUARIUM_CATALOG: AquariumProduct[] = [
     slug: "reefer-750",
     name: "REEFER 750",
     series: "REEFER G3",
+    volume: "750",
     shortDescription: "Placeholder pro vlajkový model v katalogu.",
     variants: {
       white: { image: null, imageAlt: "REEFER 750 white cabinet placeholder" },

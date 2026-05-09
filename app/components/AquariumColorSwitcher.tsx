@@ -9,6 +9,7 @@ type AquariumColorSwitcherProps = {
   eyebrow?: string;
   heading: string;
   intro: string;
+  className?: string;
 };
 
 const SWITCHER_OPTIONS: Array<{ color: CabinetColor; label: string }> = [
@@ -16,7 +17,7 @@ const SWITCHER_OPTIONS: Array<{ color: CabinetColor; label: string }> = [
   { color: "black", label: "Black cabinet" },
 ];
 
-export function AquariumColorSwitcher({ product, eyebrow, heading, intro }: AquariumColorSwitcherProps) {
+export function AquariumColorSwitcher({ product, eyebrow, heading, intro, className }: AquariumColorSwitcherProps) {
   const [selectedColor, setSelectedColor] = useState<CabinetColor>("white");
   const selected = useMemo(() => product.variants[selectedColor], [product.variants, selectedColor]);
 
@@ -47,7 +48,7 @@ export function AquariumColorSwitcher({ product, eyebrow, heading, intro }: Aqua
   const imageSrc = selected.image;
 
   return (
-    <section className={`overflow-hidden rounded-[2rem] border ${theme.panel} ${theme.shell}`}>
+    <section className={`overflow-hidden rounded-[2rem] border ${theme.panel} ${theme.shell} ${className ?? ""}`}>
       <div className="grid gap-10 p-6 md:p-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div className="space-y-6">
           <div className="space-y-3">
