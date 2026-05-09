@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { AquariumProduct, CabinetColor } from "../data/aquariums";
 
 type AquariumColorSwitcherProps = {
@@ -19,6 +19,7 @@ const SWITCHER_OPTIONS: Array<{ color: CabinetColor; label: string }> = [
 
 export function AquariumColorSwitcher({ product, eyebrow, heading, intro, className }: AquariumColorSwitcherProps) {
   const [selectedColor, setSelectedColor] = useState<CabinetColor>("white");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const selected = useMemo(() => product.variants[selectedColor], [product.variants, selectedColor]);
 
   const theme =
@@ -46,6 +47,27 @@ export function AquariumColorSwitcher({ product, eyebrow, heading, intro, classN
 
   const hasImage = Boolean(selected.image);
   const imageSrc = selected.image;
+
+  useEffect(() => {
+    if (!lightboxOpen) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setLightboxOpen(false);
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [lightboxOpen]);
 
   return (
     <section className={`overflow-hidden rounded-[2rem] border ${theme.panel} ${theme.shell} ${className ?? ""}`}>
@@ -100,14 +122,21 @@ export function AquariumColorSwitcher({ product, eyebrow, heading, intro, classN
           <div className={`relative overflow-hidden rounded-[2rem] border p-4 shadow-2xl ${theme.panel} ${theme.imageFrame}`}>
             <div className={`relative aspect-[4/3] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
               {hasImage && imageSrc ? (
-                <Image
-                  src={imageSrc}
-                  alt={selected.imageAlt}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 48vw"
-                  className="object-contain p-2 sm:p-4"
-                />
+                <button
+                  type="button"
+                  onClick={() => setLightboxOpen(true)}
+                  aria-label={`Open larger preview of ${product.name}`}
+                  className="group absolute inset-0 cursor-zoom-in"
+                >
+                  <Image
+                    src={imageSrc}
+                    alt={selected.imageAlt}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 48vw"
+                    className="object-contain p-2 transition-transform duration-200 group-hover:scale-[1.01] sm:p-4"
+                  />
+                </button>
               ) : (
                 <div className={`flex h-full w-full items-center justify-center p-6 text-center ${theme.muted}`}>
                   <div className="max-w-sm space-y-3">
@@ -129,6 +158,38 @@ export function AquariumColorSwitcher({ product, eyebrow, heading, intro, classN
           </div>
         </div>
       </div>
+
+      {lightboxOpen && hasImage && imageSrc ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Expanded preview of ${product.name}`}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 px-4 py-6"
+          onClick={() => setLightboxOpen(false)}
+        >
+          <div className="relative flex max-h-[90vh] max-w-[90vw] items-center justify-center" onClick={(event) => event.stopPropagation()}>
+            <button
+              type="button"
+              onClick={() => setLightboxOpen(false)}
+              aria-label="Close image preview"
+              className="absolute -right-2 -top-2 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-950/90 text-white shadow-lg transition-colors hover:bg-slate-900"
+            >
+              <span className="text-xl leading-none">×</span>
+            </button>
+            <div className="relative max-h-[90vh] max-w-[90vw] overflow-hidden rounded-[1.5rem] border border-white/10 bg-white p-3 shadow-2xl">
+              <div className="relative h-[80vh] w-[80vw] max-h-[90vh] max-w-[90vw]">
+                <Image
+                  src={imageSrc}
+                  alt={selected.imageAlt}
+                  fill
+                  sizes="90vw"
+                  className="object-contain"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
