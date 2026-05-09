@@ -32,8 +32,6 @@ function AquariumSidebar({
   onSelectGroup: (slug: string) => void;
   onSelectProduct: (slug: string) => void;
 }) {
-  const selectedGroup = groups.find((group) => group.slug === selectedGroupSlug) ?? groups[0];
-
   return (
     <aside className="lg:sticky lg:top-24 lg:w-[360px] lg:flex-shrink-0">
       <div className="rounded-[2rem] border border-slate-800/80 bg-slate-950/80 p-3 shadow-2xl backdrop-blur">
@@ -45,85 +43,92 @@ function AquariumSidebar({
         <div className="flex gap-3 overflow-x-auto pb-1 lg:flex-col lg:gap-4 lg:overflow-visible lg:pb-0">
           {groups.map((group) => {
             const active = group.slug === selectedGroupSlug;
+            const expanded = active;
 
             return (
-              <button
-                key={group.slug}
-                type="button"
-                onClick={() => onSelectGroup(group.slug)}
-                aria-pressed={active}
-                className={`flex min-w-[16.25rem] flex-col rounded-3xl border px-4 py-4 text-left transition-all duration-200 lg:min-w-0 lg:w-full ${
-                  active
-                    ? "border-amber-400 bg-white text-slate-950 shadow-[0_0_0_1px_rgba(251,191,36,0.45)]"
-                    : "border-white/10 bg-white/5 text-white hover:border-white/20 hover:bg-white/8"
-                }`}
-              >
-                <p className={`text-[11px] font-semibold uppercase tracking-[0.24em] ${active ? "text-slate-500" : "text-slate-400"}`}>
-                  Product family
-                </p>
-                <h3 className="mt-3 text-lg font-semibold tracking-tight">{group.name}</h3>
-                <p className={`mt-2 text-sm leading-6 ${active ? "text-slate-700" : "text-slate-300"}`}>{group.description}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-medium ${
-                      active ? "bg-slate-100 text-slate-700" : "bg-white/10 text-slate-200"
-                    }`}
-                  >
-                    {group.products.length} models
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="mt-3 border-t border-white/10 pt-3">
-          <div className="mb-2 hidden px-2 lg:block">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">Models in {selectedGroup.name}</p>
-          </div>
-          <div className="flex gap-3 overflow-x-auto pb-1 lg:flex-col lg:gap-2 lg:overflow-visible lg:pb-0">
-            {selectedGroup.products.map((product) => {
-              const active = product.slug === selectedProductSlug;
-              return (
+              <div key={group.slug} className="space-y-2">
                 <button
-                  key={product.slug}
                   type="button"
-                  onClick={() => onSelectProduct(product.slug)}
+                  onClick={() => onSelectGroup(group.slug)}
                   aria-pressed={active}
-                  className={`flex min-w-[14.5rem] flex-col rounded-2xl border px-4 py-3 text-left transition-all duration-200 lg:min-w-0 lg:w-full ${
+                  className={`flex min-w-[16.25rem] flex-col rounded-3xl border px-4 py-4 text-left transition-all duration-200 lg:min-w-0 lg:w-full ${
                     active
                       ? "border-amber-400 bg-white text-slate-950 shadow-[0_0_0_1px_rgba(251,191,36,0.45)]"
                       : "border-white/10 bg-white/5 text-white hover:border-white/20 hover:bg-white/8"
                   }`}
                 >
-                  <div className="flex items-center justify-between gap-2">
-                    <p className={`text-[11px] font-semibold uppercase tracking-[0.22em] ${active ? "text-slate-500" : "text-slate-400"}`}>
-                      {product.series}
-                    </p>
+                  <p className={`text-[11px] font-semibold uppercase tracking-[0.24em] ${active ? "text-slate-500" : "text-slate-400"}`}>
+                    Product family
+                  </p>
+                  <h3 className="mt-3 text-lg font-semibold tracking-tight">{group.name}</h3>
+                  <p className={`mt-2 text-sm leading-6 ${active ? "text-slate-700" : "text-slate-300"}`}>{group.description}</p>
+                  <div className="mt-4 flex items-center justify-between gap-3">
                     <span
-                      className={`rounded-full px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] ${
-                        active ? "bg-amber-100 text-amber-900" : "bg-white/10 text-slate-200"
+                      className={`rounded-full px-3 py-1 text-xs font-medium ${
+                        active ? "bg-slate-100 text-slate-700" : "bg-white/10 text-slate-200"
                       }`}
                     >
-                      {product.status === "ready" ? "Ready" : "Preview coming soon"}
+                      {group.products.length} modely
+                    </span>
+                    <span
+                      className={`inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] ${
+                        active ? "text-slate-700" : "text-slate-200"
+                      }`}
+                    >
+                      {expanded ? "Skrýt modely" : "Zobrazit modely"}
+                      <span className={`text-base transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}>⌄</span>
                     </span>
                   </div>
-                  <h4 className="mt-2 text-sm font-semibold tracking-tight">{product.name}</h4>
-                  {product.volume ? (
-                    <div className="mt-3">
-                      <span
-                        className={`rounded-full px-3 py-1 text-xs font-medium ${
-                          active ? "bg-slate-100 text-slate-700" : "bg-white/10 text-slate-200"
-                        }`}
-                      >
-                        {product.volume}
-                      </span>
-                    </div>
-                  ) : null}
                 </button>
-              );
-            })}
-          </div>
+
+                {expanded ? (
+                  <div className="space-y-2 pl-2 lg:pl-0">
+                    {group.products.map((product) => {
+                      const modelActive = product.slug === selectedProductSlug;
+                      return (
+                        <button
+                          key={product.slug}
+                          type="button"
+                          onClick={() => onSelectProduct(product.slug)}
+                          aria-pressed={modelActive}
+                          className={`flex min-w-[14.5rem] flex-col rounded-2xl border px-4 py-3 text-left transition-all duration-200 lg:min-w-0 lg:w-full ${
+                            modelActive
+                              ? "border-amber-400 bg-white text-slate-950 shadow-[0_0_0_1px_rgba(251,191,36,0.45)]"
+                              : "border-white/10 bg-white/5 text-white hover:border-white/20 hover:bg-white/8"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <p className={`text-[11px] font-semibold uppercase tracking-[0.22em] ${modelActive ? "text-slate-500" : "text-slate-400"}`}>
+                              {product.series}
+                            </p>
+                            <span
+                              className={`rounded-full px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] ${
+                                modelActive ? "bg-amber-100 text-amber-900" : "bg-white/10 text-slate-200"
+                              }`}
+                            >
+                              {product.status === "ready" ? "Ready" : "Preview coming soon"}
+                            </span>
+                          </div>
+                          <h4 className="mt-2 text-sm font-semibold tracking-tight">{product.name}</h4>
+                          {product.volume ? (
+                            <div className="mt-3">
+                              <span
+                                className={`rounded-full px-3 py-1 text-xs font-medium ${
+                                  modelActive ? "bg-slate-100 text-slate-700" : "bg-white/10 text-slate-200"
+                                }`}
+                              >
+                                {product.volume}
+                              </span>
+                            </div>
+                          ) : null}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
         </div>
       </div>
     </aside>
@@ -160,8 +165,10 @@ export function AquariumCatalogClient() {
         selectedProductSlug={selectedProduct.slug}
         onSelectGroup={(slug) => {
           const nextGroup = AQUARIUM_GROUPS.find((group) => group.slug === slug);
-          setSelectedGroupSlug(slug);
-          setSelectedProductSlug(nextGroup?.products[0]?.slug ?? "");
+          setSelectedGroupSlug((current) => (current === slug ? current : slug));
+          setSelectedProductSlug((current) =>
+            nextGroup?.products.some((product) => product.slug === current) ? current : nextGroup?.products[0]?.slug ?? ""
+          );
         }}
         onSelectProduct={setSelectedProductSlug}
       />
