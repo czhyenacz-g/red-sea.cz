@@ -97,6 +97,9 @@ export function AquariumCatalogClient() {
     () => AQUARIUM_CATALOG.find((product) => product.slug === selectedSlug) ?? AQUARIUM_CATALOG[0],
     [selectedSlug]
   );
+  const hasUnverifiedContent = AQUARIUM_CATALOG.some(
+    (product) => product.source?.status !== "verified" || product.shortDescription.includes("[i]") || product.specs.some((spec) => spec.value.includes("[i]"))
+  );
 
   return (
     <div className="grid gap-8 lg:grid-cols-[22rem_minmax(0,1fr)] lg:items-start">
@@ -149,6 +152,12 @@ export function AquariumCatalogClient() {
             />
           </dl>
         </div>
+
+        {hasUnverifiedContent ? (
+          <p className="px-1 text-xs leading-5 text-slate-400">
+            [i] = orientační / neověřený údaj, bude doplněno podle oficiálních materiálů.
+          </p>
+        ) : null}
       </div>
     </div>
   );
