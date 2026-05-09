@@ -14,14 +14,14 @@ function AquariumSidebar({
   onSelect: (slug: string) => void;
 }) {
   return (
-    <aside className="lg:sticky lg:top-24">
+    <aside className="lg:sticky lg:top-24 lg:w-[360px] lg:flex-shrink-0">
       <div className="rounded-[2rem] border border-slate-800/80 bg-slate-950/80 p-3 shadow-2xl backdrop-blur">
         <div className="mb-3 hidden px-2 pt-1 lg:block">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">Catalog</p>
           <p className="mt-2 text-sm leading-6 text-slate-300">Select a model to inspect cabinet colors, specs, and presentation state.</p>
         </div>
 
-        <div className="flex gap-3 overflow-x-auto pb-1 lg:block lg:space-y-2 lg:overflow-visible lg:pb-0">
+        <div className="flex gap-3 overflow-x-auto pb-1 lg:flex-col lg:gap-4 lg:overflow-visible lg:pb-0">
           {products.map((product) => {
             const active = product.slug === selectedSlug;
 
@@ -31,7 +31,7 @@ function AquariumSidebar({
                 type="button"
                 onClick={() => onSelect(product.slug)}
                 aria-pressed={active}
-                className={`group flex min-w-[15rem] flex-col rounded-3xl border px-4 py-4 text-left transition-all duration-200 lg:min-w-0 ${
+                className={`group flex min-w-[16.25rem] flex-col rounded-3xl border px-4 py-4 text-left transition-all duration-200 lg:min-w-0 lg:w-full ${
                   active
                     ? "border-amber-400 bg-white text-slate-950 shadow-[0_0_0_1px_rgba(251,191,36,0.45)]"
                     : "border-white/10 bg-white/5 text-white hover:border-white/20 hover:bg-white/8"
