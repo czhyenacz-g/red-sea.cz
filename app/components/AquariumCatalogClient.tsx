@@ -30,13 +30,13 @@ function AquariumSidebar({
 }) {
   return (
     <aside className="lg:sticky lg:top-24 lg:w-[360px] lg:flex-shrink-0">
-      <div className="rounded-[2rem] border border-slate-800/80 bg-slate-950/80 p-3 shadow-2xl backdrop-blur">
+      <div className="rounded-[2rem] border border-slate-800/80 bg-slate-950/80 p-2.5 shadow-2xl backdrop-blur">
         <div className="mb-3 hidden px-2 pt-1 lg:block">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">Catalog</p>
-          <p className="mt-2 text-sm leading-6 text-slate-300">Select a family first, then choose a model variant underneath.</p>
+          <p className="mt-2 text-sm leading-6 text-slate-400">Select a family first, then choose a model variant underneath.</p>
         </div>
 
-        <div className="flex gap-3 overflow-x-auto pb-1 lg:flex-col lg:gap-4 lg:overflow-visible lg:pb-0">
+        <div className="flex gap-3 overflow-x-auto pb-1 lg:flex-col lg:gap-3 lg:overflow-visible lg:pb-0">
           {groups.map((group) => {
             const active = group.slug === selectedGroupSlug;
 
@@ -55,23 +55,29 @@ function AquariumSidebar({
                 <p className={`text-[11px] font-semibold uppercase tracking-[0.24em] ${active ? "text-slate-500" : "text-slate-400"}`}>
                   Product family
                 </p>
-                <h3 className="mt-3 text-lg font-semibold tracking-tight">{group.name}</h3>
-                <p className={`mt-2 text-sm leading-6 ${active ? "text-slate-700" : "text-slate-300"}`}>{group.description}</p>
-                <div className="mt-4 flex items-center justify-between gap-3">
+                <h3 className="mt-2.5 text-lg font-semibold tracking-tight">{group.name}</h3>
+                <p
+                  className={`mt-1.5 line-clamp-2 text-sm leading-5 ${
+                    active ? "text-slate-600" : "text-slate-400"
+                  }`}
+                >
+                  {group.description}
+                </p>
+                <div className="mt-3 flex items-center justify-between gap-3">
                   <span
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
-                      active ? "bg-slate-100 text-slate-700" : "bg-white/10 text-slate-200"
+                      active ? "bg-slate-100 text-slate-700" : "bg-white/10 text-slate-300"
                     }`}
                   >
                     {group.products.length} modely
                   </span>
                   <span
                     className={`inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] ${
-                      active ? "text-slate-700" : "text-slate-200"
+                      active ? "text-slate-600" : "text-slate-300"
                     }`}
                   >
                     {active ? "Vybraná rodina" : "Vybrat rodinu"}
-                    <span className="text-base">⌄</span>
+                    <span className="text-sm">⌄</span>
                   </span>
                 </div>
               </button>
