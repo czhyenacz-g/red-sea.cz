@@ -65,12 +65,21 @@ function AquariumSidebar({
                       {product.volume}
                     </span>
                   ) : null}
+                  {product.dimensions ? (
+                    <span
+                      className={`rounded-full px-3 py-1 text-xs font-medium ${
+                        active ? "bg-slate-100 text-slate-700" : "bg-white/10 text-slate-200"
+                      }`}
+                    >
+                      {product.dimensions}
+                    </span>
+                  ) : null}
                   <span
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
                       active ? "bg-slate-100 text-slate-700" : "bg-white/10 text-slate-200"
                     }`}
                   >
-                    {product.variants.white.image || product.variants.black.image ? "Image ready" : "Placeholder"}
+                    {product.status === "ready" ? "Ready" : "Preview coming soon"}
                   </span>
                 </div>
               </button>
@@ -101,7 +110,63 @@ export function AquariumCatalogClient() {
           intro="The explorer keeps the cabinet switcher reusable while the selected product changes from the sidebar."
           product={selectedProduct}
         />
+
+        {selectedProduct.status === "placeholder" ? (
+          <div className="rounded-[2rem] border border-amber-200 bg-amber-50 px-5 py-4 text-amber-900">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Preview coming soon</p>
+            <p className="mt-2 text-sm leading-6">
+              This aquarium model is in the catalog, but the final converted imagery is not ready yet.
+            </p>
+          </div>
+        ) : null}
+
+        <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-lg">
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">{selectedProduct.series}</p>
+            <span
+              className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${
+                selectedProduct.status === "ready"
+                  ? "bg-emerald-100 text-emerald-800"
+                  : "bg-amber-100 text-amber-800"
+              }`}
+            >
+              {selectedProduct.status === "ready" ? "Ready" : "Preview coming soon"}
+            </span>
+          </div>
+
+          <dl className="mt-5 grid gap-3 sm:grid-cols-2">
+            <SpecCard label="Volume" value={selectedProduct.volume ?? "—"} />
+            <SpecCard label="Dimensions" value={selectedProduct.dimensions ?? "—"} />
+            <SpecCard label="Glass thickness" value={selectedProduct.glassThickness ?? "—"} />
+            <SpecCard
+              label="Cabinet colors"
+              value={selectedProduct.cabinetColors?.join(" / ") ?? "—"}
+            />
+            <SpecCard
+              label="Suitable for"
+              value={selectedProduct.suitableFor?.join(", ") ?? "—"}
+              wide
+            />
+          </dl>
+        </div>
       </div>
+    </div>
+  );
+}
+
+function SpecCard({
+  label,
+  value,
+  wide,
+}: {
+  label: string;
+  value: string;
+  wide?: boolean;
+}) {
+  return (
+    <div className={`rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 ${wide ? "sm:col-span-2" : ""}`}>
+      <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{label}</dt>
+      <dd className="mt-1 text-sm font-medium text-slate-900">{value}</dd>
     </div>
   );
 }
