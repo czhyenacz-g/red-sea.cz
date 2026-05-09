@@ -6,6 +6,9 @@ import type { AquariumProduct, CabinetColor } from "../data/aquariums";
 
 type AquariumColorSwitcherProps = {
   product: AquariumProduct;
+  modelOptions?: Array<{ slug: string; label: string }>;
+  selectedModelSlug?: string;
+  onSelectModel?: (slug: string) => void;
   eyebrow?: string;
   heading: string;
   intro: string;
@@ -17,7 +20,16 @@ const SWITCHER_OPTIONS: Array<{ color: CabinetColor; label: string }> = [
   { color: "black", label: "Black cabinet" },
 ];
 
-export function AquariumColorSwitcher({ product, eyebrow, heading, intro, className }: AquariumColorSwitcherProps) {
+export function AquariumColorSwitcher({
+  product,
+  modelOptions,
+  selectedModelSlug,
+  onSelectModel,
+  eyebrow,
+  heading,
+  intro,
+  className,
+}: AquariumColorSwitcherProps) {
   const [selectedColor, setSelectedColor] = useState<CabinetColor>("white");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const selected = useMemo(() => product.variants[selectedColor], [product.variants, selectedColor]);
@@ -99,6 +111,27 @@ export function AquariumColorSwitcher({ product, eyebrow, heading, intro, classN
                 </button>
               );
             })}
+
+            {modelOptions && onSelectModel ? (
+              <label
+                className={`relative inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${theme.button}`}
+              >
+                <span className="text-current/70">Models</span>
+                <select
+                  value={selectedModelSlug ?? modelOptions[0]?.slug ?? ""}
+                  onChange={(event) => onSelectModel(event.target.value)}
+                  className="min-w-[7.5rem] appearance-none bg-transparent pr-5 text-sm font-medium text-current outline-none"
+                  aria-label="Select aquarium model"
+                >
+                  {modelOptions.map((option) => (
+                    <option key={option.slug} value={option.slug}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-3 text-current/70">⌄</span>
+              </label>
+            ) : null}
           </div>
 
           <div className={`rounded-3xl border p-4 md:p-5 ${theme.panel}`}>

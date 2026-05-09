@@ -86,49 +86,6 @@ function AquariumSidebar({
   );
 }
 
-function ModelSelector({
-  products,
-  selectedProductSlug,
-  onSelectProduct,
-}: {
-  products: AquariumProduct[];
-  selectedProductSlug: string;
-  onSelectProduct: (slug: string) => void;
-}) {
-  return (
-    <div className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-lg">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">Models</p>
-          <p className="mt-1 text-sm text-slate-600">Choose a width, shape or size variant for the selected family.</p>
-        </div>
-        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">{products.length} variants</span>
-      </div>
-
-      <div className="mt-3 flex flex-wrap gap-2 overflow-x-auto pb-1 lg:overflow-visible">
-        {products.map((product) => {
-          const active = product.slug === selectedProductSlug;
-          return (
-            <button
-              key={product.slug}
-              type="button"
-              onClick={() => onSelectProduct(product.slug)}
-              aria-pressed={active}
-              className={`inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                active
-                  ? "border-amber-400 bg-slate-950 text-white shadow-[0_0_0_1px_rgba(251,191,36,0.35)]"
-                  : "border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-white"
-              }`}
-            >
-              {product.volume ?? product.name}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 function FamilyDetail({
   group,
   selectedProduct,
@@ -146,9 +103,10 @@ function FamilyDetail({
         heading={selectedProduct.name}
         intro={group.fullDescription}
         product={selectedProduct}
+        modelOptions={group.products.map((product) => ({ slug: product.slug, label: product.volume ?? product.name }))}
+        selectedModelSlug={selectedProduct.slug}
+        onSelectModel={onSelectProduct}
       />
-
-      <ModelSelector products={group.products} selectedProductSlug={selectedProduct.slug} onSelectProduct={onSelectProduct} />
 
       {selectedProduct.status === "placeholder" ? (
         <div className="rounded-[2rem] border border-amber-200 bg-amber-50 px-5 py-4 text-amber-900">
