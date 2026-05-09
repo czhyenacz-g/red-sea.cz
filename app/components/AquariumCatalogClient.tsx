@@ -96,7 +96,7 @@ function ModelSelector({
   onSelectProduct: (slug: string) => void;
 }) {
   return (
-    <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-lg">
+    <div className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-lg">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">Models</p>
@@ -105,7 +105,7 @@ function ModelSelector({
         <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">{products.length} variants</span>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2 overflow-x-auto pb-1 lg:overflow-visible">
+      <div className="mt-3 flex flex-wrap gap-2 overflow-x-auto pb-1 lg:overflow-visible">
         {products.map((product) => {
           const active = product.slug === selectedProductSlug;
           return (
@@ -139,7 +139,7 @@ function FamilyDetail({
   onSelectProduct: (slug: string) => void;
 }) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <AquariumColorSwitcher
         className="shadow-[0_30px_80px_-30px_rgba(15,23,42,0.65)]"
         eyebrow={group.name}
@@ -159,7 +159,7 @@ function FamilyDetail({
         </div>
       ) : null}
 
-      <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-lg">
+      <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-lg">
         <div className="flex flex-wrap items-center gap-3">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">{selectedProduct.series}</p>
           <span
@@ -171,7 +171,7 @@ function FamilyDetail({
           </span>
         </div>
 
-        <dl className="mt-5 grid gap-3 sm:grid-cols-2">
+        <dl className="mt-4 grid gap-3 sm:grid-cols-2">
           {selectedProduct.specs.map((spec) => (
             <SpecCard key={spec.label} label={spec.label} value={spec.value} />
           ))}
@@ -201,7 +201,7 @@ function SpecCard({
   value: string;
 }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+    <div className="rounded-2xl border border-slate-200 bg-slate-50 px-3.5 py-2.5">
       <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{label}</dt>
       <dd className="mt-1 text-sm font-medium text-slate-900">{value}</dd>
     </div>
@@ -238,7 +238,7 @@ export function AquariumCatalogClient() {
         setSelectedProductSlug(nextGroup?.products[0]?.slug ?? "");
       }} />
 
-      <div className="space-y-6 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-2">
+      <div className="space-y-5 lg:sticky lg:top-24">
         <FamilyDetail group={selectedGroup} selectedProduct={selectedProduct} onSelectProduct={setSelectedProductSlug} />
 
         {hasUnverifiedContent ? (

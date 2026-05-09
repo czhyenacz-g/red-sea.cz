@@ -71,12 +71,12 @@ export function AquariumColorSwitcher({ product, eyebrow, heading, intro, classN
 
   return (
     <section className={`overflow-hidden rounded-[2rem] border ${theme.panel} ${theme.shell} ${className ?? ""}`}>
-      <div className="grid gap-10 p-6 md:p-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      <div className="grid gap-8 p-5 md:p-7 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div className="space-y-6">
           <div className="space-y-3">
             {eyebrow ? <p className={`text-xs font-semibold uppercase tracking-[0.28em] ${theme.accent}`}>{eyebrow}</p> : null}
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{heading}</h2>
-            <p className={`max-w-2xl text-base leading-7 sm:text-lg ${theme.muted}`}>{intro}</p>
+            <h2 className="max-w-2xl text-2xl font-semibold tracking-tight sm:text-3xl">{heading}</h2>
+            <p className={`max-w-2xl text-sm leading-6 sm:text-base ${theme.muted}`}>{intro}</p>
           </div>
 
           <div className="flex flex-wrap gap-3">
@@ -101,11 +101,10 @@ export function AquariumColorSwitcher({ product, eyebrow, heading, intro, classN
             })}
           </div>
 
-          <div className={`rounded-3xl border p-5 md:p-6 ${theme.panel}`}>
+          <div className={`rounded-3xl border p-4 md:p-5 ${theme.panel}`}>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-current/60">Selected variant</p>
-            <h3 className="mt-2 text-2xl font-semibold">{product.name}</h3>
+            <h3 className="mt-2 text-xl font-semibold sm:text-2xl">{product.name}</h3>
             <p className={`mt-1 text-sm font-medium uppercase tracking-[0.2em] ${theme.muted}`}>{product.series}</p>
-            <p className={`mt-3 max-w-xl text-sm leading-6 sm:text-base ${theme.muted}`}>{product.longDescription ?? product.shortDescription}</p>
             <dl className="mt-5 grid gap-3 sm:grid-cols-2">
               {product.specs.map((spec) => (
                 <div key={spec.label} className={`rounded-2xl border px-4 py-3 ${theme.panel}`}>
@@ -119,22 +118,22 @@ export function AquariumColorSwitcher({ product, eyebrow, heading, intro, classN
 
         <div className="relative">
           <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/10 via-transparent to-transparent blur-2xl" />
-          <div className={`relative overflow-hidden rounded-[2rem] border p-4 shadow-2xl ${theme.panel} ${theme.imageFrame}`}>
-            <div className={`relative aspect-[4/3] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
+          <div className={`relative overflow-hidden rounded-[2rem] border p-3 shadow-2xl ${theme.panel} ${theme.imageFrame}`}>
+            <div className={`relative aspect-[5/4] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
               {hasImage && imageSrc ? (
                 <button
                   type="button"
                   onClick={() => setLightboxOpen(true)}
                   aria-label={`Open larger preview of ${product.name}`}
-                  className="group absolute inset-0 cursor-zoom-in"
-                >
+                    className="group absolute inset-0 cursor-zoom-in"
+                  >
                   <Image
                     src={imageSrc}
                     alt={selected.imageAlt}
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 48vw"
-                    className="object-contain p-2 transition-transform duration-200 group-hover:scale-[1.01] sm:p-4"
+                    className="object-contain p-2 transition-transform duration-200 group-hover:scale-[1.01] sm:p-3"
                   />
                 </button>
               ) : (
