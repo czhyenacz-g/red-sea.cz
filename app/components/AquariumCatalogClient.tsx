@@ -65,15 +65,6 @@ function AquariumSidebar({
                       {product.volume}
                     </span>
                   ) : null}
-                  {product.dimensions ? (
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-medium ${
-                        active ? "bg-slate-100 text-slate-700" : "bg-white/10 text-slate-200"
-                      }`}
-                    >
-                      {product.dimensions}
-                    </span>
-                  ) : null}
                   <span
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
                       active ? "bg-slate-100 text-slate-700" : "bg-white/10 text-slate-200"
@@ -138,18 +129,21 @@ export function AquariumCatalogClient() {
           </div>
 
           <dl className="mt-5 grid gap-3 sm:grid-cols-2">
-            <SpecCard label="Volume" value={selectedProduct.volume ?? "—"} />
-            <SpecCard label="Dimensions" value={selectedProduct.dimensions ?? "—"} />
-            <SpecCard label="Glass thickness" value={selectedProduct.glassThickness ?? "—"} />
-            <SpecCard
-              label="Cabinet colors"
-              value={selectedProduct.cabinetColors?.join(" / ") ?? "—"}
-            />
-            <SpecCard
-              label="Suitable for"
-              value={selectedProduct.suitableFor?.join(", ") ?? "—"}
-              wide
-            />
+            {selectedProduct.specs.map((spec) => (
+              <SpecCard key={spec.label} label={spec.label} value={spec.value} />
+            ))}
+            {selectedProduct.highlights?.length ? (
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 sm:col-span-2">
+                <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Highlights</dt>
+                <dd className="mt-2 flex flex-wrap gap-2">
+                  {selectedProduct.highlights.map((highlight) => (
+                    <span key={highlight} className="rounded-full bg-white px-3 py-1 text-xs font-medium text-slate-700">
+                      {highlight}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            ) : null}
           </dl>
         </div>
 
@@ -166,14 +160,12 @@ export function AquariumCatalogClient() {
 function SpecCard({
   label,
   value,
-  wide,
 }: {
   label: string;
   value: string;
-  wide?: boolean;
 }) {
   return (
-    <div className={`rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 ${wide ? "sm:col-span-2" : ""}`}>
+    <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
       <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{label}</dt>
       <dd className="mt-1 text-sm font-medium text-slate-900">{value}</dd>
     </div>

@@ -1,10 +1,5 @@
 export type CabinetColor = "white" | "black";
 
-export type AquariumSpecs = Array<{
-  label: string;
-  value: string;
-}>;
-
 export type AquariumStatus = "ready" | "placeholder";
 
 export type AquariumVariant = {
@@ -16,229 +11,358 @@ export type AquariumProduct = {
   slug: string;
   name: string;
   series: string;
-  volume?: string;
   featured?: boolean;
-  dimensions?: string;
-  glassThickness?: string;
-  cabinetColors?: string[];
-  suitableFor?: string[];
+  volume?: string;
   status: AquariumStatus;
   source?: {
-    status: "verified" | "unverified" | "placeholder";
+    status: "provided-text" | "verified" | "placeholder";
     note?: string;
     url?: string;
   };
   shortDescription: string;
   longDescription?: string;
+  highlights?: string[];
   variants: Record<CabinetColor, AquariumVariant>;
-  specs: AquariumSpecs;
+  specs: Array<{ label: string; value: string }>;
+};
+
+const REEFER_G3_COPY = [
+  "Reef-ready systems with redesigned flow system.",
+  "Hydrodynamically superior piping and up to 50% more circulation.",
+  "Popular REEFER features with extended warranty up to 5 years.",
+  "Customizable with preferred equipment.",
+];
+
+const REEFER_G3_HIGHLIGHTS = [
+  "17 models ranging from 60 to 210 cm width",
+  "Regular and Peninsula designs",
+  "Redesigned flow system",
+  "Hydrodynamically superior piping",
+  "ReefMat-ready sumps",
+  "Integrated smart ATO",
+  "Marine-spec plywood cabinets with leveling feet",
+  "Extended warranty up to 5 years",
+];
+
+const EMPTY_VARIANTS: Record<CabinetColor, AquariumVariant> = {
+  white: { image: null, imageAlt: "Aquarium white cabinet placeholder" },
+  black: { image: null, imageAlt: "Aquarium black cabinet placeholder" },
 };
 
 export const AQUARIUM_CATALOG: AquariumProduct[] = [
   {
-    slug: "max-nano-xl",
-    name: "MAX NANO XL",
+    slug: "max-nano-g2-cube",
+    name: "MAX NANO G2 cube",
     series: "MAX NANO G2",
-    volume: "Compact",
-    featured: true,
-    dimensions: "60 x 55 x 55 cm [i]",
-    glassThickness: "10 mm [i]",
-    cabinetColors: ["White", "Black"],
-    suitableFor: ["Compact reef [i]", "Showroom demo [i]"],
+    volume: "75 l",
+    status: "placeholder",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text.",
+    },
+    shortDescription:
+      "Rear filtration chamber, can be sold without cabinet, equipped with LED light, pump and skimmer, prepared for ReefATO and NanoMat accessories. [i]",
+    longDescription:
+      "Available in four types and in white and black finish. [i]",
+    variants: EMPTY_VARIANTS,
+    specs: [{ label: "Volume", value: "75 l" }],
+  },
+  {
+    slug: "max-nano-g2-peninsula",
+    name: "MAX NANO G2 peninsula",
+    series: "MAX NANO G2",
+    volume: "100 l",
+    status: "placeholder",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text.",
+    },
+    shortDescription:
+      "Rear filtration chamber, can be sold without cabinet, equipped with LED light, pump and skimmer, prepared for ReefATO and NanoMat accessories. [i]",
+    longDescription:
+      "Available in four types and in white and black finish. [i]",
+    variants: EMPTY_VARIANTS,
+    specs: [{ label: "Volume", value: "100 l" }],
+  },
+  {
+    slug: "max-nano-g2-xl",
+    name: "MAX NANO G2 XL",
+    series: "MAX NANO G2",
+    volume: "125 l",
     status: "ready",
     source: {
-      status: "unverified",
-      note: "Only the product name and cabinet image variants are currently backed by converted source assets.",
+      status: "provided-text",
+      note: "Based on supplied Czech source text and converted image assets.",
     },
-    shortDescription: "Kompaktní reef setup pro menší prostory a showroom prezentace. [i]",
+    shortDescription:
+      "Rear filtration chamber, can be sold without cabinet, equipped with LED light, pump and skimmer, prepared for ReefATO and NanoMat accessories. [i]",
     longDescription:
-      "Demonstrační produkt s připravenými white/black variantami. Další modely mohou být doplněny stejným datovým formátem bez změny UI. [i]",
+      "Available in four types and in white and black finish. [i]",
     variants: {
       white: {
         image: "/assets/aquariums/max-nano-xl-white.webp",
-        imageAlt: "MAX NANO XL with white cabinet",
+        imageAlt: "MAX NANO G2 XL with white cabinet",
       },
       black: {
         image: "/assets/aquariums/max-nano-xl-black.webp",
-        imageAlt: "MAX NANO XL with black cabinet",
+        imageAlt: "MAX NANO G2 XL with black cabinet",
       },
     },
-    specs: [
-      { label: "Series", value: "MAX NANO G2 [i]" },
-      { label: "Use", value: "Compact reef display [i]" },
-      { label: "Cabinets", value: "White / Black" },
-    ],
+    specs: [{ label: "Volume", value: "125 l" }],
   },
   {
-    slug: "max-nano-cube",
-    name: "MAX NANO Cube",
+    slug: "max-nano-g2-xxl",
+    name: "MAX NANO G2 XXL",
     series: "MAX NANO G2",
-    volume: "Nano [i]",
-    dimensions: "55 x 55 x 55 cm [i]",
-    cabinetColors: ["White", "Black"],
-    suitableFor: ["Starter reef [i]"],
+    volume: "200 l",
     status: "placeholder",
     source: {
-      status: "placeholder",
-      note: "Placeholder entry without verified product data yet.",
+      status: "provided-text",
+      note: "Based on supplied Czech source text.",
     },
-    shortDescription: "Kostkový formát s placeholder vizuálem pro budoucí assety. [i]",
-    variants: {
-      white: { image: null, imageAlt: "MAX NANO Cube white cabinet placeholder" },
-      black: { image: null, imageAlt: "MAX NANO Cube black cabinet placeholder" },
-    },
-    specs: [
-      { label: "Series", value: "MAX NANO G2 [i]" },
-      { label: "Use", value: "Starter reef aquarium [i]" },
-    ],
+    shortDescription:
+      "Rear filtration chamber, can be sold without cabinet, equipped with LED light, pump and skimmer, prepared for ReefATO and NanoMat accessories. [i]",
+    longDescription:
+      "Available in four types and in white and black finish. [i]",
+    variants: EMPTY_VARIANTS,
+    specs: [{ label: "Volume", value: "200 l" }],
   },
   {
-    slug: "max-nano-xxl",
-    name: "MAX NANO XXL",
-    series: "MAX NANO G2",
-    volume: "Large nano [i]",
-    dimensions: "90 x 60 x 55 cm [i]",
-    glassThickness: "12 mm [i]",
-    cabinetColors: ["White", "Black"],
-    suitableFor: ["Advanced nano reef [i]", "Premium display [i]"],
+    slug: "reefer-max-170-g3",
+    name: "REEFER MAX 170 G3",
+    series: "REEFER MAX G3",
     status: "placeholder",
     source: {
-      status: "placeholder",
-      note: "Placeholder entry without verified product data yet.",
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "Větší all-in-one varianta s dostatkem prostoru pro prezentaci. [i]",
-    variants: {
-      white: { image: null, imageAlt: "MAX NANO XXL white cabinet placeholder" },
-      black: { image: null, imageAlt: "MAX NANO XXL black cabinet placeholder" },
-    },
-    specs: [
-      { label: "Series", value: "MAX NANO G2 [i]" },
-      { label: "Use", value: "Premium nano reef [i]" },
-    ],
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [],
   },
   {
-    slug: "reefer-170",
-    name: "REEFER 170",
-    series: "REEFER G3",
-    volume: "170 [i]",
-    dimensions: "62 x 58 x 53 cm [i]",
-    cabinetColors: ["White", "Black"],
-    suitableFor: ["Desktop reef [i]"],
+    slug: "reefer-max-200-g3",
+    name: "REEFER MAX 200 G3",
+    series: "REEFER MAX G3",
     status: "placeholder",
-    source: { status: "placeholder", note: "Placeholder entry without verified product data yet." },
-    shortDescription: "Placeholder pro kompaktní REEFER model. [i]",
-    variants: {
-      white: { image: null, imageAlt: "REEFER 170 white cabinet placeholder" },
-      black: { image: null, imageAlt: "REEFER 170 black cabinet placeholder" },
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    specs: [{ label: "Series", value: "REEFER G3" }],
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [],
   },
   {
-    slug: "reefer-250",
-    name: "REEFER 250",
-    series: "REEFER G3",
-    volume: "250 [i]",
-    dimensions: "90 x 57 x 55 cm [i]",
-    glassThickness: "10 mm [i]",
-    cabinetColors: ["White", "Black"],
-    suitableFor: ["Home reef [i]"],
+    slug: "reefer-max-250-g3",
+    name: "REEFER MAX 250 G3",
+    series: "REEFER MAX G3",
     status: "placeholder",
-    source: { status: "placeholder", note: "Placeholder entry without verified product data yet." },
-    shortDescription: "Placeholder pro střední model v katalogu. [i]",
-    variants: {
-      white: { image: null, imageAlt: "REEFER 250 white cabinet placeholder" },
-      black: { image: null, imageAlt: "REEFER 250 black cabinet placeholder" },
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    specs: [{ label: "Series", value: "REEFER G3" }],
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [],
   },
   {
-    slug: "reefer-350",
-    name: "REEFER 350",
-    series: "REEFER G3",
-    volume: "350 [i]",
-    dimensions: "100 x 60 x 55 cm [i]",
-    glassThickness: "12 mm [i]",
-    cabinetColors: ["White", "Black"],
-    suitableFor: ["Home reef [i]", "Retail display [i]"],
+    slug: "reefer-max-300-g3",
+    name: "REEFER MAX 300 G3",
+    series: "REEFER MAX G3",
     status: "placeholder",
-    source: { status: "placeholder", note: "Placeholder entry without verified product data yet." },
-    shortDescription: "Placeholder pro větší domácí reef systém. [i]",
-    variants: {
-      white: { image: null, imageAlt: "REEFER 350 white cabinet placeholder" },
-      black: { image: null, imageAlt: "REEFER 350 black cabinet placeholder" },
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    specs: [{ label: "Series", value: "REEFER G3" }],
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [],
   },
   {
-    slug: "reefer-425",
-    name: "REEFER 425",
-    series: "REEFER G3",
-    volume: "425 [i]",
-    dimensions: "120 x 55 x 57 cm [i]",
-    glassThickness: "12 mm [i]",
-    cabinetColors: ["White", "Black"],
-    suitableFor: ["Showroom reef [i]", "Advanced hobbyist [i]"],
+    slug: "reefer-max-350-g3",
+    name: "REEFER MAX 350 G3",
+    series: "REEFER MAX G3",
     status: "placeholder",
-    source: { status: "placeholder", note: "Placeholder entry without verified product data yet." },
-    shortDescription: "Placeholder pro oblíbený objem s širší sestavou. [i]",
-    variants: {
-      white: { image: null, imageAlt: "REEFER 425 white cabinet placeholder" },
-      black: { image: null, imageAlt: "REEFER 425 black cabinet placeholder" },
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    specs: [{ label: "Series", value: "REEFER G3" }],
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [],
   },
   {
-    slug: "reefer-525",
-    name: "REEFER 525",
-    series: "REEFER G3",
-    volume: "525 [i]",
-    dimensions: "150 x 55 x 60 cm [i]",
-    glassThickness: "12 mm [i]",
-    cabinetColors: ["White", "Black"],
-    suitableFor: ["Showroom reef [i]", "B2B presentation [i]"],
+    slug: "reefer-max-425-g3",
+    name: "REEFER MAX 425 G3",
+    series: "REEFER MAX G3",
     status: "placeholder",
-    source: { status: "placeholder", note: "Placeholder entry without verified product data yet." },
-    shortDescription: "Placeholder pro velký reef setup do showroomu. [i]",
-    variants: {
-      white: { image: null, imageAlt: "REEFER 525 white cabinet placeholder" },
-      black: { image: null, imageAlt: "REEFER 525 black cabinet placeholder" },
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    specs: [{ label: "Series", value: "REEFER G3" }],
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: [...REEFER_G3_HIGHLIGHTS, "Eurobraced for 425 models and above"],
+    variants: EMPTY_VARIANTS,
+    specs: [],
   },
   {
-    slug: "reefer-625",
-    name: "REEFER 625",
-    series: "REEFER G3",
-    volume: "625 [i]",
-    dimensions: "160 x 60 x 60 cm [i]",
-    glassThickness: "15 mm [i]",
-    cabinetColors: ["White", "Black"],
-    suitableFor: ["Large reef display [i]", "Retail showroom [i]"],
+    slug: "reefer-max-525-g3",
+    name: "REEFER MAX 525 G3",
+    series: "REEFER MAX G3",
     status: "placeholder",
-    source: { status: "placeholder", note: "Placeholder entry without verified product data yet." },
-    shortDescription: "Placeholder pro špičkovou prezentaci s větším sklem. [i]",
-    variants: {
-      white: { image: null, imageAlt: "REEFER 625 white cabinet placeholder" },
-      black: { image: null, imageAlt: "REEFER 625 black cabinet placeholder" },
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    specs: [{ label: "Series", value: "REEFER G3" }],
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: [...REEFER_G3_HIGHLIGHTS, "Eurobraced for 425 models and above"],
+    variants: EMPTY_VARIANTS,
+    specs: [],
   },
   {
-    slug: "reefer-750",
-    name: "REEFER 750",
-    series: "REEFER G3",
-    volume: "750 [i]",
-    dimensions: "180 x 60 x 60 cm [i]",
-    glassThickness: "15 mm [i]",
-    cabinetColors: ["White", "Black"],
-    suitableFor: ["Flagship reef [i]", "Large showroom [i]"],
+    slug: "reefer-max-625-g3",
+    name: "REEFER MAX 625 G3",
+    series: "REEFER MAX G3",
     status: "placeholder",
-    source: { status: "placeholder", note: "Placeholder entry without verified product data yet." },
-    shortDescription: "Placeholder pro vlajkový model v katalogu. [i]",
-    variants: {
-      white: { image: null, imageAlt: "REEFER 750 white cabinet placeholder" },
-      black: { image: null, imageAlt: "REEFER 750 black cabinet placeholder" },
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    specs: [{ label: "Series", value: "REEFER G3" }],
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: [...REEFER_G3_HIGHLIGHTS, "Eurobraced for 425 models and above"],
+    variants: EMPTY_VARIANTS,
+    specs: [],
+  },
+  {
+    slug: "reefer-max-750-g3",
+    name: "REEFER MAX 750 G3",
+    series: "REEFER MAX G3",
+    status: "placeholder",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+    },
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: [...REEFER_G3_HIGHLIGHTS, "Eurobraced for 425 models and above"],
+    variants: EMPTY_VARIANTS,
+    specs: [],
+  },
+  {
+    slug: "reefer-max-s-550-g3",
+    name: "REEFER MAX S-550 G3",
+    series: "REEFER MAX S G3",
+    status: "placeholder",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+    },
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [],
+  },
+  {
+    slug: "reefer-max-s-700-g3",
+    name: "REEFER MAX S-700 G3",
+    series: "REEFER MAX S G3",
+    status: "placeholder",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+    },
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [],
+  },
+  {
+    slug: "reefer-max-s-850-g3",
+    name: "REEFER MAX S-850 G3",
+    series: "REEFER MAX S G3",
+    status: "placeholder",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+    },
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [],
+  },
+  {
+    slug: "reefer-max-s-1000-g3",
+    name: "REEFER MAX S-1000 G3",
+    series: "REEFER MAX S G3",
+    status: "placeholder",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+    },
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [],
+  },
+  {
+    slug: "reefer-max-peninsula-350-g3",
+    name: "REEFER MAX Peninsula 350 G3",
+    series: "REEFER MAX Peninsula G3",
+    status: "placeholder",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+    },
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [{ label: "Length", value: "96 cm" }],
+  },
+  {
+    slug: "reefer-max-peninsula-500-g3",
+    name: "REEFER MAX Peninsula 500 G3",
+    series: "REEFER MAX Peninsula G3",
+    status: "placeholder",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+    },
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [{ label: "Length", value: "125 cm" }],
+  },
+  {
+    slug: "reefer-max-peninsula-s-700-g3",
+    name: "REEFER MAX Peninsula S-700 G3",
+    series: "REEFER MAX S Peninsula G3",
+    status: "placeholder",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+    },
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [{ label: "Length", value: "151 cm" }],
+  },
+  {
+    slug: "reefer-max-peninsula-s-950-g3",
+    name: "REEFER MAX Peninsula S-950 G3",
+    series: "REEFER MAX S Peninsula G3",
+    status: "placeholder",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+    },
+    shortDescription: REEFER_G3_COPY.join(" "),
+    highlights: REEFER_G3_HIGHLIGHTS,
+    variants: EMPTY_VARIANTS,
+    specs: [{ label: "Length", value: "200 cm" }],
   },
 ];
