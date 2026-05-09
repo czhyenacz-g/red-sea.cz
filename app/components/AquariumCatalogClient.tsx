@@ -6,7 +6,8 @@ import { AQUARIUM_GROUPS, type AquariumGroup, type AquariumProduct } from "../da
 
 function hasUnverifiedMarkers(item: AquariumGroup | AquariumProduct) {
   const textFields = [
-    "description" in item ? item.description : "",
+    "sidebarSummary" in item ? item.sidebarSummary : "",
+    "fullDescription" in item ? item.fullDescription : "",
     "shortDescription" in item ? item.shortDescription : "",
     "longDescription" in item ? item.longDescription ?? "" : "",
   ];
@@ -56,12 +57,8 @@ function AquariumSidebar({
                   Product family
                 </p>
                 <h3 className="mt-2.5 text-lg font-semibold tracking-tight">{group.name}</h3>
-                <p
-                  className={`mt-1.5 line-clamp-2 text-sm leading-5 ${
-                    active ? "text-slate-600" : "text-slate-400"
-                  }`}
-                >
-                  {group.description}
+                <p className={`mt-1.5 line-clamp-2 text-sm leading-5 ${active ? "text-slate-600" : "text-slate-400"}`}>
+                  {group.sidebarSummary}
                 </p>
                 <div className="mt-3 flex items-center justify-between gap-3">
                   <span
@@ -147,7 +144,7 @@ function FamilyDetail({
         className="shadow-[0_30px_80px_-30px_rgba(15,23,42,0.65)]"
         eyebrow={group.name}
         heading={selectedProduct.name}
-        intro={group.description}
+        intro={group.fullDescription}
         product={selectedProduct}
       />
 
