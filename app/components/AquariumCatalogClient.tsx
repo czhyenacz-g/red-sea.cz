@@ -93,7 +93,7 @@ export function AquariumCatalogClient() {
     <div className="grid gap-8 lg:grid-cols-[22rem_minmax(0,1fr)] lg:items-start">
       <AquariumSidebar products={AQUARIUM_CATALOG} selectedSlug={selectedProduct.slug} onSelect={setSelectedSlug} />
 
-      <div className="space-y-6">
+      <div className="space-y-6 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-2">
         <AquariumColorSwitcher
           className="shadow-[0_30px_80px_-30px_rgba(15,23,42,0.65)]"
           eyebrow="Selected aquarium"
