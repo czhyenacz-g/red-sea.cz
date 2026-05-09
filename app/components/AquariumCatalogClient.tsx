@@ -158,52 +158,6 @@ function FamilyDetail({
           </p>
         </div>
       ) : null}
-
-      <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-lg">
-        <div className="flex flex-wrap items-center gap-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">{selectedProduct.series}</p>
-          <span
-            className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${
-              selectedProduct.status === "ready" ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
-            }`}
-          >
-            {selectedProduct.status === "ready" ? "Ready" : "Preview coming soon"}
-          </span>
-        </div>
-
-        <dl className="mt-4 grid gap-3 sm:grid-cols-2">
-          {selectedProduct.specs.map((spec) => (
-            <SpecCard key={spec.label} label={spec.label} value={spec.value} />
-          ))}
-          {selectedProduct.highlights?.length ? (
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 sm:col-span-2">
-              <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Highlights</dt>
-              <dd className="mt-2 flex flex-wrap gap-2">
-                {selectedProduct.highlights.map((highlight) => (
-                  <span key={highlight} className="rounded-full bg-white px-3 py-1 text-xs font-medium text-slate-700">
-                    {highlight}
-                  </span>
-                ))}
-              </dd>
-            </div>
-          ) : null}
-        </dl>
-      </div>
-    </div>
-  );
-}
-
-function SpecCard({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-slate-50 px-3.5 py-2.5">
-      <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{label}</dt>
-      <dd className="mt-1 text-sm font-medium text-slate-900">{value}</dd>
     </div>
   );
 }
