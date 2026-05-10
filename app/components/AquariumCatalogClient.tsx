@@ -79,6 +79,18 @@ function FamilyDetail({
   selectedProduct: AquariumProduct;
   onSelectProduct: (slug: string) => void;
 }) {
+  const modelOptions = group.products.map((product) => {
+    if (group.slug !== "max-nano-g2") {
+      return { slug: product.slug, label: product.volume ?? product.name };
+    }
+
+    const typeLabel = product.name.replace(/^MAX NANO G2\s*/, "");
+    return {
+      slug: product.slug,
+      label: `${typeLabel} (${product.volume ?? ""})`.trim(),
+    };
+  });
+
   return (
     <div className="space-y-4">
       <AquariumColorSwitcher
@@ -87,7 +99,7 @@ function FamilyDetail({
         heading={selectedProduct.name}
         intro={group.fullDescription}
         product={selectedProduct}
-        modelOptions={group.products.map((product) => ({ slug: product.slug, label: product.volume ?? product.name }))}
+        modelOptions={modelOptions}
         selectedModelSlug={selectedProduct.slug}
         onSelectModel={onSelectProduct}
       />
