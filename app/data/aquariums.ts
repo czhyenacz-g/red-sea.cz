@@ -50,11 +50,6 @@ const MAX_NANO_GROUP_FULL_DESCRIPTION =
 
 const REEFER_G3_GROUP_FULL_DESCRIPTION = "Akvarijní designové komplety se vyznačují nejen dokonalým vzhledem, ale i snadnou obsluhovatelností.";
 
-const EMPTY_VARIANTS: Record<CabinetColor, AquariumVariant> = {
-  white: { image: null, imageAlt: "Akvárium s bílým provedením" },
-  black: { image: null, imageAlt: "Akvárium s černým provedením" },
-};
-
 const maxNanoProducts: AquariumProduct[] = [
   {
     slug: "max-nano-g2-cube",
@@ -62,14 +57,23 @@ const maxNanoProducts: AquariumProduct[] = [
     series: "MAX NANO G2",
     groupSlug: "max-nano-g2",
     volume: "75 l",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: MAX_NANO_DESCRIPTION,
     longDescription: "Akvária této skupiny mají filtraci umístěnou v zadní komoře a proto se mohou prodávat i bez skříňky.",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/max-nano-g2-cube-white.webp",
+        imageAlt: "MAX NANO G2 cube with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/max-nano-g2-cube-black.webp",
+        imageAlt: "MAX NANO G2 cube with black cabinet",
+      },
+    },
     specs: [{ label: "Volume", value: "75 l" }],
   },
   {
@@ -78,14 +82,23 @@ const maxNanoProducts: AquariumProduct[] = [
     series: "MAX NANO G2",
     groupSlug: "max-nano-g2",
     volume: "100 l",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: MAX_NANO_DESCRIPTION,
     longDescription: "Akvária této skupiny mají filtraci umístěnou v zadní komoře a proto se mohou prodávat i bez skříňky.",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/max-nano-g2-peninsula-white.webp",
+        imageAlt: "MAX NANO G2 peninsula with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/max-nano-g2-peninsula-black.webp",
+        imageAlt: "MAX NANO G2 peninsula with black cabinet",
+      },
+    },
     specs: [{ label: "Volume", value: "100 l" }],
   },
   {
@@ -97,7 +110,7 @@ const maxNanoProducts: AquariumProduct[] = [
     status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and converted image assets.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: MAX_NANO_DESCRIPTION,
     longDescription: "Akvária této skupiny mají filtraci umístěnou v zadní komoře a proto se mohou prodávat i bez skříňky.",
@@ -119,14 +132,23 @@ const maxNanoProducts: AquariumProduct[] = [
     series: "MAX NANO G2",
     groupSlug: "max-nano-g2",
     volume: "200 l",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: MAX_NANO_DESCRIPTION,
     longDescription: "Akvária této skupiny mají filtraci umístěnou v zadní komoře a proto se mohou prodávat i bez skříňky.",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/max-nano-g2-xxl-white.webp",
+        imageAlt: "MAX NANO G2 XXL with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/max-nano-g2-xxl-black.webp",
+        imageAlt: "MAX NANO G2 XXL with black cabinet",
+      },
+    },
     specs: [{ label: "Volume", value: "200 l" }],
   },
 ];
@@ -137,13 +159,22 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
     name: "REEFER MAX 170 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-60-90",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and shared 170/200 image asset.",
     },
     shortDescription: "Oblíbené modely: (délka 60–90 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-170-200-g3-white.webp",
+        imageAlt: "REEFER MAX 170 G3 shared white image with REEFER MAX 200 G3",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-170-200-g3-black.webp",
+        imageAlt: "REEFER MAX 170 G3 shared black image with REEFER MAX 200 G3",
+      },
+    },
     specs: [],
   },
   {
@@ -151,13 +182,22 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
     name: "REEFER MAX 200 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-60-90",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and shared 170/200 image asset.",
     },
     shortDescription: "Oblíbené modely: (délka 60–90 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-170-200-g3-white.webp",
+        imageAlt: "REEFER MAX 200 G3 shared white image with REEFER MAX 170 G3",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-170-200-g3-black.webp",
+        imageAlt: "REEFER MAX 200 G3 shared black image with REEFER MAX 170 G3",
+      },
+    },
     specs: [],
   },
   {
@@ -165,13 +205,22 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
     name: "REEFER MAX 250 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-60-90",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "Oblíbené modely: (délka 60–90 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-250-g3-white.webp",
+        imageAlt: "REEFER MAX 250 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-250-g3-black.webp",
+        imageAlt: "REEFER MAX 250 G3 with black cabinet",
+      },
+    },
     specs: [],
   },
   {
@@ -179,13 +228,22 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
     name: "REEFER MAX 300 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-60-90",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "Oblíbené modely: (délka 60–90 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-300-g3-white.webp",
+        imageAlt: "REEFER MAX 300 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-300-g3-black.webp",
+        imageAlt: "REEFER MAX 300 G3 with black cabinet",
+      },
+    },
     specs: [],
   },
 ];
@@ -196,13 +254,22 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
     name: "REEFER MAX 350 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-120-150",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "Dlouhé modely (délka 120–150 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-350-g3-white.webp",
+        imageAlt: "REEFER MAX 350 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-350-g3-black.webp",
+        imageAlt: "REEFER MAX 350 G3 with black cabinet",
+      },
+    },
     specs: [],
   },
   {
@@ -210,13 +277,22 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
     name: "REEFER MAX 425 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-120-150",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "Dlouhé modely (délka 120–150 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-425-g3-white.webp",
+        imageAlt: "REEFER MAX 425 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-425-g3-black.webp",
+        imageAlt: "REEFER MAX 425 G3 with black cabinet",
+      },
+    },
     specs: [],
   },
   {
@@ -224,13 +300,22 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
     name: "REEFER MAX 525 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-120-150",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "Dlouhé modely (délka 120–150 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-525-g3-white.webp",
+        imageAlt: "REEFER MAX 525 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-525-g3-black.webp",
+        imageAlt: "REEFER MAX 525 G3 with black cabinet",
+      },
+    },
     specs: [],
   },
   {
@@ -238,13 +323,22 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
     name: "REEFER MAX 625 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-120-150",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "Dlouhé modely (délka 120–150 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-625-g3-white.webp",
+        imageAlt: "REEFER MAX 625 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-625-g3-black.webp",
+        imageAlt: "REEFER MAX 625 G3 with black cabinet",
+      },
+    },
     specs: [],
   },
 ];
@@ -255,43 +349,120 @@ const reefMaxG3_180Products: AquariumProduct[] = [
     name: "REEFER MAX 750 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-180",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "Extra dlouhé modely (délka 180 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-750-g3-white.webp",
+        imageAlt: "REEFER MAX 750 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-750-g3-black.webp",
+        imageAlt: "REEFER MAX 750 G3 with black cabinet",
+      },
+    },
     specs: [],
   },
 ];
 
 const reefMaxSProducts: AquariumProduct[] = [
-  "REEFER MAX S-550 G3",
-  "REEFER MAX S-700 G3",
-  "REEFER MAX S-850 G3",
-  "REEFER MAX S-1000 G3",
-].map((name) => {
-  const slug = name
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-
-  return {
-    slug,
-    name,
+  {
+    slug: "reefer-max-s-550-g3",
+    name: "REEFER MAX S-550 G3",
     series: "REEFER MAX S G3",
     groupSlug: "reefer-max-s-g3",
-    status: "placeholder" as const,
+    status: "ready",
     source: {
-      status: "provided-text" as const,
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      status: "provided-text",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-s-550-g3-white.webp",
+        imageAlt: "REEFER MAX S-550 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-s-550-g3-black.webp",
+        imageAlt: "REEFER MAX S-550 G3 with black cabinet",
+      },
+    },
     specs: [],
-  };
-});
+  },
+  {
+    slug: "reefer-max-s-700-g3",
+    name: "REEFER MAX S-700 G3",
+    series: "REEFER MAX S G3",
+    groupSlug: "reefer-max-s-g3",
+    status: "ready",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
+    },
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-s-700-g3-white.webp",
+        imageAlt: "REEFER MAX S-700 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-s-700-g3-black.webp",
+        imageAlt: "REEFER MAX S-700 G3 with black cabinet",
+      },
+    },
+    specs: [],
+  },
+  {
+    slug: "reefer-max-s-850-g3",
+    name: "REEFER MAX S-850 G3",
+    series: "REEFER MAX S G3",
+    groupSlug: "reefer-max-s-g3",
+    status: "ready",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
+    },
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-s-850-g3-white.webp",
+        imageAlt: "REEFER MAX S-850 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-s-850-g3-black.webp",
+        imageAlt: "REEFER MAX S-850 G3 with black cabinet",
+      },
+    },
+    specs: [],
+  },
+  {
+    slug: "reefer-max-s-1000-g3",
+    name: "REEFER MAX S-1000 G3",
+    series: "REEFER MAX S G3",
+    groupSlug: "reefer-max-s-g3",
+    status: "ready",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
+    },
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-s-1000-g3-white.webp",
+        imageAlt: "REEFER MAX S-1000 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-s-1000-g3-black.webp",
+        imageAlt: "REEFER MAX S-1000 G3 with black cabinet",
+      },
+    },
+    specs: [],
+  },
+];
 
 const reefMaxPeninsulaProducts: AquariumProduct[] = [
   {
@@ -299,13 +470,22 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
     name: "REEFER MAX Peninsula 350 G3",
     series: "REEFER MAX Peninsula G3",
     groupSlug: "reefer-max-peninsula-g3",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-peninsula-350-g3-white.webp",
+        imageAlt: "REEFER MAX Peninsula 350 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-peninsula-350-g3-black.webp",
+        imageAlt: "REEFER MAX Peninsula 350 G3 with black cabinet",
+      },
+    },
     specs: [{ label: "Length", value: "96 cm" }],
   },
   {
@@ -313,13 +493,22 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
     name: "REEFER MAX Peninsula 500 G3",
     series: "REEFER MAX Peninsula G3",
     groupSlug: "reefer-max-peninsula-g3",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-peninsula-500-g3-white.webp",
+        imageAlt: "REEFER MAX Peninsula 500 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-peninsula-500-g3-black.webp",
+        imageAlt: "REEFER MAX Peninsula 500 G3 with black cabinet",
+      },
+    },
     specs: [{ label: "Length", value: "125 cm" }],
   },
 ];
@@ -330,13 +519,22 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
     name: "REEFER MAX Peninsula S-700 G3",
     series: "REEFER MAX S Peninsula G3",
     groupSlug: "reefer-max-s-peninsula-g3",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-s-700-g3-white.webp",
+        imageAlt: "REEFER MAX S-700 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-s-700-g3-black.webp",
+        imageAlt: "REEFER MAX S-700 G3 with black cabinet",
+      },
+    },
     specs: [{ label: "Length", value: "151 cm" }],
   },
   {
@@ -344,13 +542,22 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
     name: "REEFER MAX Peninsula S-950 G3",
     series: "REEFER MAX S Peninsula G3",
     groupSlug: "reefer-max-s-peninsula-g3",
-    status: "placeholder",
+    status: "ready",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text and general REEFER G3 copy.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     shortDescription: "REEFER MAX S -Peninsula (průhledová akvária, hliníkový rám)",
-    variants: EMPTY_VARIANTS,
+    variants: {
+      white: {
+        image: "/assets/aquariums/reefer-max-s-peninsula-950-g3-white.webp",
+        imageAlt: "REEFER MAX Peninsula S-950 G3 with white cabinet",
+      },
+      black: {
+        image: "/assets/aquariums/reefer-max-s-peninsula-950-g3-black.webp",
+        imageAlt: "REEFER MAX Peninsula S-950 G3 with black cabinet",
+      },
+    },
     specs: [{ label: "Length", value: "200 cm" }],
   },
 ];
@@ -361,7 +568,7 @@ export const AQUARIUM_GROUPS: AquariumGroup[] = [
     name: "MAX NANO G2",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     sidebarSummary: MAX_NANO_GROUP_SIDEBAR_SUMMARY,
     fullDescription: MAX_NANO_GROUP_FULL_DESCRIPTION,
@@ -372,7 +579,7 @@ export const AQUARIUM_GROUPS: AquariumGroup[] = [
     name: "REEFER MAX G3",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     sidebarSummary: "Oblíbené modely: (délka 60–90 cm)",
     fullDescription: REEFER_G3_GROUP_FULL_DESCRIPTION,
@@ -383,7 +590,7 @@ export const AQUARIUM_GROUPS: AquariumGroup[] = [
     name: "REEFER MAX G3",
     source: {
       status: "provided-text",
-      note: "Based on supplied Czech source text.",
+      note: "Based on supplied Czech source text and source-mapped image assets.",
     },
     sidebarSummary: "Dlouhé modely (délka 120–150 cm)",
     fullDescription: REEFER_G3_GROUP_FULL_DESCRIPTION,
