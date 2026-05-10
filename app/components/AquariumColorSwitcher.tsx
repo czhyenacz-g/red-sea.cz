@@ -65,6 +65,7 @@ export function AquariumColorSwitcher({
 
   const hasImage = Boolean(selectedImage);
   const imageSrc = selectedImage?.src ?? null;
+  const imageFilename = selectedImage?.src.split("/").pop() ?? "";
 
   useEffect(() => {
     setGalleryIndex(0);
@@ -211,7 +212,7 @@ export function AquariumColorSwitcher({
           <div className={`relative overflow-hidden rounded-[2rem] border p-3 shadow-2xl ${theme.panel} ${theme.imageFrame}`}>
             <div className={`relative aspect-[10/9] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
               {hasImage && imageSrc ? (
-                <DelayedImageTooltip label={product.name} className="absolute inset-0">
+                <DelayedImageTooltip label={imageFilename || product.name} className="absolute inset-0">
                   <>
                     {selected.images.length > 1 ? (
                       <>

@@ -42,13 +42,14 @@ export default function Page() {
         <div className="grid gap-5 lg:grid-cols-3">
           {TOP_CARDS.map((product, index) => {
             const canOpen = Boolean(product.image);
+            const imageFilename = product.image.split("/").pop() ?? product.title;
             const tone = index === 1 ? "border-amber-100 bg-[#fbf7ef]" : "border-slate-200 bg-white";
 
             return (
               <article key={product.slug} className={`overflow-hidden rounded-[2rem] border shadow-[0_24px_80px_-40px_rgba(15,23,42,0.35)] ${tone}`}>
                 <div className={`border-b p-4 ${index === 1 ? "border-amber-100" : "border-slate-100"}`}>
                   {canOpen ? (
-                    <DelayedImageTooltip label={product.title}>
+                    <DelayedImageTooltip label={imageFilename}>
                       <button
                         type="button"
                         onClick={() => setLightboxImage({ src: product.image, alt: product.title })}
@@ -107,36 +108,40 @@ export default function Page() {
               { id: 6, label: "Sůl Red Sea, krabice - 20,1 kg", image: "/assets/salt/candidates/09-rs-20kg-160gal.webp" },
               { id: 7, label: "Sůl Coral Pro, pytel - 25 kg", image: "/assets/salt/candidates/10-coral-pro-25kg-bag.webp" },
               { id: 8, label: "Sůl Red Sea, pytel - 25 kg", image: "/assets/salt/candidates/11-red-sea-25kg-bag.webp" },
-            ].map((candidate) => (
-              <article key={candidate.id} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_18px_50px_-35px_rgba(15,23,42,0.35)]">
-                <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-sm font-semibold text-white">
-                    {candidate.id}
-                  </span>
-                  <span className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">Balení</span>
-                </div>
-                <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-3">
-                  <DelayedImageTooltip label={candidate.label}>
-                    <button
-                      type="button"
-                      onClick={() => setLightboxImage({ src: candidate.image, alt: candidate.label })}
-                      className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] bg-white cursor-zoom-in"
-                    >
-                      <Image
-                        src={candidate.image}
-                        alt={candidate.label}
-                        fill
-                        sizes="(max-width: 1280px) 100vw, 33vw"
-                        className="object-contain p-4 transition-transform duration-200 hover:scale-[1.01]"
-                      />
-                    </button>
-                  </DelayedImageTooltip>
-                </div>
-                <div className="px-4 py-3">
-                  <p className="text-sm leading-6 text-slate-700">{candidate.label}</p>
-                </div>
-              </article>
-            ))}
+            ].map((candidate) => {
+              const imageFilename = candidate.image.split("/").pop() ?? candidate.label;
+
+              return (
+                <article key={candidate.id} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_18px_50px_-35px_rgba(15,23,42,0.35)]">
+                  <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-sm font-semibold text-white">
+                      {candidate.id}
+                    </span>
+                    <span className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">Balení</span>
+                  </div>
+                  <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-3">
+                    <DelayedImageTooltip label={imageFilename}>
+                      <button
+                        type="button"
+                        onClick={() => setLightboxImage({ src: candidate.image, alt: candidate.label })}
+                        className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] bg-white cursor-zoom-in"
+                      >
+                        <Image
+                          src={candidate.image}
+                          alt={candidate.label}
+                          fill
+                          sizes="(max-width: 1280px) 100vw, 33vw"
+                          className="object-contain p-4 transition-transform duration-200 hover:scale-[1.01]"
+                        />
+                      </button>
+                    </DelayedImageTooltip>
+                  </div>
+                  <div className="px-4 py-3">
+                    <p className="text-sm leading-6 text-slate-700">{candidate.label}</p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       </main>

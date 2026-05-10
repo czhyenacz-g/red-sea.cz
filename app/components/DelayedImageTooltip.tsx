@@ -55,7 +55,7 @@ export function DelayedImageTooltip({ label, children, delayMs = 5000, className
         <div
           role="status"
           aria-live="polite"
-          className="pointer-events-none absolute left-1/2 top-4 z-20 -translate-x-1/2 -translate-y-full rounded-full border border-slate-200 bg-slate-950 px-3 py-1.5 text-xs font-medium text-white shadow-lg"
+          className="pointer-events-none absolute inset-x-3 bottom-3 z-20 rounded-full border border-slate-200 bg-slate-950/95 px-3 py-2 text-center text-xs font-medium text-white shadow-lg"
         >
           {label}
         </div>
