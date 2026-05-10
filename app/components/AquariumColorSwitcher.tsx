@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+import { DelayedImageTooltip } from "./DelayedImageTooltip";
 import type { AquariumProduct, CabinetColor } from "../data/aquariums";
 
 type AquariumColorSwitcherProps = {
@@ -187,21 +188,23 @@ export function AquariumColorSwitcher({
           <div className={`relative overflow-hidden rounded-[2rem] border p-3 shadow-2xl ${theme.panel} ${theme.imageFrame}`}>
             <div className={`relative aspect-[4/3] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
               {hasImage && imageSrc ? (
-                <button
-                  type="button"
-                  onClick={() => setLightboxOpen(true)}
-                  aria-label={`Open larger preview of ${product.name}`}
-                  className="group absolute inset-0 cursor-zoom-in"
-                >
-                  <Image
-                    src={imageSrc}
-                    alt={selected.imageAlt}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 48vw"
-                    className="object-contain p-2 transition-transform duration-200 group-hover:scale-[1.01] sm:p-3"
-                  />
-                </button>
+                <DelayedImageTooltip label={product.name}>
+                  <button
+                    type="button"
+                    onClick={() => setLightboxOpen(true)}
+                    aria-label={`Open larger preview of ${product.name}`}
+                    className="group absolute inset-0 cursor-zoom-in"
+                  >
+                    <Image
+                      src={imageSrc}
+                      alt={selected.imageAlt}
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 48vw"
+                      className="object-contain p-2 transition-transform duration-200 group-hover:scale-[1.01] sm:p-3"
+                    />
+                  </button>
+                </DelayedImageTooltip>
               ) : (
                 <div className={`flex h-full w-full items-center justify-center p-6 text-center ${theme.muted}`}>
                   <div className="max-w-sm space-y-3">

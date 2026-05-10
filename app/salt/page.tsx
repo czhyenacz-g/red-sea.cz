@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Header } from "../components/Header";
+import { DelayedImageTooltip } from "../components/DelayedImageTooltip";
 import { ProductImageLightbox } from "../components/ProductImageLightbox";
 
 const TOP_CARDS = [
@@ -46,20 +47,37 @@ export default function Page() {
             return (
               <article key={product.slug} className={`overflow-hidden rounded-[2rem] border shadow-[0_24px_80px_-40px_rgba(15,23,42,0.35)] ${tone}`}>
                 <div className={`border-b p-4 ${index === 1 ? "border-amber-100" : "border-slate-100"}`}>
-                  <button
-                    type="button"
-                    onClick={() => setLightboxImage({ src: product.image, alt: product.title })}
-                    disabled={!canOpen}
-                    className={`relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-white ${canOpen ? "cursor-zoom-in" : "cursor-default"}`}
-                  >
-                    <Image
-                      src={product.image}
-                      alt={product.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="object-contain p-5 transition-transform duration-200 hover:scale-[1.01]"
-                    />
-                  </button>
+                  {canOpen ? (
+                    <DelayedImageTooltip label={product.title}>
+                      <button
+                        type="button"
+                        onClick={() => setLightboxImage({ src: product.image, alt: product.title })}
+                        className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-white cursor-zoom-in"
+                      >
+                        <Image
+                          src={product.image}
+                          alt={product.title}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 33vw"
+                          className="object-contain p-5 transition-transform duration-200 hover:scale-[1.01]"
+                        />
+                      </button>
+                    </DelayedImageTooltip>
+                  ) : (
+                    <button
+                      type="button"
+                      disabled
+                      className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-white cursor-default"
+                    >
+                      <Image
+                        src={product.image}
+                        alt={product.title}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 33vw"
+                        className="object-contain p-5 transition-transform duration-200 hover:scale-[1.01]"
+                      />
+                    </button>
+                  )}
                 </div>
 
                 <div className="space-y-3 p-5">
@@ -98,19 +116,21 @@ export default function Page() {
                   <span className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">Balení</span>
                 </div>
                 <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-3">
-                  <button
-                    type="button"
-                    onClick={() => setLightboxImage({ src: candidate.image, alt: candidate.label })}
-                    className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] bg-white cursor-zoom-in"
-                  >
-                    <Image
-                      src={candidate.image}
-                      alt={candidate.label}
-                      fill
-                      sizes="(max-width: 1280px) 100vw, 33vw"
-                      className="object-contain p-4 transition-transform duration-200 hover:scale-[1.01]"
-                    />
-                  </button>
+                  <DelayedImageTooltip label={candidate.label}>
+                    <button
+                      type="button"
+                      onClick={() => setLightboxImage({ src: candidate.image, alt: candidate.label })}
+                      className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] bg-white cursor-zoom-in"
+                    >
+                      <Image
+                        src={candidate.image}
+                        alt={candidate.label}
+                        fill
+                        sizes="(max-width: 1280px) 100vw, 33vw"
+                        className="object-contain p-4 transition-transform duration-200 hover:scale-[1.01]"
+                      />
+                    </button>
+                  </DelayedImageTooltip>
                 </div>
                 <div className="px-4 py-3">
                   <p className="text-sm leading-6 text-slate-700">{candidate.label}</p>
