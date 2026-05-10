@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Header } from "../components/Header";
 import { SALT_PRODUCTS } from "../data/saltProducts";
 
-const SALT_BRIDGE_IMAGE = "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp";
+const SALT_BRIDGE_IMAGE = "/assets/salt/candidates/02-buckets-with-salt-outside-big.webp";
 
 const TOP_CARDS = [
   {
