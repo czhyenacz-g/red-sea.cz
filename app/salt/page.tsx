@@ -4,50 +4,60 @@ import Image from "next/image";
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { ProductImageLightbox } from "../components/ProductImageLightbox";
-import { SALT_PRODUCTS } from "../data/saltProducts";
-
-const SALT_BRIDGE_IMAGE = "/assets/salt/candidates/02-buckets-with-salt-outside-big.webp";
 
 const TOP_CARDS = [
   {
-    slug: "red-sea-salt",
+    slug: "red-sea-salt-small-bucket",
     title: "Red Sea salt",
     description: "Prémiová mořská sůl.",
-    image: "/assets/salt/candidates/05-red-sea-salt-2023.webp",
+    image: "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp",
   },
   {
-    slug: "bridge",
-    title: "Mořská sůl",
-    description: "Red Sea salt a Coral Pro Salt.",
-    image: SALT_BRIDGE_IMAGE,
-  },
-  {
-    slug: "coral-pro-salt",
+    slug: "coral-pro-salt-small-bucket",
     title: "Coral Pro Salt",
     description: "Prémiová mořská sůl s vyšší alkalinitou.",
-    image: "/assets/salt/candidates/04-coral-pro-salt-2023.webp",
+    image: "/assets/salt/candidates/06-rs-salt-7kg-bucket-with-salt.webp",
   },
-];
-
-const SALT_CANDIDATES = [
-  { id: 1, label: "CP SALT 7kg bucket with salt", image: "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp" },
-  { id: 2, label: "RS SALT 7kg bucket with salt", image: "/assets/salt/candidates/06-rs-salt-7kg-bucket-with-salt.webp" },
-  { id: 3, label: "CP 20KG160gal", image: "/assets/salt/candidates/08-cp-20kg-160gal.webp" },
-  { id: 4, label: "RS 20KG160gal", image: "/assets/salt/candidates/09-rs-20kg-160gal.webp" },
-  { id: 5, label: "R11232 25kg_200gall Coral Pro Salt", image: "/assets/salt/candidates/10-coral-pro-25kg-bag.webp" },
-  { id: 6, label: "R11072 25kg_200gall Red Sea Salt", image: "/assets/salt/candidates/11-red-sea-25kg-bag.webp" },
-];
-
-const CLASSIC_BUCKETS = [
-  { id: 7, label: "CP SALT bucket with salt", image: "/assets/salt/candidates/03-cp-salt-bucket-with-salt.webp" },
-  { id: 8, label: "RS SALT bucket with salt", image: "/assets/salt/candidates/07-rs-salt-bucket-with-salt.webp" },
+  {
+    slug: "red-sea-salt-classic-bucket",
+    title: "Red Sea salt",
+    description: "Prémiová mořská sůl.",
+    image: "/assets/salt/candidates/03-cp-salt-bucket-with-salt.webp",
+  },
+  {
+    slug: "coral-pro-salt-classic-bucket",
+    title: "Coral Pro Salt",
+    description: "Prémiová mořská sůl s vyšší alkalinitou.",
+    image: "/assets/salt/candidates/07-rs-salt-bucket-with-salt.webp",
+  },
+  {
+    slug: "red-sea-salt-20kg-box",
+    title: "Red Sea salt",
+    description: "Prémiová mořská sůl.",
+    image: "/assets/salt/candidates/08-cp-20kg-160gal.webp",
+  },
+  {
+    slug: "coral-pro-salt-20kg-box",
+    title: "Coral Pro Salt",
+    description: "Prémiová mořská sůl s vyšší alkalinitou.",
+    image: "/assets/salt/candidates/09-rs-20kg-160gal.webp",
+  },
+  {
+    slug: "coral-pro-salt-25kg-bag",
+    title: "Coral Pro Salt",
+    description: "Prémiová mořská sůl s vyšší alkalinitou.",
+    image: "/assets/salt/candidates/10-coral-pro-25kg-bag.webp",
+  },
+  {
+    slug: "red-sea-salt-25kg-bag",
+    title: "Red Sea salt",
+    description: "Prémiová mořská sůl.",
+    image: "/assets/salt/candidates/11-red-sea-25kg-bag.webp",
+  },
 ];
 
 export default function Page() {
-  const [lightboxImage, setLightboxImage] = useState<{
-    src: string;
-    alt: string;
-  } | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
 
   return (
     <div className="min-h-screen bg-[#f6f2ea]">
@@ -58,31 +68,25 @@ export default function Page() {
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Red Sea salt</h1>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {TOP_CARDS.map((product, index) => {
-            const clickable = Boolean(product.image);
+            const canOpen = Boolean(product.image);
+            const tone = index < 4 ? "border-slate-200 bg-white" : "border-amber-100 bg-[#fbf7ef]";
 
             return (
-              <article
-                key={product.slug}
-                className={`overflow-hidden rounded-[2rem] border shadow-[0_24px_80px_-40px_rgba(15,23,42,0.35)] ${
-                  index === 1 ? "border-amber-100 bg-[#fbf7ef]" : "border-slate-200 bg-white"
-                }`}
-              >
-                <div className={`border-b p-4 ${index === 1 ? "border-amber-100" : "border-slate-100"}`}>
+              <article key={product.slug} className={`overflow-hidden rounded-[2rem] border shadow-[0_24px_80px_-40px_rgba(15,23,42,0.35)] ${tone}`}>
+                <div className={`border-b p-4 ${index < 4 ? "border-slate-100" : "border-amber-100"}`}>
                   <button
                     type="button"
                     onClick={() => setLightboxImage({ src: product.image, alt: product.title })}
-                    disabled={!clickable}
-                    className={`relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-white ${
-                      clickable ? "cursor-zoom-in" : "cursor-default"
-                    }`}
+                    disabled={!canOpen}
+                    className={`relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-white ${canOpen ? "cursor-zoom-in" : "cursor-default"}`}
                   >
                     <Image
                       src={product.image}
                       alt={product.title}
                       fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      sizes="(max-width: 1280px) 100vw, 25vw"
                       className="object-contain p-5 transition-transform duration-200 hover:scale-[1.01]"
                     />
                   </button>
@@ -106,23 +110,23 @@ export default function Page() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {SALT_CANDIDATES.map((candidate) => (
-              <article key={candidate.id} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_18px_50px_-35px_rgba(15,23,42,0.35)]">
+            {TOP_CARDS.map((candidate, idx) => (
+              <article key={candidate.slug} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_18px_50px_-35px_rgba(15,23,42,0.35)]">
                 <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-sm font-semibold text-white">
-                    {candidate.id}
+                    {idx + 1}
                   </span>
                   <span className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">Balení</span>
                 </div>
                 <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-3">
                   <button
                     type="button"
-                    onClick={() => setLightboxImage({ src: candidate.image, alt: candidate.label })}
+                    onClick={() => setLightboxImage({ src: candidate.image, alt: candidate.title })}
                     className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] bg-white cursor-zoom-in"
                   >
                     <Image
                       src={candidate.image}
-                      alt={candidate.label}
+                      alt={candidate.title}
                       fill
                       sizes="(max-width: 1280px) 100vw, 33vw"
                       className="object-contain p-4 transition-transform duration-200 hover:scale-[1.01]"
@@ -130,50 +134,13 @@ export default function Page() {
                   </button>
                 </div>
                 <div className="px-4 py-3">
-                  <p className="text-sm leading-6 text-slate-700">{candidate.label}</p>
+                  <p className="text-sm leading-6 text-slate-700">{candidate.title}</p>
                   <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-400">
                     {candidate.image.split("/").pop()?.replace(".webp", "")}
                   </p>
                 </div>
               </article>
             ))}
-          </div>
-
-          <div className="mt-8">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Klasické kyble</p>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {CLASSIC_BUCKETS.map((candidate) => (
-                <article key={candidate.id} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_18px_50px_-35px_rgba(15,23,42,0.35)]">
-                  <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-sm font-semibold text-white">
-                      {candidate.id}
-                    </span>
-                    <span className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">Balení</span>
-                  </div>
-                  <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-3">
-                    <button
-                      type="button"
-                      onClick={() => setLightboxImage({ src: candidate.image, alt: candidate.label })}
-                      className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] bg-white cursor-zoom-in"
-                    >
-                      <Image
-                        src={candidate.image}
-                        alt={candidate.label}
-                        fill
-                        sizes="(max-width: 1280px) 100vw, 33vw"
-                        className="object-contain p-4 transition-transform duration-200 hover:scale-[1.01]"
-                      />
-                    </button>
-                  </div>
-                  <div className="px-4 py-3">
-                    <p className="text-sm leading-6 text-slate-700">{candidate.label}</p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-400">
-                      {candidate.image.split("/").pop()?.replace(".webp", "")}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
           </div>
         </section>
       </main>
