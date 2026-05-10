@@ -4,12 +4,7 @@ import { SALT_PRODUCTS } from "../data/saltProducts";
 
 const SALT_CANDIDATES = [
   { id: 1, label: "CP SALT 7kg bucket with salt", image: "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp" },
-  { id: 2, label: "buckets-with-salt-outside-big-2023", image: "/assets/salt/candidates/02-buckets-with-salt-outside-big.webp" },
-  { id: 3, label: "CP SALT bucket with salt", image: "/assets/salt/candidates/03-cp-salt-bucket-with-salt.webp" },
-  { id: 4, label: "coral pro-salt-2023", image: "/assets/salt/candidates/04-coral-pro-salt-2023.webp" },
-  { id: 5, label: "red-sea-salt-2023", image: "/assets/salt/candidates/05-red-sea-salt-2023.webp" },
   { id: 6, label: "RS SALT 7kg bucket with salt", image: "/assets/salt/candidates/06-rs-salt-7kg-bucket-with-salt.webp" },
-  { id: 7, label: "RS SALT bucket with salt", image: "/assets/salt/candidates/07-rs-salt-bucket-with-salt.webp" },
   { id: 8, label: "CP 20KG160gal", image: "/assets/salt/candidates/08-cp-20kg-160gal.webp" },
   { id: 9, label: "RS 20KG160gal", image: "/assets/salt/candidates/09-rs-20kg-160gal.webp" },
   { id: 10, label: "R11232 25kg_200gall Coral Pro Salt", image: "/assets/salt/candidates/10-coral-pro-25kg-bag.webp" },
