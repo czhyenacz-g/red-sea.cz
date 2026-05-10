@@ -83,7 +83,7 @@ export function AquariumColorSwitcher({
 
   return (
     <section className={`overflow-hidden rounded-[2rem] border ${theme.panel} ${theme.shell} ${className ?? ""}`}>
-      <div className="grid gap-8 p-5 md:p-7 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      <div className="grid gap-8 p-5 md:p-7 lg:grid-cols-[0.95fr_1.15fr] lg:items-center">
         <div className="space-y-6">
           <div className="space-y-3">
             {eyebrow ? <p className={`text-xs font-semibold uppercase tracking-[0.28em] ${theme.accent}`}>{eyebrow}</p> : null}
@@ -152,7 +152,7 @@ export function AquariumColorSwitcher({
         <div className="relative">
           <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/10 via-transparent to-transparent blur-2xl" />
           <div className={`relative overflow-hidden rounded-[2rem] border p-3 shadow-2xl ${theme.panel} ${theme.imageFrame}`}>
-            <div className={`relative aspect-[5/4] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
+            <div className={`relative aspect-[4/3] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
               {hasImage && imageSrc ? (
                 <button
                   type="button"

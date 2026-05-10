@@ -3,15 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { RedSeaLogo } from "./RedSeaLogo";
-
-const NAV_ITEMS = [
-  { label: "Salt", href: "/salt" },
-  { label: "Reef Care Products", href: "/reef-care-products" },
-  { label: "Aquariums", href: "/aquariums" },
-  { label: "ReefBeat & Devices", href: "/reefbeat" },
-  { label: "Accessories", href: "/accessories" },
-  { label: "Wizards", href: "/wizards" },
-];
+import { PRODUCT_CATEGORIES } from "../data/productCategories";
 
 export function Header() {
   const pathname = usePathname();
@@ -31,7 +23,7 @@ export function Header() {
             </span>
           </Link>
           <nav className="hidden lg:flex items-center gap-1 flex-1">
-            {NAV_ITEMS.map((item) => (
+            {PRODUCT_CATEGORIES.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

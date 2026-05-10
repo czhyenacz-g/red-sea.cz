@@ -1,13 +1,16 @@
 import { Header } from "../components/Header";
+import { CategoryLanding } from "../components/CategoryLanding";
+import { PRODUCT_CATEGORIES } from "../data/productCategories";
 
 export default function Page() {
+  const category = PRODUCT_CATEGORIES.find((item) => item.slug === "reefbeat");
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
-      <main className="flex-1 max-w-7xl mx-auto px-6 py-16 w-full">
-        <h1 className="text-3xl font-bold text-[#153156] mb-4">reefbeat</h1>
-        <p className="text-gray-400">Obsah připravujeme.</p>
-      </main>
+      {category ? (
+        <CategoryLanding category={category} intro="ReefBeat ekosystém a chytrá zařízení pro vzdálené ovládání a monitoring." highlights={["ReefBeat ecosystem", "remote control", "smart devices"]} />
+      ) : null}
     </div>
   );
 }
