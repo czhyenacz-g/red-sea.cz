@@ -11,8 +11,8 @@ export default function Page() {
       {category ? (
         <CategoryLanding
           category={category}
-          intro="[placeholder]"
-          highlights={["[placeholder]"]}
+          intro={category.summary}
+          highlights={["Complete 4-part Supplement Program", "Complete 7-part Supplement Program", "Starter pack", "Colors starter pack", "Skeletal elements"]}
         />
       ) : null}
     </div>

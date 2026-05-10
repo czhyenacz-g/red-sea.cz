@@ -11,8 +11,8 @@ export default function Page() {
       {category ? (
         <CategoryLanding
           category={category}
-          intro="[placeholder]"
-          highlights={["[placeholder]"]}
+          intro={category.summary}
+          highlights={["NanoMat roller filter", "REEFER AC Skimmer"]}
         />
       ) : null}
     </div>

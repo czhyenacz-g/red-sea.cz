@@ -41,27 +41,28 @@ export type AquariumGroup = {
 };
 
 const MAX_NANO_DESCRIPTION =
-  "[placeholder]";
+  "Akvária této skupiny mají filtraci umístěnou v zadní komoře a proto se mohou prodávat i bez skříňky. Jsou vybavené veškerou potřebnou technikou. Led světlo, čerpadlo i odpěňovač. Jsou připraveny i pro použití ReefAto i NanoMat, které k nim lze přikoupit.";
 
-const MAX_NANO_GROUP_SIDEBAR_SUMMARY = "[placeholder]";
+const MAX_NANO_GROUP_SIDEBAR_SUMMARY = "Akvária této skupiny mají filtraci umístěnou v zadní komoře.";
 
-const MAX_NANO_GROUP_FULL_DESCRIPTION = "[placeholder]";
+const MAX_NANO_GROUP_FULL_DESCRIPTION =
+  "Akvária této skupiny mají filtraci umístěnou v zadní komoře a proto se mohou prodávat i bez skříňky. Jsou vybavené veškerou potřebnou technikou. Led světlo, čerpadlo i odpěňovač. Jsou připraveny i pro použití ReefAto i NanoMat, které k nim lze přikoupit.";
 
-const REEFER_G3_GROUP_SIDEBAR_SUMMARY = "[placeholder]";
+const REEFER_G3_GROUP_SIDEBAR_SUMMARY = "Oblíbené modely: (délka 60-90 cm)";
 
-const REEFER_G3_GROUP_FULL_DESCRIPTION = "[placeholder]";
+const REEFER_G3_GROUP_FULL_DESCRIPTION = "Akvarijní designové komplety se vyznačují nejen dokonalým vzhledem, ale i snadnou obsluhovatelností. Jsou rozděleny na tyto skupiny:";
 
 const REEFER_G3_HIGHLIGHTS = [
-  "[placeholder]",
+  "Oblíbené modely: (délka 60-90 cm)",
 ];
 
 const REEFER_G3_SERIES_RULES = [
-  "[placeholder]",
+  "Dlouhé modely (délka 120-150 cm)",
 ];
 
 const EMPTY_VARIANTS: Record<CabinetColor, AquariumVariant> = {
-  white: { image: null, imageAlt: "[placeholder]" },
-  black: { image: null, imageAlt: "[placeholder]" },
+  white: { image: null, imageAlt: "Akvárium s bílým provedením" },
+  black: { image: null, imageAlt: "Akvárium s černým provedením" },
 };
 
 const maxNanoProducts: AquariumProduct[] = [
@@ -77,7 +78,7 @@ const maxNanoProducts: AquariumProduct[] = [
       note: "Based on supplied Czech source text.",
     },
     shortDescription: MAX_NANO_DESCRIPTION,
-    longDescription: "[placeholder]",
+    longDescription: "Akvária této skupiny mají filtraci umístěnou v zadní komoře a proto se mohou prodávat i bez skříňky.",
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Volume", value: "75 l" }],
   },
@@ -93,7 +94,7 @@ const maxNanoProducts: AquariumProduct[] = [
       note: "Based on supplied Czech source text.",
     },
     shortDescription: MAX_NANO_DESCRIPTION,
-    longDescription: "[placeholder]",
+    longDescription: "Akvária této skupiny mají filtraci umístěnou v zadní komoře a proto se mohou prodávat i bez skříňky.",
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Volume", value: "100 l" }],
   },
@@ -109,7 +110,7 @@ const maxNanoProducts: AquariumProduct[] = [
       note: "Based on supplied Czech source text and converted image assets.",
     },
     shortDescription: MAX_NANO_DESCRIPTION,
-    longDescription: "[placeholder]",
+    longDescription: "Akvária této skupiny mají filtraci umístěnou v zadní komoře a proto se mohou prodávat i bez skříňky.",
     variants: {
       white: {
         image: "/assets/aquariums/max-nano-xl-white.webp",
@@ -134,7 +135,7 @@ const maxNanoProducts: AquariumProduct[] = [
       note: "Based on supplied Czech source text.",
     },
     shortDescription: MAX_NANO_DESCRIPTION,
-    longDescription: "[placeholder]",
+    longDescription: "Akvária této skupiny mají filtraci umístěnou v zadní komoře a proto se mohou prodávat i bez skříňky.",
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Volume", value: "200 l" }],
   },
@@ -151,7 +152,7 @@ const reefMaxG3Products: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
@@ -166,7 +167,7 @@ const reefMaxG3Products: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
@@ -181,7 +182,7 @@ const reefMaxG3Products: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
@@ -196,7 +197,7 @@ const reefMaxG3Products: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
@@ -211,7 +212,7 @@ const reefMaxG3Products: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
@@ -226,7 +227,7 @@ const reefMaxG3Products: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
     variants: EMPTY_VARIANTS,
     specs: [],
@@ -241,7 +242,7 @@ const reefMaxG3Products: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
     variants: EMPTY_VARIANTS,
     specs: [],
@@ -256,7 +257,7 @@ const reefMaxG3Products: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
     variants: EMPTY_VARIANTS,
     specs: [],
@@ -271,7 +272,7 @@ const reefMaxG3Products: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
     variants: EMPTY_VARIANTS,
     specs: [],
@@ -299,7 +300,7 @@ const reefMaxSProducts: AquariumProduct[] = [
       status: "provided-text" as const,
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
@@ -317,7 +318,7 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "96 cm" }],
@@ -332,7 +333,7 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "125 cm" }],
@@ -350,7 +351,7 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
     highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "151 cm" }],
@@ -365,7 +366,7 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "[placeholder]",
+    shortDescription: "REEFER MAX S -Peninsula (průhledová akvária, hliníkový rám)",
     highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "200 cm" }],
@@ -413,8 +414,8 @@ export const AQUARIUM_GROUPS: AquariumGroup[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text.",
     },
-    sidebarSummary: "[placeholder]",
-    fullDescription: "[placeholder]",
+    sidebarSummary: "REEFER MAX Peninsula (průhledová akvária)",
+    fullDescription: "REEFER MAX Peninsula (průhledová akvária)",
     products: reefMaxPeninsulaProducts,
   },
   {
@@ -424,8 +425,8 @@ export const AQUARIUM_GROUPS: AquariumGroup[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text.",
     },
-    sidebarSummary: "[placeholder]",
-    fullDescription: "[placeholder]",
+    sidebarSummary: "REEFER MAX S -Peninsula (průhledová akvária, hliníkový rám)",
+    fullDescription: "REEFER MAX S -Peninsula (průhledová akvária, hliníkový rám)",
     products: reefMaxSPeninsulaProducts,
   },
 ];

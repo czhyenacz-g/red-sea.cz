@@ -11,7 +11,7 @@ export function CategoryLanding({ category, intro, highlights }: CategoryLanding
   return (
     <main className="flex-1 bg-white">
       <div className="mx-auto w-full max-w-7xl px-6 py-14 sm:py-16">
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#153156]">[placeholder]</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#153156]">Redsea</p>
         <div className="mt-3 max-w-3xl space-y-4">
           <h1 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">{category.label}</h1>
           <p className="text-base leading-7 text-slate-600">{intro}</p>
@@ -29,7 +29,7 @@ export function CategoryLanding({ category, intro, highlights }: CategoryLanding
 
         <div className="mt-10">
           <Link href="/" className="text-sm font-medium text-[#153156] hover:underline">
-            [placeholder]
+            Redsea
           </Link>
         </div>
       </div>

@@ -9,7 +9,7 @@ export default function Page() {
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
       {category ? (
-        <CategoryLanding category={category} intro="[placeholder]" highlights={["[placeholder]"]} />
+        <CategoryLanding category={category} intro={category.summary} highlights={["ReefLed G2", "REEFER DC Skimmer", "Reef Run G2 DC pump"]} />
       ) : null}
     </div>
   );

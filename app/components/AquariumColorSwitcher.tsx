@@ -175,8 +175,8 @@ export function AquariumColorSwitcher({
                     <div className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border ${theme.panel}`}>
                       <span className="text-2xl">+</span>
                     </div>
-                    <p className="text-sm font-medium">[placeholder]</p>
-                    <p className="text-sm leading-6">[placeholder]</p>
+                    <p className="text-sm font-medium" />
+                    <p className="text-sm leading-6" />
                   </div>
                 </div>
               )}

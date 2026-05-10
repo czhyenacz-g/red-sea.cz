@@ -9,7 +9,7 @@ export default function Page() {
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
       {category ? (
-        <CategoryLanding category={category} intro="[placeholder]" highlights={["[placeholder]"]} />
+        <CategoryLanding category={category} intro={category.summary} highlights={["Red Sea salt", "Coral Pro Salt", "7 kg / 22 kg / 20,1 kg / 25 kg"]} />
       ) : null}
     </div>
   );

@@ -33,8 +33,8 @@ function AquariumSidebar({
     <aside className="lg:sticky lg:top-24 lg:w-[360px] lg:flex-shrink-0">
       <div className="rounded-[2rem] border border-slate-800/80 bg-slate-950/80 p-2.5 shadow-2xl backdrop-blur">
         <div className="mb-3 hidden px-2 pt-1 lg:block">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">[placeholder]</p>
-          <p className="mt-2 text-sm leading-6 text-slate-400">[placeholder]</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">Akvarijní systémy</p>
+          <p className="mt-2 text-sm leading-6 text-slate-400">Akvarijní designové komplety se vyznačují nejen dokonalým vzhledem, ale i snadnou obsluhovatelností.</p>
         </div>
 
         <div className="flex gap-3 overflow-x-auto pb-1 lg:flex-col lg:gap-3 lg:overflow-visible lg:pb-0">
@@ -109,10 +109,7 @@ function FamilyDetail({
       />
 
       {selectedProduct.status === "placeholder" ? (
-        <div className="rounded-[2rem] border border-amber-200 bg-amber-50 px-5 py-4 text-amber-900">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">[placeholder]</p>
-          <p className="mt-2 text-sm leading-6">[placeholder]</p>
-        </div>
+        <div className="hidden" />
       ) : null}
     </div>
   );
