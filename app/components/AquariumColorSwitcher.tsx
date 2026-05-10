@@ -168,6 +168,7 @@ export function AquariumColorSwitcher({
             </div>
           ) : null}
 
+          {/*
           <div className={`rounded-3xl border p-4 md:p-5 ${theme.panel}`}>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-current/60">Vybraný model</p>
             <h3 className="mt-2 text-xl font-semibold sm:text-2xl">{product.name}</h3>
@@ -181,6 +182,7 @@ export function AquariumColorSwitcher({
               ))}
             </dl>
           </div>
+          */}
         </div>
 
         <div className="relative">
