@@ -407,8 +407,9 @@ export const AQUARIUM_GROUPS: AquariumGroup[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text.",
     },
-    sidebarSummary: REEFER_G3_GROUP_FULL_DESCRIPTION,
-    fullDescription: REEFER_G3_GROUP_FULL_DESCRIPTION,
+    sidebarSummary: "Prémiová hliníková konstrukce s vyměnitelnými panely.",
+    fullDescription:
+      "Je navržen jako prémiový formát. Využívá robustní hliníkovou konstrukci (super-structure) s vyměnitelnými vnějšími panely, což je odolnější a modernější řešení než klasická překližka.",
     products: reefMaxSProducts,
   },
   {
