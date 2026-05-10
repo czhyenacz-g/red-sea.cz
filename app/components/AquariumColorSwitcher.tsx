@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { DelayedImageTooltip } from "./DelayedImageTooltip";
+import { ProductImageLightbox } from "./ProductImageLightbox";
 import type { AquariumProduct, CabinetColor } from "../data/aquariums";
 
 type AquariumColorSwitcherProps = {
@@ -35,7 +36,9 @@ export function AquariumColorSwitcher({
 }: AquariumColorSwitcherProps) {
   const [selectedColor, setSelectedColor] = useState<CabinetColor>("white");
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [galleryIndex, setGalleryIndex] = useState(0);
   const selected = useMemo(() => product.variants[selectedColor], [product.variants, selectedColor]);
+  const selectedImage = selected.images[galleryIndex] ?? selected.images[0] ?? null;
 
   const theme =
     selectedColor === "white"
@@ -60,8 +63,26 @@ export function AquariumColorSwitcher({
           imageFrame: "border-slate-200",
         };
 
-  const hasImage = Boolean(selected.image);
-  const imageSrc = selected.image;
+  const hasImage = Boolean(selectedImage);
+  const imageSrc = selectedImage?.src ?? null;
+
+  useEffect(() => {
+    setGalleryIndex(0);
+  }, [product.slug, selectedColor]);
+
+  const handlePrevImage = () => {
+    if (!selected.images.length) {
+      return;
+    }
+    setGalleryIndex((current) => (current - 1 + selected.images.length) % selected.images.length);
+  };
+
+  const handleNextImage = () => {
+    if (!selected.images.length) {
+      return;
+    }
+    setGalleryIndex((current) => (current + 1) % selected.images.length);
+  };
 
   useEffect(() => {
     if (!lightboxOpen) {
@@ -191,21 +212,46 @@ export function AquariumColorSwitcher({
             <div className={`relative aspect-[10/9] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
               {hasImage && imageSrc ? (
                 <DelayedImageTooltip label={product.name} className="absolute inset-0">
-                  <button
-                    type="button"
-                    onClick={() => setLightboxOpen(true)}
-                    aria-label={`Open larger preview of ${product.name}`}
-                    className="group absolute inset-0 cursor-zoom-in"
-                  >
-                    <Image
-                      src={imageSrc}
-                      alt={selected.imageAlt}
-                      fill
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 48vw"
-                      className="object-contain p-2 transition-transform duration-200 group-hover:scale-[1.01] sm:p-3"
-                    />
-                  </button>
+                  <>
+                    {selected.images.length > 1 ? (
+                      <>
+                        <button
+                          type="button"
+                          onClick={handlePrevImage}
+                          aria-label="Předchozí varianta obrázku"
+                          className="absolute left-3 top-1/2 z-10 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-slate-950/75 text-white shadow-lg transition-colors hover:bg-slate-900"
+                        >
+                          <span className="text-2xl leading-none">‹</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleNextImage}
+                          aria-label="Další varianta obrázku"
+                          className="absolute right-3 top-1/2 z-10 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-slate-950/75 text-white shadow-lg transition-colors hover:bg-slate-900"
+                        >
+                          <span className="text-2xl leading-none">›</span>
+                        </button>
+                        <div className="absolute bottom-3 right-3 z-10 rounded-full border border-white/15 bg-slate-950/80 px-3 py-1 text-xs font-medium text-white shadow-lg">
+                          {galleryIndex + 1} / {selected.images.length}
+                        </div>
+                      </>
+                    ) : null}
+                    <button
+                      type="button"
+                      onClick={() => setLightboxOpen(true)}
+                      aria-label={`Open larger preview of ${product.name}`}
+                      className="group absolute inset-0 cursor-zoom-in"
+                    >
+                      <Image
+                        src={imageSrc}
+                        alt={selectedImage?.alt ?? product.name}
+                        fill
+                        priority
+                        sizes="(max-width: 1024px) 100vw, 48vw"
+                        className="object-contain p-2 transition-transform duration-200 group-hover:scale-[1.01] sm:p-3"
+                      />
+                    </button>
+                  </>
                 </DelayedImageTooltip>
               ) : (
                 <div className={`flex h-full w-full items-center justify-center p-6 text-center ${theme.muted}`}>
@@ -222,35 +268,19 @@ export function AquariumColorSwitcher({
       </div>
 
       {lightboxOpen && hasImage && imageSrc ? (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={`Zvětšený náhled ${product.name}`}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 px-4 py-6"
-          onClick={() => setLightboxOpen(false)}
-        >
-          <div className="relative flex max-h-[90vh] max-w-[90vw] items-center justify-center" onClick={(event) => event.stopPropagation()}>
-            <button
-              type="button"
-              onClick={() => setLightboxOpen(false)}
-              aria-label="Zavřít náhled obrázku"
-              className="absolute -right-2 -top-2 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-950/90 text-white shadow-lg transition-colors hover:bg-slate-900"
-            >
-              <span className="text-xl leading-none">×</span>
-            </button>
-            <div className="relative max-h-[90vh] max-w-[90vw] overflow-hidden rounded-[1.5rem] border border-white/10 bg-white p-3 shadow-2xl">
-              <div className="relative h-[80vh] w-[80vw] max-h-[90vh] max-w-[90vw]">
-                <Image
-                  src={imageSrc}
-                  alt={selected.imageAlt}
-                  fill
-                  sizes="90vw"
-                  className="object-contain"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        <ProductImageLightbox
+          open={lightboxOpen}
+          imageSrc={imageSrc}
+          imageAlt={selectedImage?.alt ?? product.name}
+          onClose={() => setLightboxOpen(false)}
+          ariaLabel={`Zvětšený náhled ${product.name}`}
+          title={product.name}
+          imageLabel={selectedImage?.label}
+          imageIndex={galleryIndex}
+          imageCount={selected.images.length}
+          onPrev={handlePrevImage}
+          onNext={handleNextImage}
+        />
       ) : null}
     </section>
   );
