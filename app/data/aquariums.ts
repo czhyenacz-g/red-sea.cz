@@ -12,6 +12,7 @@ export type AquariumProduct = {
   name: string;
   series: string;
   groupSlug: string;
+  subgroupLabel?: string;
   featured?: boolean;
   volume?: string;
   status: AquariumStatus;
@@ -147,6 +148,7 @@ const reefMaxG3Products: AquariumProduct[] = [
     name: "REEFER MAX 170 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3",
+    subgroupLabel: "60–90 cm",
     status: "placeholder",
     source: {
       status: "provided-text",
@@ -162,6 +164,7 @@ const reefMaxG3Products: AquariumProduct[] = [
     name: "REEFER MAX 200 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3",
+    subgroupLabel: "60–90 cm",
     status: "placeholder",
     source: {
       status: "provided-text",
@@ -177,6 +180,7 @@ const reefMaxG3Products: AquariumProduct[] = [
     name: "REEFER MAX 250 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3",
+    subgroupLabel: "60–90 cm",
     status: "placeholder",
     source: {
       status: "provided-text",
@@ -192,6 +196,7 @@ const reefMaxG3Products: AquariumProduct[] = [
     name: "REEFER MAX 300 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3",
+    subgroupLabel: "60–90 cm",
     status: "placeholder",
     source: {
       status: "provided-text",
@@ -207,6 +212,7 @@ const reefMaxG3Products: AquariumProduct[] = [
     name: "REEFER MAX 350 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3",
+    subgroupLabel: "120–150 cm",
     status: "placeholder",
     source: {
       status: "provided-text",
@@ -222,6 +228,7 @@ const reefMaxG3Products: AquariumProduct[] = [
     name: "REEFER MAX 425 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3",
+    subgroupLabel: "120–150 cm",
     status: "placeholder",
     source: {
       status: "provided-text",
@@ -237,6 +244,7 @@ const reefMaxG3Products: AquariumProduct[] = [
     name: "REEFER MAX 525 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3",
+    subgroupLabel: "120–150 cm",
     status: "placeholder",
     source: {
       status: "provided-text",
@@ -252,6 +260,7 @@ const reefMaxG3Products: AquariumProduct[] = [
     name: "REEFER MAX 625 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3",
+    subgroupLabel: "120–150 cm",
     status: "placeholder",
     source: {
       status: "provided-text",
@@ -267,6 +276,7 @@ const reefMaxG3Products: AquariumProduct[] = [
     name: "REEFER MAX 750 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3",
+    subgroupLabel: "180 cm",
     status: "placeholder",
     source: {
       status: "provided-text",

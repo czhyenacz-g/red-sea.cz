@@ -95,6 +95,23 @@ function FamilyDetail({
   selectedProduct: AquariumProduct;
   onSelectProduct: (slug: string) => void;
 }) {
+  const groupedProducts = useMemo(() => {
+    if (group.slug !== "reefer-max-g3") {
+      return null;
+    }
+
+    return group.products.reduce<Array<{ label: string; products: AquariumProduct[] }>>((acc, product) => {
+      const label = product.subgroupLabel ?? "";
+      const bucket = acc.find((entry) => entry.label === label);
+      if (bucket) {
+        bucket.products.push(product);
+      } else {
+        acc.push({ label, products: [product] });
+      }
+      return acc;
+    }, []);
+  }, [group]);
+
   return (
     <div className="space-y-4">
       <AquariumColorSwitcher
@@ -107,6 +124,36 @@ function FamilyDetail({
         selectedModelSlug={selectedProduct.slug}
         onSelectModel={onSelectProduct}
       />
+
+      {groupedProducts ? (
+        <div className="space-y-4">
+          {groupedProducts.map((bucket) => (
+            <div key={bucket.label} className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-lg">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">{bucket.label}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {bucket.products.map((product) => {
+                  const active = product.slug === selectedProduct.slug;
+                  return (
+                    <button
+                      key={product.slug}
+                      type="button"
+                      onClick={() => onSelectProduct(product.slug)}
+                      aria-pressed={active}
+                      className={`inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+                        active
+                          ? "border-amber-400 bg-slate-950 text-white shadow-[0_0_0_1px_rgba(251,191,36,0.35)]"
+                          : "border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-white"
+                      }`}
+                    >
+                      {product.volume ?? product.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
 
       {selectedProduct.status === "placeholder" ? (
         <div className="hidden" />
