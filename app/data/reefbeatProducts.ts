@@ -106,8 +106,8 @@ export const REEFBEAT_PRODUCTS: ReefbeatProduct[] = [
     text: "REEFER DC Skimmer - vysoce účinný odpěňovač v provedení podle výkonu 300,600,900 odlišující se od základních AC modelů samonastavitelnou výškou hladiny pěny v komoře odpěňovače. Toto zařízení se ovládá pomoci ReefRun Dual Controller (není součástí balení), který zároveň může ovládat i čerpadlo Reef Run G2 Pump",
     images: [
       {
-        src: "/assets/reefbeat/reefer-dc-skimmer-family.webp",
-        alt: "RSK Skimmers 300 600 900",
+        src: "/assets/reefbeat/reefer-dc-skimmer.webp",
+        alt: "REEFER DC Skimmer",
       },
     ],
   },

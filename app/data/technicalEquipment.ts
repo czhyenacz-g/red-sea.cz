@@ -20,7 +20,7 @@ export const TECHNICAL_EQUIPMENT_PRODUCTS: TechnicalEquipmentProduct[] = [
     slug: "reefer-ac-skimmer",
     title: "REEFER AC Skimmer",
     description: "Vysoce účinný odpěňovač v provedení podle výkonu 300,600,900",
-    image: null,
+    image: "/assets/technical-equipment/rsk-ac-skimmer-family.webp",
     imageAlt: "REEFER AC Skimmer",
   },
 ];
