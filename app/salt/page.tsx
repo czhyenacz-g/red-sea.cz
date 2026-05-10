@@ -62,7 +62,7 @@ export default function Page() {
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-sm font-semibold text-white">
                     {candidate.id}
                   </span>
-                  <span className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">Candidate</span>
+                  <span className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">Balení</span>
                 </div>
                 <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-3">
                   <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] bg-white">
