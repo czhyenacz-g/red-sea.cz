@@ -186,7 +186,7 @@ export function AquariumColorSwitcher({
         <div className="relative">
           <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/10 via-transparent to-transparent blur-2xl" />
           <div className={`relative overflow-hidden rounded-[2rem] border p-3 shadow-2xl ${theme.panel} ${theme.imageFrame}`}>
-            <div className={`relative aspect-[4/3] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
+            <div className={`relative aspect-[10/9] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
               {hasImage && imageSrc ? (
                 <DelayedImageTooltip label={product.name}>
                   <button
@@ -214,10 +214,6 @@ export function AquariumColorSwitcher({
                   </div>
                 </div>
               )}
-            </div>
-            <div className={`mt-4 flex items-center justify-between gap-4 text-sm ${theme.muted}`}>
-              <span className="font-medium">Barva skříňky</span>
-              <span className="capitalize">{selectedColor}</span>
             </div>
           </div>
         </div>
