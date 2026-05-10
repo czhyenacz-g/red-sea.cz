@@ -2,6 +2,29 @@ import Image from "next/image";
 import { Header } from "../components/Header";
 import { SALT_PRODUCTS } from "../data/saltProducts";
 
+const SALT_BRIDGE_IMAGE = "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp";
+
+const TOP_CARDS = [
+  {
+    slug: "red-sea-salt",
+    title: "Red Sea salt",
+    description: "Prémiová mořská sůl.",
+    image: "/assets/salt/candidates/05-red-sea-salt-2023.webp",
+  },
+  {
+    slug: "bridge",
+    title: "Mořská sůl",
+    description: "Red Sea salt a Coral Pro Salt.",
+    image: SALT_BRIDGE_IMAGE,
+  },
+  {
+    slug: "coral-pro-salt",
+    title: "Coral Pro Salt",
+    description: "Prémiová mořská sůl s vyšší alkalinitou.",
+    image: "/assets/salt/candidates/04-coral-pro-salt-2023.webp",
+  },
+];
+
 const SALT_CANDIDATES = [
   { id: 1, label: "CP SALT 7kg bucket with salt", image: "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp" },
   { id: 2, label: "RS SALT 7kg bucket with salt", image: "/assets/salt/candidates/06-rs-salt-7kg-bucket-with-salt.webp" },
@@ -22,12 +45,14 @@ export default function Page() {
         </div>
 
         <div className="grid gap-5 lg:grid-cols-3">
-          {SALT_PRODUCTS.map((product) => (
+          {TOP_CARDS.map((product, index) => (
             <article
               key={product.slug}
-              className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_80px_-40px_rgba(15,23,42,0.35)]"
+              className={`overflow-hidden rounded-[2rem] border shadow-[0_24px_80px_-40px_rgba(15,23,42,0.35)] ${
+                index === 1 ? "border-amber-100 bg-[#fbf7ef]" : "border-slate-200 bg-white"
+              }`}
             >
-              <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-4">
+              <div className={`border-b p-4 ${index === 1 ? "border-amber-100" : "border-slate-100"}`}>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-white">
                   <Image
                     src={product.image}
