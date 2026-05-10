@@ -4,22 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import { AquariumColorSwitcher } from "./AquariumColorSwitcher";
 import { AQUARIUM_GROUPS, type AquariumGroup, type AquariumProduct } from "../data/aquariums";
 
-function hasUnverifiedMarkers(item: AquariumGroup | AquariumProduct) {
-  const textFields = [
-    "sidebarSummary" in item ? item.sidebarSummary : "",
-    "fullDescription" in item ? item.fullDescription : "",
-    "shortDescription" in item ? item.shortDescription : "",
-    "longDescription" in item ? item.longDescription ?? "" : "",
-  ];
-
-  return (
-    item.source?.status !== "verified" ||
-    textFields.some((value) => value.includes("[i]")) ||
-    ("specs" in item ? item.specs.some((spec) => spec.value.includes("[i]")) : false) ||
-    ("highlights" in item ? item.highlights?.some((highlight) => highlight.includes("[i]")) ?? false : false)
-  );
-}
-
 function AquariumSidebar({
   groups,
   selectedGroupSlug,
@@ -95,18 +79,19 @@ function FamilyDetail({
   selectedProduct: AquariumProduct;
   onSelectProduct: (slug: string) => void;
 }) {
-  const groupedProducts = useMemo(() => {
+  const modelGroups = useMemo(() => {
     if (group.slug !== "reefer-max-g3") {
       return null;
     }
 
-    return group.products.reduce<Array<{ label: string; products: AquariumProduct[] }>>((acc, product) => {
+    return group.products.reduce<Array<{ label: string; options: Array<{ slug: string; label: string }> }>>((acc, product) => {
       const label = product.subgroupLabel ?? "";
       const bucket = acc.find((entry) => entry.label === label);
+      const option = { slug: product.slug, label: product.volume ?? product.name };
       if (bucket) {
-        bucket.products.push(product);
+        bucket.options.push(option);
       } else {
-        acc.push({ label, products: [product] });
+        acc.push({ label, options: [option] });
       }
       return acc;
     }, []);
@@ -121,43 +106,10 @@ function FamilyDetail({
         intro={group.fullDescription}
         product={selectedProduct}
         modelOptions={group.products.map((product) => ({ slug: product.slug, label: product.volume ?? product.name }))}
+        modelGroups={modelGroups ?? undefined}
         selectedModelSlug={selectedProduct.slug}
         onSelectModel={onSelectProduct}
       />
-
-      {groupedProducts ? (
-        <div className="space-y-4">
-          {groupedProducts.map((bucket) => (
-            <div key={bucket.label} className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-lg">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">{bucket.label}</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {bucket.products.map((product) => {
-                  const active = product.slug === selectedProduct.slug;
-                  return (
-                    <button
-                      key={product.slug}
-                      type="button"
-                      onClick={() => onSelectProduct(product.slug)}
-                      aria-pressed={active}
-                      className={`inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
-                        active
-                          ? "border-amber-400 bg-slate-950 text-white shadow-[0_0_0_1px_rgba(251,191,36,0.35)]"
-                          : "border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-white"
-                      }`}
-                    >
-                      {product.volume ?? product.name}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : null}
-
-      {selectedProduct.status === "placeholder" ? (
-        <div className="hidden" />
-      ) : null}
     </div>
   );
 }
@@ -182,8 +134,6 @@ export function AquariumCatalogClient() {
     [selectedGroup, selectedProductSlug]
   );
 
-  const hasUnverifiedContent = hasUnverifiedMarkers(selectedGroup) || hasUnverifiedMarkers(selectedProduct);
-
   return (
     <div className="grid gap-8 lg:grid-cols-[22rem_minmax(0,1fr)] lg:items-start">
       <AquariumSidebar groups={AQUARIUM_GROUPS} selectedGroupSlug={selectedGroup.slug} onSelectGroup={(slug) => {
@@ -194,12 +144,6 @@ export function AquariumCatalogClient() {
 
       <div className="space-y-5 lg:sticky lg:top-24">
         <FamilyDetail group={selectedGroup} selectedProduct={selectedProduct} onSelectProduct={setSelectedProductSlug} />
-
-        {hasUnverifiedContent ? (
-          <p className="px-1 text-xs leading-5 text-slate-400">
-            [i] = orientační / neověřený údaj, bude doplněno podle oficiálních materiálů.
-          </p>
-        ) : null}
       </div>
     </div>
   );

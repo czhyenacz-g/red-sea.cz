@@ -7,6 +7,7 @@ import type { AquariumProduct, CabinetColor } from "../data/aquariums";
 type AquariumColorSwitcherProps = {
   product: AquariumProduct;
   modelOptions?: Array<{ slug: string; label: string }>;
+  modelGroups?: Array<{ label: string; options: Array<{ slug: string; label: string }> }>;
   selectedModelSlug?: string;
   onSelectModel?: (slug: string) => void;
   eyebrow?: string;
@@ -23,6 +24,7 @@ const SWITCHER_OPTIONS: Array<{ color: CabinetColor; label: string }> = [
 export function AquariumColorSwitcher({
   product,
   modelOptions,
+  modelGroups,
   selectedModelSlug,
   onSelectModel,
   eyebrow,
@@ -112,7 +114,7 @@ export function AquariumColorSwitcher({
               );
             })}
 
-            {modelOptions && onSelectModel ? (
+            {modelOptions && onSelectModel && !modelGroups ? (
               <label
                 className={`relative inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${theme.button}`}
               >
@@ -133,6 +135,37 @@ export function AquariumColorSwitcher({
               </label>
             ) : null}
           </div>
+
+          {modelGroups && onSelectModel ? (
+            <div className="space-y-2">
+              {modelGroups.map((group) => (
+                <div
+                  key={group.label}
+                  className={`rounded-2xl border px-3 py-3 ${selectedColor === "white" ? "border-white/10 bg-white/5" : "border-slate-200 bg-white"}`}
+                >
+                  <p className={`text-[11px] font-semibold uppercase tracking-[0.24em] ${theme.muted}`}>{group.label}</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {group.options.map((option) => {
+                      const active = option.slug === selectedModelSlug;
+                      return (
+                        <button
+                          key={option.slug}
+                          type="button"
+                          onClick={() => onSelectModel(option.slug)}
+                          aria-pressed={active}
+                          className={`inline-flex items-center rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
+                            active ? theme.buttonActive : theme.button
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
 
           <div className={`rounded-3xl border p-4 md:p-5 ${theme.panel}`}>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-current/60">Vybraný model</p>
@@ -158,8 +191,8 @@ export function AquariumColorSwitcher({
                   type="button"
                   onClick={() => setLightboxOpen(true)}
                   aria-label={`Open larger preview of ${product.name}`}
-                    className="group absolute inset-0 cursor-zoom-in"
-                  >
+                  className="group absolute inset-0 cursor-zoom-in"
+                >
                   <Image
                     src={imageSrc}
                     alt={selected.imageAlt}
@@ -175,8 +208,6 @@ export function AquariumColorSwitcher({
                     <div className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border ${theme.panel}`}>
                       <span className="text-2xl">+</span>
                     </div>
-                    <p className="text-sm font-medium" />
-                    <p className="text-sm leading-6" />
                   </div>
                 </div>
               )}
