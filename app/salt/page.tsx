@@ -4,11 +4,11 @@ import { SALT_PRODUCTS } from "../data/saltProducts";
 
 const SALT_CANDIDATES = [
   { id: 1, label: "CP SALT 7kg bucket with salt", image: "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp" },
-  { id: 6, label: "RS SALT 7kg bucket with salt", image: "/assets/salt/candidates/06-rs-salt-7kg-bucket-with-salt.webp" },
-  { id: 8, label: "CP 20KG160gal", image: "/assets/salt/candidates/08-cp-20kg-160gal.webp" },
-  { id: 9, label: "RS 20KG160gal", image: "/assets/salt/candidates/09-rs-20kg-160gal.webp" },
-  { id: 10, label: "R11232 25kg_200gall Coral Pro Salt", image: "/assets/salt/candidates/10-coral-pro-25kg-bag.webp" },
-  { id: 11, label: "R11072 25kg_200gall Red Sea Salt", image: "/assets/salt/candidates/11-red-sea-25kg-bag.webp" },
+  { id: 2, label: "RS SALT 7kg bucket with salt", image: "/assets/salt/candidates/06-rs-salt-7kg-bucket-with-salt.webp" },
+  { id: 3, label: "CP 20KG160gal", image: "/assets/salt/candidates/08-cp-20kg-160gal.webp" },
+  { id: 4, label: "RS 20KG160gal", image: "/assets/salt/candidates/09-rs-20kg-160gal.webp" },
+  { id: 5, label: "R11232 25kg_200gall Coral Pro Salt", image: "/assets/salt/candidates/10-coral-pro-25kg-bag.webp" },
+  { id: 6, label: "R11072 25kg_200gall Red Sea Salt", image: "/assets/salt/candidates/11-red-sea-25kg-bag.webp" },
 ];
 
 export default function Page() {
@@ -49,11 +49,10 @@ export default function Page() {
 
         <section className="mt-12">
           <div className="mb-4 max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Kandidáti</p>
-            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">Vyber, které obrázky tu necháme</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">
-              Fotky jsou očíslované podle pořadí, abys mohl rychle určit, které mají zůstat v konečné verzi.
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Balení</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
+              Mořské soli jsou dodávány v balení 7 kg, 22 kg (kýbl), 20,1 kg (krabice) a 25 kg – pytel pro profesionální použití.
+            </h2>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -78,6 +77,9 @@ export default function Page() {
                 </div>
                 <div className="px-4 py-3">
                   <p className="text-sm leading-6 text-slate-700">{candidate.label}</p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-400">
+                    {candidate.image.split("/").pop()?.replace(".webp", "")}
+                  </p>
                 </div>
               </article>
             ))}
