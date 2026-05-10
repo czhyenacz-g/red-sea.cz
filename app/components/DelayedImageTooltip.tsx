@@ -6,9 +6,10 @@ type DelayedImageTooltipProps = {
   label: string;
   children: ReactNode;
   delayMs?: number;
+  className?: string;
 };
 
-export function DelayedImageTooltip({ label, children, delayMs = 5000 }: DelayedImageTooltipProps) {
+export function DelayedImageTooltip({ label, children, delayMs = 5000, className = "relative inline-block" }: DelayedImageTooltipProps) {
   const [visible, setVisible] = useState(false);
   const timerRef = useRef<number | null>(null);
 
@@ -37,7 +38,7 @@ export function DelayedImageTooltip({ label, children, delayMs = 5000 }: Delayed
 
   return (
     <div
-      className="group relative"
+      className={`group ${className}`}
       onMouseEnter={startTimer}
       onMouseLeave={() => {
         clearTimer();
