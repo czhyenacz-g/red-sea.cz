@@ -2,6 +2,20 @@ import Image from "next/image";
 import { Header } from "../components/Header";
 import { SALT_PRODUCTS } from "../data/saltProducts";
 
+const SALT_CANDIDATES = [
+  { id: 1, label: "CP SALT 7kg bucket with salt", image: "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp" },
+  { id: 2, label: "buckets-with-salt-outside-big-2023", image: "/assets/salt/candidates/02-buckets-with-salt-outside-big.webp" },
+  { id: 3, label: "CP SALT bucket with salt", image: "/assets/salt/candidates/03-cp-salt-bucket-with-salt.webp" },
+  { id: 4, label: "coral pro-salt-2023", image: "/assets/salt/candidates/04-coral-pro-salt-2023.webp" },
+  { id: 5, label: "red-sea-salt-2023", image: "/assets/salt/candidates/05-red-sea-salt-2023.webp" },
+  { id: 6, label: "RS SALT 7kg bucket with salt", image: "/assets/salt/candidates/06-rs-salt-7kg-bucket-with-salt.webp" },
+  { id: 7, label: "RS SALT bucket with salt", image: "/assets/salt/candidates/07-rs-salt-bucket-with-salt.webp" },
+  { id: 8, label: "CP 20KG160gal", image: "/assets/salt/candidates/08-cp-20kg-160gal.webp" },
+  { id: 9, label: "RS 20KG160gal", image: "/assets/salt/candidates/09-rs-20kg-160gal.webp" },
+  { id: 10, label: "R11232 25kg_200gall Coral Pro Salt", image: "/assets/salt/candidates/10-coral-pro-25kg-bag.webp" },
+  { id: 11, label: "R11072 25kg_200gall Red Sea Salt", image: "/assets/salt/candidates/11-red-sea-25kg-bag.webp" },
+];
+
 export default function Page() {
   return (
     <div className="min-h-screen bg-[#f6f2ea]">
@@ -37,6 +51,43 @@ export default function Page() {
             </article>
           ))}
         </div>
+
+        <section className="mt-12">
+          <div className="mb-4 max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Kandidáti</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">Vyber, které obrázky tu necháme</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Fotky jsou očíslované podle pořadí, abys mohl rychle určit, které mají zůstat v konečné verzi.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {SALT_CANDIDATES.map((candidate) => (
+              <article key={candidate.id} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_18px_50px_-35px_rgba(15,23,42,0.35)]">
+                <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-sm font-semibold text-white">
+                    {candidate.id}
+                  </span>
+                  <span className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">Candidate</span>
+                </div>
+                <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-3">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] bg-white">
+                    <Image
+                      src={candidate.image}
+                      alt={candidate.label}
+                      fill
+                      sizes="(max-width: 1280px) 100vw, 33vw"
+                      className="object-contain p-4"
+                    />
+                  </div>
+                </div>
+                <div className="px-4 py-3">
+                  <p className="text-sm leading-6 text-slate-700">{candidate.label}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );
