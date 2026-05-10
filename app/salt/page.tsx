@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { Header } from "../components/Header";
+import { ProductImageLightbox } from "../components/ProductImageLightbox";
 import { SALT_PRODUCTS } from "../data/saltProducts";
 
 const SALT_BRIDGE_IMAGE = "/assets/salt/candidates/02-buckets-with-salt-outside-big.webp";
@@ -35,6 +39,11 @@ const SALT_CANDIDATES = [
 ];
 
 export default function Page() {
+  const [lightboxImage, setLightboxImage] = useState<{
+    src: string;
+    alt: string;
+  } | null>(null);
+
   return (
     <div className="min-h-screen bg-[#f6f2ea]">
       <Header />
@@ -45,31 +54,42 @@ export default function Page() {
         </div>
 
         <div className="grid gap-5 lg:grid-cols-3">
-          {TOP_CARDS.map((product, index) => (
-            <article
-              key={product.slug}
-              className={`overflow-hidden rounded-[2rem] border shadow-[0_24px_80px_-40px_rgba(15,23,42,0.35)] ${
-                index === 1 ? "border-amber-100 bg-[#fbf7ef]" : "border-slate-200 bg-white"
-              }`}
-            >
-              <div className={`border-b p-4 ${index === 1 ? "border-amber-100" : "border-slate-100"}`}>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-white">
-                  <Image
-                    src={product.image}
-                    alt={product.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                    className="object-contain p-5"
-                  />
-                </div>
-              </div>
+          {TOP_CARDS.map((product, index) => {
+            const clickable = Boolean(product.image);
 
-              <div className="space-y-3 p-5">
-                <h2 className="text-xl font-semibold tracking-tight text-slate-950">{product.title}</h2>
-                <p className="text-sm leading-6 text-slate-600">{product.description}</p>
-              </div>
-            </article>
-          ))}
+            return (
+              <article
+                key={product.slug}
+                className={`overflow-hidden rounded-[2rem] border shadow-[0_24px_80px_-40px_rgba(15,23,42,0.35)] ${
+                  index === 1 ? "border-amber-100 bg-[#fbf7ef]" : "border-slate-200 bg-white"
+                }`}
+              >
+                <div className={`border-b p-4 ${index === 1 ? "border-amber-100" : "border-slate-100"}`}>
+                  <button
+                    type="button"
+                    onClick={() => setLightboxImage({ src: product.image, alt: product.title })}
+                    disabled={!clickable}
+                    className={`relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-white ${
+                      clickable ? "cursor-zoom-in" : "cursor-default"
+                    }`}
+                  >
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-contain p-5 transition-transform duration-200 hover:scale-[1.01]"
+                    />
+                  </button>
+                </div>
+
+                <div className="space-y-3 p-5">
+                  <h2 className="text-xl font-semibold tracking-tight text-slate-950">{product.title}</h2>
+                  <p className="text-sm leading-6 text-slate-600">{product.description}</p>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         <section className="mt-12">
@@ -90,15 +110,19 @@ export default function Page() {
                   <span className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">Balení</span>
                 </div>
                 <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-3">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] bg-white">
+                  <button
+                    type="button"
+                    onClick={() => setLightboxImage({ src: candidate.image, alt: candidate.label })}
+                    className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] bg-white cursor-zoom-in"
+                  >
                     <Image
                       src={candidate.image}
                       alt={candidate.label}
                       fill
                       sizes="(max-width: 1280px) 100vw, 33vw"
-                      className="object-contain p-4"
+                      className="object-contain p-4 transition-transform duration-200 hover:scale-[1.01]"
                     />
-                  </div>
+                  </button>
                 </div>
                 <div className="px-4 py-3">
                   <p className="text-sm leading-6 text-slate-700">{candidate.label}</p>
@@ -111,6 +135,14 @@ export default function Page() {
           </div>
         </section>
       </main>
+
+      <ProductImageLightbox
+        open={Boolean(lightboxImage)}
+        imageSrc={lightboxImage?.src ?? null}
+        imageAlt={lightboxImage?.alt ?? ""}
+        onClose={() => setLightboxImage(null)}
+        ariaLabel={lightboxImage ? `Zvětšený náhled ${lightboxImage.alt}` : "Zvětšený náhled obrázku"}
+      />
     </div>
   );
 }
