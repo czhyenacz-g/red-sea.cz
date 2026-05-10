@@ -38,6 +38,11 @@ const SALT_CANDIDATES = [
   { id: 6, label: "R11072 25kg_200gall Red Sea Salt", image: "/assets/salt/candidates/11-red-sea-25kg-bag.webp" },
 ];
 
+const CLASSIC_BUCKETS = [
+  { id: 7, label: "CP SALT bucket with salt", image: "/assets/salt/candidates/03-cp-salt-bucket-with-salt.webp" },
+  { id: 8, label: "RS SALT bucket with salt", image: "/assets/salt/candidates/07-rs-salt-bucket-with-salt.webp" },
+];
+
 export default function Page() {
   const [lightboxImage, setLightboxImage] = useState<{
     src: string;
@@ -132,6 +137,43 @@ export default function Page() {
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className="mt-8">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Klasické kyble</p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {CLASSIC_BUCKETS.map((candidate) => (
+                <article key={candidate.id} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_18px_50px_-35px_rgba(15,23,42,0.35)]">
+                  <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-sm font-semibold text-white">
+                      {candidate.id}
+                    </span>
+                    <span className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">Balení</span>
+                  </div>
+                  <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-3">
+                    <button
+                      type="button"
+                      onClick={() => setLightboxImage({ src: candidate.image, alt: candidate.label })}
+                      className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] bg-white cursor-zoom-in"
+                    >
+                      <Image
+                        src={candidate.image}
+                        alt={candidate.label}
+                        fill
+                        sizes="(max-width: 1280px) 100vw, 33vw"
+                        className="object-contain p-4 transition-transform duration-200 hover:scale-[1.01]"
+                      />
+                    </button>
+                  </div>
+                  <div className="px-4 py-3">
+                    <p className="text-sm leading-6 text-slate-700">{candidate.label}</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-400">
+                      {candidate.image.split("/").pop()?.replace(".webp", "")}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
       </main>
