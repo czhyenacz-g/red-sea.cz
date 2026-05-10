@@ -49,11 +49,11 @@ export default function Page() {
               <article key={product.slug} className={`overflow-hidden rounded-[2rem] border shadow-[0_24px_80px_-40px_rgba(15,23,42,0.35)] ${tone}`}>
                 <div className={`border-b p-4 ${index === 1 ? "border-amber-100" : "border-slate-100"}`}>
                   {canOpen ? (
-                    <DelayedImageTooltip label={imageFilename}>
+                    <DelayedImageTooltip label={imageFilename} className="block w-full">
                       <button
                         type="button"
                         onClick={() => setLightboxImage({ src: product.image, alt: product.title })}
-                        className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-white cursor-zoom-in"
+                        className="relative block aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-white cursor-zoom-in"
                       >
                         <Image
                           src={product.image}
@@ -120,11 +120,11 @@ export default function Page() {
                     <span className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">Balení</span>
                   </div>
                   <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-3">
-                    <DelayedImageTooltip label={imageFilename}>
+                    <DelayedImageTooltip label={imageFilename} className="block w-full">
                       <button
                         type="button"
                         onClick={() => setLightboxImage({ src: candidate.image, alt: candidate.label })}
-                        className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] bg-white cursor-zoom-in"
+                        className="relative block aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] bg-white cursor-zoom-in"
                       >
                         <Image
                           src={candidate.image}
