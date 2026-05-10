@@ -79,24 +79,6 @@ function FamilyDetail({
   selectedProduct: AquariumProduct;
   onSelectProduct: (slug: string) => void;
 }) {
-  const modelGroups = useMemo(() => {
-    if (group.slug !== "reefer-max-g3") {
-      return null;
-    }
-
-    return group.products.reduce<Array<{ label: string; options: Array<{ slug: string; label: string }> }>>((acc, product) => {
-      const label = product.subgroupLabel ?? "";
-      const bucket = acc.find((entry) => entry.label === label);
-      const option = { slug: product.slug, label: product.volume ?? product.name };
-      if (bucket) {
-        bucket.options.push(option);
-      } else {
-        acc.push({ label, options: [option] });
-      }
-      return acc;
-    }, []);
-  }, [group]);
-
   return (
     <div className="space-y-4">
       <AquariumColorSwitcher
@@ -106,7 +88,6 @@ function FamilyDetail({
         intro={group.fullDescription}
         product={selectedProduct}
         modelOptions={group.products.map((product) => ({ slug: product.slug, label: product.volume ?? product.name }))}
-        modelGroups={modelGroups ?? undefined}
         selectedModelSlug={selectedProduct.slug}
         onSelectModel={onSelectProduct}
       />

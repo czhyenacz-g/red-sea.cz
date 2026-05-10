@@ -12,7 +12,6 @@ export type AquariumProduct = {
   name: string;
   series: string;
   groupSlug: string;
-  subgroupLabel?: string;
   featured?: boolean;
   volume?: string;
   status: AquariumStatus;
@@ -49,17 +48,7 @@ const MAX_NANO_GROUP_SIDEBAR_SUMMARY = "Akvária této skupiny mají filtraci um
 const MAX_NANO_GROUP_FULL_DESCRIPTION =
   "Akvária této skupiny mají filtraci umístěnou v zadní komoře a proto se mohou prodávat i bez skříňky. Jsou vybavené veškerou potřebnou technikou. Led světlo, čerpadlo i odpěňovač. Jsou připraveny i pro použití ReefAto i NanoMat, které k nim lze přikoupit.";
 
-const REEFER_G3_GROUP_SIDEBAR_SUMMARY = "Oblíbené modely: (délka 60-90 cm)";
-
-const REEFER_G3_GROUP_FULL_DESCRIPTION = "Akvarijní designové komplety se vyznačují nejen dokonalým vzhledem, ale i snadnou obsluhovatelností. Jsou rozděleny na tyto skupiny:";
-
-const REEFER_G3_HIGHLIGHTS = [
-  "Oblíbené modely: (délka 60-90 cm)",
-];
-
-const REEFER_G3_SERIES_RULES = [
-  "Dlouhé modely (délka 120-150 cm)",
-];
+const REEFER_G3_GROUP_FULL_DESCRIPTION = "Akvarijní designové komplety se vyznačují nejen dokonalým vzhledem, ale i snadnou obsluhovatelností.";
 
 const EMPTY_VARIANTS: Record<CabinetColor, AquariumVariant> = {
   white: { image: null, imageAlt: "Akvárium s bílým provedením" },
@@ -142,20 +131,18 @@ const maxNanoProducts: AquariumProduct[] = [
   },
 ];
 
-const reefMaxG3Products: AquariumProduct[] = [
+const reefMaxG3_60_90Products: AquariumProduct[] = [
   {
     slug: "reefer-max-170-g3",
     name: "REEFER MAX 170 G3",
     series: "REEFER MAX G3",
-    groupSlug: "reefer-max-g3",
-    subgroupLabel: "60–90 cm",
+    groupSlug: "reefer-max-g3-60-90",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
+    shortDescription: "Oblíbené modely: (délka 60–90 cm)",
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -163,15 +150,13 @@ const reefMaxG3Products: AquariumProduct[] = [
     slug: "reefer-max-200-g3",
     name: "REEFER MAX 200 G3",
     series: "REEFER MAX G3",
-    groupSlug: "reefer-max-g3",
-    subgroupLabel: "60–90 cm",
+    groupSlug: "reefer-max-g3-60-90",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
+    shortDescription: "Oblíbené modely: (délka 60–90 cm)",
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -179,15 +164,13 @@ const reefMaxG3Products: AquariumProduct[] = [
     slug: "reefer-max-250-g3",
     name: "REEFER MAX 250 G3",
     series: "REEFER MAX G3",
-    groupSlug: "reefer-max-g3",
-    subgroupLabel: "60–90 cm",
+    groupSlug: "reefer-max-g3-60-90",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
+    shortDescription: "Oblíbené modely: (délka 60–90 cm)",
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -195,31 +178,30 @@ const reefMaxG3Products: AquariumProduct[] = [
     slug: "reefer-max-300-g3",
     name: "REEFER MAX 300 G3",
     series: "REEFER MAX G3",
-    groupSlug: "reefer-max-g3",
-    subgroupLabel: "60–90 cm",
+    groupSlug: "reefer-max-g3-60-90",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
+    shortDescription: "Oblíbené modely: (délka 60–90 cm)",
     variants: EMPTY_VARIANTS,
     specs: [],
   },
+];
+
+const reefMaxG3_120_150Products: AquariumProduct[] = [
   {
     slug: "reefer-max-350-g3",
     name: "REEFER MAX 350 G3",
     series: "REEFER MAX G3",
-    groupSlug: "reefer-max-g3",
-    subgroupLabel: "120–150 cm",
+    groupSlug: "reefer-max-g3-120-150",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
+    shortDescription: "Dlouhé modely (délka 120–150 cm)",
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -227,15 +209,13 @@ const reefMaxG3Products: AquariumProduct[] = [
     slug: "reefer-max-425-g3",
     name: "REEFER MAX 425 G3",
     series: "REEFER MAX G3",
-    groupSlug: "reefer-max-g3",
-    subgroupLabel: "120–150 cm",
+    groupSlug: "reefer-max-g3-120-150",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
+    shortDescription: "Dlouhé modely (délka 120–150 cm)",
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -243,15 +223,13 @@ const reefMaxG3Products: AquariumProduct[] = [
     slug: "reefer-max-525-g3",
     name: "REEFER MAX 525 G3",
     series: "REEFER MAX G3",
-    groupSlug: "reefer-max-g3",
-    subgroupLabel: "120–150 cm",
+    groupSlug: "reefer-max-g3-120-150",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
+    shortDescription: "Dlouhé modely (délka 120–150 cm)",
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -259,31 +237,30 @@ const reefMaxG3Products: AquariumProduct[] = [
     slug: "reefer-max-625-g3",
     name: "REEFER MAX 625 G3",
     series: "REEFER MAX G3",
-    groupSlug: "reefer-max-g3",
-    subgroupLabel: "120–150 cm",
+    groupSlug: "reefer-max-g3-120-150",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
+    shortDescription: "Dlouhé modely (délka 120–150 cm)",
     variants: EMPTY_VARIANTS,
     specs: [],
   },
+];
+
+const reefMaxG3_180Products: AquariumProduct[] = [
   {
     slug: "reefer-max-750-g3",
     name: "REEFER MAX 750 G3",
     series: "REEFER MAX G3",
-    groupSlug: "reefer-max-g3",
-    subgroupLabel: "180 cm",
+    groupSlug: "reefer-max-g3-180",
     status: "placeholder",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
-    shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES, "Eurobraced applies here and above [i]"],
+    shortDescription: "Extra dlouhé modely (délka 180 cm)",
     variants: EMPTY_VARIANTS,
     specs: [],
   },
@@ -311,7 +288,6 @@ const reefMaxSProducts: AquariumProduct[] = [
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
     shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, ...REEFER_G3_SERIES_RULES],
     variants: EMPTY_VARIANTS,
     specs: [],
   };
@@ -329,7 +305,6 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
     shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "96 cm" }],
   },
@@ -344,7 +319,6 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
     shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "125 cm" }],
   },
@@ -362,7 +336,6 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
     shortDescription: "Oblíbené modely: (délka 60-90 cm)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "151 cm" }],
   },
@@ -377,7 +350,6 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
       note: "Based on supplied Czech source text and general REEFER G3 copy.",
     },
     shortDescription: "REEFER MAX S -Peninsula (průhledová akvária, hliníkový rám)",
-    highlights: [...REEFER_G3_HIGHLIGHTS, "Regular and Peninsula designs"],
     variants: EMPTY_VARIANTS,
     specs: [{ label: "Length", value: "200 cm" }],
   },
@@ -396,15 +368,37 @@ export const AQUARIUM_GROUPS: AquariumGroup[] = [
     products: maxNanoProducts,
   },
   {
-    slug: "reefer-max-g3",
+    slug: "reefer-max-g3-60-90",
     name: "REEFER MAX G3",
     source: {
       status: "provided-text",
       note: "Based on supplied Czech source text.",
     },
-    sidebarSummary: REEFER_G3_GROUP_SIDEBAR_SUMMARY,
+    sidebarSummary: "Oblíbené modely: (délka 60–90 cm)",
     fullDescription: REEFER_G3_GROUP_FULL_DESCRIPTION,
-    products: reefMaxG3Products,
+    products: reefMaxG3_60_90Products,
+  },
+  {
+    slug: "reefer-max-g3-120-150",
+    name: "REEFER MAX G3",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text.",
+    },
+    sidebarSummary: "Dlouhé modely (délka 120–150 cm)",
+    fullDescription: REEFER_G3_GROUP_FULL_DESCRIPTION,
+    products: reefMaxG3_120_150Products,
+  },
+  {
+    slug: "reefer-max-g3-180",
+    name: "REEFER MAX G3",
+    source: {
+      status: "provided-text",
+      note: "Based on supplied Czech source text.",
+    },
+    sidebarSummary: "Extra dlouhé modely (délka 180 cm)",
+    fullDescription: REEFER_G3_GROUP_FULL_DESCRIPTION,
+    products: reefMaxG3_180Products,
   },
   {
     slug: "reefer-max-s-g3",
@@ -413,7 +407,7 @@ export const AQUARIUM_GROUPS: AquariumGroup[] = [
       status: "provided-text",
       note: "Based on supplied Czech source text.",
     },
-    sidebarSummary: REEFER_G3_GROUP_SIDEBAR_SUMMARY,
+    sidebarSummary: REEFER_G3_GROUP_FULL_DESCRIPTION,
     fullDescription: REEFER_G3_GROUP_FULL_DESCRIPTION,
     products: reefMaxSProducts,
   },
