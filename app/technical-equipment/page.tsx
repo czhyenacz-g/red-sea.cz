@@ -11,8 +11,8 @@ export default function Page() {
       {category ? (
         <CategoryLanding
           category={category}
-          intro="Technické vybavení pro cirkulaci, filtraci a údržbu systému."
-          highlights={["Skimmers", "Pumps", "Wave"]}
+          intro="[placeholder]"
+          highlights={["[placeholder]"]}
         />
       ) : null}
     </div>

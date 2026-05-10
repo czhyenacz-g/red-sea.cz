@@ -11,8 +11,8 @@ export default function Page() {
       {category ? (
         <CategoryLanding
           category={category}
-          intro="Doplňky a additive skupiny včetně 4-part Supplement a Starter pack reference."
-          highlights={["4-part Supplement", "Starter pack", "Colors"]}
+          intro="[placeholder]"
+          highlights={["[placeholder]"]}
         />
       ) : null}
     </div>

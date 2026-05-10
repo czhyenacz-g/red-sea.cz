@@ -9,7 +9,7 @@ export default function Page() {
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
       {category ? (
-        <CategoryLanding category={category} intro="ReefBeat ekosystém a chytrá zařízení pro vzdálené ovládání a monitoring." highlights={["ReefBeat ecosystem", "remote control", "smart devices"]} />
+        <CategoryLanding category={category} intro="[placeholder]" highlights={["[placeholder]"]} />
       ) : null}
     </div>
   );

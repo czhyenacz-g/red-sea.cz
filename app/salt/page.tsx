@@ -9,7 +9,7 @@ export default function Page() {
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
       {category ? (
-        <CategoryLanding category={category} intro="Soli a směsi pro mořské akvárium, včetně Coral Pro Salt a souvisejících variant." highlights={["Coral Pro Salt", "reef aquarium salt", "professional salt"]} />
+        <CategoryLanding category={category} intro="[placeholder]" highlights={["[placeholder]"]} />
       ) : null}
     </div>
   );

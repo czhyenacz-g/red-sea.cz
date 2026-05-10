@@ -16,8 +16,8 @@ type AquariumColorSwitcherProps = {
 };
 
 const SWITCHER_OPTIONS: Array<{ color: CabinetColor; label: string }> = [
-  { color: "white", label: "White cabinet" },
-  { color: "black", label: "Black cabinet" },
+  { color: "white", label: "Bílá skříňka" },
+  { color: "black", label: "Černá skříňka" },
 ];
 
 export function AquariumColorSwitcher({
@@ -116,12 +116,12 @@ export function AquariumColorSwitcher({
               <label
                 className={`relative inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${theme.button}`}
               >
-                <span className="text-current/70">Models</span>
+                <span className="text-current/70">Modely</span>
                 <select
                   value={selectedModelSlug ?? modelOptions[0]?.slug ?? ""}
                   onChange={(event) => onSelectModel(event.target.value)}
                   className="min-w-[7.5rem] appearance-none bg-transparent pr-5 text-sm font-medium text-current outline-none"
-                  aria-label="Select aquarium model"
+                  aria-label="Vybrat model akvária"
                 >
                   {modelOptions.map((option) => (
                     <option key={option.slug} value={option.slug}>
@@ -135,7 +135,7 @@ export function AquariumColorSwitcher({
           </div>
 
           <div className={`rounded-3xl border p-4 md:p-5 ${theme.panel}`}>
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-current/60">Selected variant</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-current/60">Vybraný model</p>
             <h3 className="mt-2 text-xl font-semibold sm:text-2xl">{product.name}</h3>
             <p className={`mt-1 text-sm font-medium uppercase tracking-[0.2em] ${theme.muted}`}>{product.series}</p>
             <dl className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -175,16 +175,14 @@ export function AquariumColorSwitcher({
                     <div className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border ${theme.panel}`}>
                       <span className="text-2xl">+</span>
                     </div>
-                    <p className="text-sm font-medium">Preview coming soon</p>
-                    <p className="text-sm leading-6">
-                      This product is listed in the catalog, but the converted cabinet images are not ready yet.
-                    </p>
+                    <p className="text-sm font-medium">[placeholder]</p>
+                    <p className="text-sm leading-6">[placeholder]</p>
                   </div>
                 </div>
               )}
             </div>
             <div className={`mt-4 flex items-center justify-between gap-4 text-sm ${theme.muted}`}>
-              <span className="font-medium">Cabinet color</span>
+              <span className="font-medium">Barva skříňky</span>
               <span className="capitalize">{selectedColor}</span>
             </div>
           </div>
@@ -195,7 +193,7 @@ export function AquariumColorSwitcher({
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={`Expanded preview of ${product.name}`}
+          aria-label={`Zvětšený náhled ${product.name}`}
           className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 px-4 py-6"
           onClick={() => setLightboxOpen(false)}
         >
@@ -203,7 +201,7 @@ export function AquariumColorSwitcher({
             <button
               type="button"
               onClick={() => setLightboxOpen(false)}
-              aria-label="Close image preview"
+              aria-label="Zavřít náhled obrázku"
               className="absolute -right-2 -top-2 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-950/90 text-white shadow-lg transition-colors hover:bg-slate-900"
             >
               <span className="text-xl leading-none">×</span>

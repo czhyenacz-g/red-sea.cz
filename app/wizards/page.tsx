@@ -5,8 +5,8 @@ export default function Page() {
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
       <main className="flex-1 max-w-7xl mx-auto px-6 py-16 w-full">
-        <h1 className="text-3xl font-bold text-[#153156] mb-4">wizards</h1>
-        <p className="text-gray-400">Obsah připravujeme.</p>
+        <h1 className="text-3xl font-bold text-[#153156] mb-4">[placeholder]</h1>
+        <p className="text-gray-400">[placeholder]</p>
       </main>
     </div>
   );
