@@ -81,14 +81,14 @@ export default function Page() {
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {[
-              { id: 1, label: "CP SALT 7kg bucket with salt", image: "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp" },
-              { id: 2, label: "RS SALT 7kg bucket with salt", image: "/assets/salt/candidates/06-rs-salt-7kg-bucket-with-salt.webp" },
-              { id: 3, label: "CP SALT bucket with salt", image: "/assets/salt/candidates/03-cp-salt-bucket-with-salt.webp" },
-              { id: 4, label: "RS SALT bucket with salt", image: "/assets/salt/candidates/07-rs-salt-bucket-with-salt.webp" },
-              { id: 5, label: "CP 20KG160gal", image: "/assets/salt/candidates/08-cp-20kg-160gal.webp" },
-              { id: 6, label: "RS 20KG160gal", image: "/assets/salt/candidates/09-rs-20kg-160gal.webp" },
-              { id: 7, label: "R11232 25kg_200gall Coral Pro Salt", image: "/assets/salt/candidates/10-coral-pro-25kg-bag.webp" },
-              { id: 8, label: "R11072 25kg_200gall Red Sea Salt", image: "/assets/salt/candidates/11-red-sea-25kg-bag.webp" },
+              { id: 1, label: "Sůl Coral Pro, malý kýbl - 7 kg", image: "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp" },
+              { id: 2, label: "Sůl Red Sea, malý kýbl - 7 kg", image: "/assets/salt/candidates/06-rs-salt-7kg-bucket-with-salt.webp" },
+              { id: 3, label: "Sůl Coral Pro, klasický kýbl - 22 kg", image: "/assets/salt/candidates/03-cp-salt-bucket-with-salt.webp" },
+              { id: 4, label: "Sůl Red Sea, klasický kýbl - 22 kg", image: "/assets/salt/candidates/07-rs-salt-bucket-with-salt.webp" },
+              { id: 5, label: "Sůl Coral Pro, krabice - 20,1 kg", image: "/assets/salt/candidates/08-cp-20kg-160gal.webp" },
+              { id: 6, label: "Sůl Red Sea, krabice - 20,1 kg", image: "/assets/salt/candidates/09-rs-20kg-160gal.webp" },
+              { id: 7, label: "Sůl Coral Pro, pytel - 25 kg", image: "/assets/salt/candidates/10-coral-pro-25kg-bag.webp" },
+              { id: 8, label: "Sůl Red Sea, pytel - 25 kg", image: "/assets/salt/candidates/11-red-sea-25kg-bag.webp" },
             ].map((candidate) => (
               <article key={candidate.id} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_18px_50px_-35px_rgba(15,23,42,0.35)]">
                 <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
@@ -114,9 +114,6 @@ export default function Page() {
                 </div>
                 <div className="px-4 py-3">
                   <p className="text-sm leading-6 text-slate-700">{candidate.label}</p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-400">
-                    {candidate.image.split("/").pop()?.replace(".webp", "")}
-                  </p>
                 </div>
               </article>
             ))}
