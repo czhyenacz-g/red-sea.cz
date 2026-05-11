@@ -91,8 +91,8 @@ export const REEFBEAT_PRODUCTS: ReefbeatProduct[] = [
   },
   {
     slug: "reefrun-g2-dc-pump",
-    title: "Reef Run G2 DC pump",
-    text: "Tlačná říditelná čerpadla o výkonu 4000,6000,8000 a 12000 l/h. Tato čerpadla mají dvoje řízení přes aplikaci a pomocí tlačítek.",
+    title: "REEFER DC Skimmer + Duální controller + Reef Run G2 DC pump",
+    text: "<strong>O čerpadlech:</strong> Tlačná říditelná čerpadla o výkonu 4000,6000,8000 a 12000 l/h. Tato čerpadla mají dvoje řízení přes aplikaci a pomocí tlačítek.",
     images: [
       {
         src: "/assets/reefbeat/reefrun-g2-family.webp",

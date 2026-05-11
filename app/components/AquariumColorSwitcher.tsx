@@ -139,17 +139,17 @@ export function AquariumColorSwitcher({
 
             {modelOptions && onSelectModel && !modelGroups ? (
               <label
-                className={`relative inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${theme.button}`}
+                className="relative inline-flex items-center gap-2 rounded-full border border-slate-300 bg-slate-200 px-4 py-2 text-sm font-medium text-slate-950 transition-colors"
               >
-                <span className="text-current/70">Modely</span>
+                <span className="pointer-events-none absolute left-4 text-slate-700">Seznam modelů</span>
                 <select
                   value={selectedModelSlug ?? modelOptions[0]?.slug ?? ""}
                   onChange={(event) => onSelectModel(event.target.value)}
-                  className="min-w-[7.5rem] appearance-none bg-transparent pr-5 text-sm font-medium text-current outline-none"
-                  aria-label="Vybrat model akvária"
+                  className="min-w-[7.5rem] appearance-none bg-slate-200 pr-5 text-sm font-medium text-transparent outline-none caret-transparent"
+                  aria-label="Seznam modelů akvária"
                 >
                   {modelOptions.map((option) => (
-                    <option key={option.slug} value={option.slug}>
+                    <option key={option.slug} value={option.slug} className="bg-slate-200 text-slate-950">
                       {option.label}
                     </option>
                   ))}

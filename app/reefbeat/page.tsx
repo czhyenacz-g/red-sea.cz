@@ -33,7 +33,7 @@ function ProductCard({
 
       <div className="space-y-3 p-5">
         <h2 className="text-xl font-semibold tracking-tight text-slate-950">{title}</h2>
-        <p className="text-sm leading-6 text-slate-600">{text}</p>
+        <p className="text-sm leading-6 text-slate-600" dangerouslySetInnerHTML={{ __html: text }} />
       </div>
     </article>
   );
