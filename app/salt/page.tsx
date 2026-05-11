@@ -11,20 +11,21 @@ const TOP_CARDS = [
     slug: "red-sea-salt-small-bucket",
     title: "Red Sea salt",
     description: "Prémiová mořská sůl.",
-    image: "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp",
+    image: "/assets/salt/candidates/06-rs-salt-7kg-bucket-with-salt.webp",
   },
+    {
+        slug: "bridge",
+        title: "Mořská sůl",
+        description: "Coral Pro Salt a Red Sea salt",
+        image: "/assets/salt/candidates/02-buckets-with-salt-outside-big.webp",
+    },
   {
     slug: "coral-pro-salt-small-bucket",
     title: "Coral Pro Salt",
     description: "Prémiová mořská sůl s vyšší alkalinitou.",
-    image: "/assets/salt/candidates/06-rs-salt-7kg-bucket-with-salt.webp",
+    image: "/assets/salt/candidates/01-cp-salt-7kg-bucket.webp",
   },
-  {
-    slug: "bridge",
-    title: "Mořská sůl",
-    description: "Red Sea salt a Coral Pro Salt.",
-    image: "/assets/salt/candidates/02-buckets-with-salt-outside-big.webp",
-  },
+
 ];
 
 export default function Page() {
