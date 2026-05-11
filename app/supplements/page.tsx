@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { ProductImageLightbox } from "../components/ProductImageLightbox";
-import { SUPPLEMENTS_ITEMS, SUPPLEMENTS_INTRO, SUPPLEMENTS_TITLE, type SupplementImage } from "../data/supplements";
+import { SUPPLEMENTS_ITEMS, SUPPLEMENTS_INTRO, SUPPLEMENTS_TMP_IMAGES, SUPPLEMENTS_TITLE, type SupplementImage } from "../data/supplements";
 
 function Card({
   title,
@@ -14,19 +14,20 @@ function Card({
 }: {
   title: string;
   text: string;
-  image?: SupplementImage;
+  image?: SupplementImage | SupplementImage[];
   onOpen?: (image: SupplementImage) => void;
 }) {
+  const primaryImage = Array.isArray(image) ? image[0] : image;
   return (
     <article className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_80px_-48px_rgba(15,23,42,0.35)]">
-      {image ? (
+      {primaryImage ? (
         <button
           type="button"
-          onClick={() => onOpen?.(image)}
+          onClick={() => onOpen?.(primaryImage)}
           className="block w-full border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-4 text-left cursor-zoom-in"
         >
           <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-slate-100 bg-white">
-            <Image src={image.src} alt={image.alt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain p-4" />
+            <Image src={primaryImage.src} alt={primaryImage.alt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain p-4" />
           </div>
         </button>
       ) : null}
@@ -41,8 +42,10 @@ function Card({
 
 export default function Page() {
   const [lightbox, setLightbox] = useState<SupplementImage | null>(null);
+  const [lightboxTitle, setLightboxTitle] = useState<string | null>(null);
 
-  const heroImage = SUPPLEMENTS_ITEMS[0]?.image ?? null;
+  const heroImage = SUPPLEMENTS_TMP_IMAGES.find((image) => image.number === 38) ?? null;
+  const heroImageForLightbox = heroImage ? { src: heroImage.src, alt: heroImage.name } : null;
 
   return (
     <div className="min-h-screen bg-[#f6f2ea]">
@@ -62,7 +65,7 @@ export default function Page() {
           {heroImage ? (
             <button
               type="button"
-              onClick={() => setLightbox(heroImage)}
+              onClick={() => heroImageForLightbox && setLightbox(heroImageForLightbox)}
               className="group relative block overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_80px_-48px_rgba(15,23,42,0.35)] cursor-zoom-in"
             >
               <div className="absolute left-4 top-4 z-10 rounded-full border border-white/20 bg-slate-950/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white">
@@ -71,7 +74,7 @@ export default function Page() {
               <div className="relative aspect-[4/3]">
                 <Image
                   src={heroImage.src}
-                  alt={heroImage.alt}
+                  alt={heroImage.name}
                   fill
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
@@ -82,15 +85,28 @@ export default function Page() {
         </section>
 
         <section className="mt-12">
+          <div className="mb-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Reef Care Program</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">{SUPPLEMENTS_ITEMS[1].title}</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">{SUPPLEMENTS_ITEMS[1].text}</p>
+          </div>
+
           <div className="grid gap-5 lg:grid-cols-2">
-            {SUPPLEMENTS_ITEMS.slice(0, 2).map((item) => (
-              <Card
-                key={item.slug}
-                title={item.title}
-                text={item.text}
-                image={item.image}
-                onOpen={(image) => setLightbox(image)}
-              />
+            {(Array.isArray(SUPPLEMENTS_ITEMS[1].image) ? SUPPLEMENTS_ITEMS[1].image : []).map((image) => (
+              <article key={image.src} className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_18px_60px_-42px_rgba(15,23,42,0.35)]">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLightbox(image);
+                    setLightboxTitle(SUPPLEMENTS_ITEMS[1].title);
+                  }}
+                  className="block w-full cursor-zoom-in bg-slate-50 p-4 text-left"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] border border-slate-100 bg-white">
+                    <Image src={image.src} alt={image.alt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain p-4" />
+                  </div>
+                </button>
+              </article>
             ))}
           </div>
         </section>
@@ -108,19 +124,46 @@ export default function Page() {
                 title={item.title}
                 text={item.text}
                 image={item.image}
-                onOpen={item.image ? (image) => setLightbox(image) : undefined}
+                onOpen={item.image ? (image) => {
+                  setLightbox(image);
+                  setLightboxTitle(item.title);
+                } : undefined}
               />
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-12">
+          <div className="mb-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Reef Care Program</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">Všechny fotky z tmp_photos/Reef Care Program</h2>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {SUPPLEMENTS_TMP_IMAGES.filter((image) => image.number !== 57).map((image) => (
+              <article key={image.src} className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_18px_60px_-42px_rgba(15,23,42,0.35)]">
+                <div className="relative aspect-[4/3] bg-slate-50">
+                  <Image src={image.src} alt={image.name} fill sizes="(max-width: 1280px) 50vw, 25vw" className="object-contain p-4" />
+                </div>
+                <div className="border-t border-slate-100 px-4 py-3">
+                  <p className="text-sm font-semibold text-amber-700">{image.number}.</p>
+                  <p className="text-sm font-medium text-slate-700">{image.name}</p>
+                </div>
+              </article>
             ))}
           </div>
         </section>
       </main>
 
-      <ProductImageLightbox
+        <ProductImageLightbox
         open={Boolean(lightbox)}
         imageSrc={lightbox?.src ?? null}
         imageAlt={lightbox?.alt ?? ""}
-        onClose={() => setLightbox(null)}
-        ariaLabel={lightbox ? `Zvětšený náhled ${lightbox.alt}` : "Zvětšený náhled obrázku"}
+        onClose={() => {
+          setLightbox(null);
+          setLightboxTitle(null);
+        }}
+        ariaLabel={lightbox ? `Zvětšený náhled ${lightboxTitle ?? lightbox.alt}` : "Zvětšený náhled obrázku"}
       />
     </div>
   );
