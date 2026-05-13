@@ -85,27 +85,6 @@ export function AquariumColorSwitcher({
     setGalleryIndex((current) => (current + 1) % selected.images.length);
   };
 
-  useEffect(() => {
-    if (!lightboxOpen) {
-      return;
-    }
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setLightboxOpen(false);
-      }
-    };
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [lightboxOpen]);
-
   return (
     <section className={`overflow-hidden rounded-[2rem] border ${theme.panel} ${theme.shell} ${className ?? ""}`}>
       <div className="grid gap-8 p-5 md:p-7 lg:grid-cols-[0.95fr_1.15fr] lg:items-center">
