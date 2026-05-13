@@ -13,13 +13,20 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center gap-8 py-4">
           <Link href="/" className="shrink-0 flex items-center gap-3">
-            <RedSeaLogo />
+            <span className="flex flex-col items-center leading-none">
+              <RedSeaLogo />
+              <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.22em] text-gray-500">
+                czech distributor
+              </span>
+            </span>
             <span className="hidden sm:block w-px h-8 bg-gray-200" />
-            <span
-              className="hidden sm:block text-sm font-bold tracking-tight"
-              style={{ color: "#153156", fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif", letterSpacing: "-0.01em" }}
-            >
-              red-sea.cz
+            <span className="hidden sm:block">
+              <span
+                className="text-sm font-bold tracking-tight"
+                style={{ color: "#153156", fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif", letterSpacing: "-0.01em" }}
+              >
+                red-sea.cz
+              </span>
             </span>
           </Link>
           <nav className="hidden lg:flex items-center gap-1 flex-1">

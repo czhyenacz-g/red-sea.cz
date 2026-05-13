@@ -42,4 +42,11 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     summary: "Zařízení z této skupiny se dají ovládat přes aplikaci The ReefBeat Ecosystem na mobilních telefonech či tabletech a uživatel je tak může ovládat či kontrolovat na dálku.",
     source: "Redsea.pages",
   },
+  {
+    slug: "pro-partners",
+    label: "Pro partnery",
+    href: "/pro-partners",
+    summary: "B2B a wholesale kontakt pro partnery, kteří chtějí objednávat nebo řešit dostupnost produktů.",
+    source: "Redsea.pages",
+  },
 ];
