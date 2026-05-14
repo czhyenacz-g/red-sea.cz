@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { COMPANY_INTRO } from "../data/company";
 
@@ -14,6 +14,7 @@ export function BrandIntroDock() {
   const [dismissed, setDismissed] = useState(false);
   const [shown, setShown] = useState(false);
   const [active, setActive] = useState(false);
+  const initializedRef = useRef(false);
 
   useEffect(() => {
     setDismissed(sessionStorage.getItem(STORAGE_KEY) === "1");
@@ -21,8 +22,13 @@ export function BrandIntroDock() {
   }, []);
 
   useEffect(() => {
+    if (initializedRef.current) {
+      return;
+    }
+
+    initializedRef.current = true;
+
     if (!isHome || dismissed || shown) {
-      setOpen(false);
       return;
     }
 
@@ -38,8 +44,6 @@ export function BrandIntroDock() {
 
     const timer = window.setTimeout(() => {
       setOpen(false);
-      setShown(true);
-      sessionStorage.setItem(SHOWN_KEY, "1");
     }, 6000);
 
     return () => window.clearTimeout(timer);
