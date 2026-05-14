@@ -185,17 +185,19 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
             exiting ? "-translate-x-8 opacity-0" : "translate-x-0 opacity-100"
           }`}
           style={overlayStyle}
-          onMouseEnter={() => setActive(true)}
-          onMouseLeave={() => setActive(false)}
-          onFocusCapture={() => setActive(true)}
-          onBlurCapture={(event) => {
-            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-              setActive(false);
-            }
-          }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(239,68,68,0.16),_transparent_28%),linear-gradient(160deg,#162235_0%,#0e1723_45%,#090d15_100%)]" />
-          <div className="relative flex h-full w-full max-w-4xl flex-col px-2 py-2 sm:px-4 sm:py-4">
+          <div
+            className="relative flex h-full w-full max-w-4xl flex-col px-2 py-2 sm:px-4 sm:py-4"
+            onMouseEnter={() => setActive(true)}
+            onMouseLeave={() => setActive(false)}
+            onFocusCapture={() => setActive(true)}
+            onBlurCapture={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                setActive(false);
+              }
+            }}
+          >
             <div className="flex items-start justify-between gap-4 px-2 py-3 sm:px-0 sm:py-2">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.32em] text-amber-300">Red Sea CZ</p>
