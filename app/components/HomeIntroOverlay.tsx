@@ -19,20 +19,15 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
   const [exiting, setExiting] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [shown, setShown] = useState(false);
+  const [mode, setMode] = useState<"auto" | "manual" | "closed">("closed");
   const [active, setActive] = useState(false);
   const [remainingMs, setRemainingMs] = useState(DURATION_MS);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [home, setHome] = useState(true);
   const timeoutRef = useRef<number | null>(null);
   const exitTimeoutRef = useRef<number | null>(null);
-  const deadlineRef = useRef<number | null>(null);
   const remainingRef = useRef(DURATION_MS);
-  const activeRef = useRef(false);
   const headerObserverRef = useRef<ResizeObserver | null>(null);
-
-  useEffect(() => {
-    activeRef.current = active;
-  }, [active]);
 
   const clearTimer = useCallback(() => {
     if (timeoutRef.current !== null) {
@@ -45,10 +40,10 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
     }
   }, []);
 
-  const setCountdown = useCallback((duration = DURATION_MS) => {
-    deadlineRef.current = performance.now() + duration;
-    remainingRef.current = duration;
-    setRemainingMs(duration);
+  const syncRemaining = useCallback((nextRemaining: number) => {
+    const clampedRemaining = Math.max(0, nextRemaining);
+    remainingRef.current = clampedRemaining;
+    setRemainingMs(clampedRemaining);
   }, []);
 
   useEffect(() => {
@@ -87,52 +82,57 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
     }
 
     setOpen(true);
+    setMode("auto");
     setShown(true);
     sessionStorage.setItem(SHOWN_KEY, "1");
-    setCountdown();
+    syncRemaining(DURATION_MS);
     return clearTimer;
-  }, [clearTimer, dismissed, home, setCountdown, shown]);
+  }, [clearTimer, dismissed, home, shown, syncRemaining]);
 
   useEffect(() => {
-    if (!open) {
-      clearTimer();
+    if (!open || mode !== "auto") {
       return;
     }
 
-    if (activeRef.current) {
-      clearTimer();
+    clearTimer();
+    if (active) {
       return;
     }
 
+    const startedRemaining = remainingRef.current;
+    const startedAt = performance.now();
     const tick = () => {
-      if (!deadlineRef.current) {
-        deadlineRef.current = performance.now() + remainingRef.current;
-      }
-
-      const nextRemaining = Math.max(0, deadlineRef.current - performance.now());
-      remainingRef.current = nextRemaining;
-      setRemainingMs(nextRemaining);
+      const elapsed = performance.now() - startedAt;
+      const nextRemaining = Math.max(0, startedRemaining - elapsed);
+      syncRemaining(nextRemaining);
 
       if (nextRemaining <= 0) {
         timeoutRef.current = null;
-        setOpen(false);
+        setExiting(true);
+        exitTimeoutRef.current = window.setTimeout(() => {
+          setOpen(false);
+          setExiting(false);
+          setMode("closed");
+        }, 420);
         return;
       }
 
       timeoutRef.current = window.setTimeout(tick, 100);
     };
 
-    tick();
+    timeoutRef.current = window.setTimeout(tick, 100);
     return clearTimer;
-  }, [active, clearTimer, open]);
+  }, [active, clearTimer, mode, open, syncRemaining]);
 
   const handleClose = useCallback(() => {
     clearTimer();
-    deadlineRef.current = null;
+    remainingRef.current = DURATION_MS;
+    setRemainingMs(DURATION_MS);
     setExiting(true);
     exitTimeoutRef.current = window.setTimeout(() => {
       setOpen(false);
       setExiting(false);
+      setMode("closed");
     }, 420);
     setDismissed(true);
     setShown(true);
@@ -160,10 +160,12 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
     setDismissed(false);
     setExiting(false);
     setOpen(true);
+    setMode("manual");
     setShown(true);
     sessionStorage.setItem(SHOWN_KEY, "1");
-    setCountdown();
-  }, [clearTimer, setCountdown]);
+    remainingRef.current = DURATION_MS;
+    setRemainingMs(DURATION_MS);
+  }, [clearTimer]);
 
   const introLines = useMemo(
     () => [COMPANY_INTRO.paragraphs[0], COMPANY_INTRO.paragraphs[1], COMPANY_INTRO.paragraphs[2]].filter(Boolean),
@@ -220,16 +222,20 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
               ))}
 
               <div className="space-y-3 pt-1">
-                <div className="flex items-center justify-between text-xs text-slate-300">
-                  <span>Zavře se za {Math.max(1, Math.ceil(remainingMs / 1000))} s</span>
-                  <span>{Math.max(0, Math.min(100, Math.round((remainingMs / DURATION_MS) * 100)))}%</span>
-                </div>
-                <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
-                  <div
-                    className="h-full rounded-full bg-amber-300 transition-[width] duration-100"
-                    style={{ width: `${Math.max(0, Math.min(100, (remainingMs / DURATION_MS) * 100))}%` }}
-                  />
-                </div>
+                {mode === "auto" ? (
+                  <>
+                    <div className="flex items-center justify-between text-xs text-slate-300">
+                      <span>Zavře se za {Math.max(1, Math.ceil(remainingMs / 1000))} s</span>
+                      <span>{Math.max(0, Math.min(100, Math.round((remainingMs / DURATION_MS) * 100)))}%</span>
+                    </div>
+                    <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
+                      <div
+                        className="h-full rounded-full bg-amber-300 transition-[width] duration-100"
+                        style={{ width: `${Math.max(0, Math.min(100, (remainingMs / DURATION_MS) * 100))}%` }}
+                      />
+                    </div>
+                  </>
+                ) : null}
               </div>
 
               <div className="pt-2">
