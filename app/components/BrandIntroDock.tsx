@@ -88,6 +88,10 @@ export function BrandIntroDock() {
     ? "fixed right-4 bottom-4 z-40 w-[calc(100vw-2rem)] max-w-[24rem] sm:right-4 sm:top-24 sm:bottom-auto sm:w-[22rem]"
     : "fixed right-4 bottom-4 z-40 w-[calc(100vw-2rem)] max-w-[16rem] sm:w-auto";
 
+  if (isHome) {
+    return null;
+  }
+
   return (
     <>
       {open ? (
