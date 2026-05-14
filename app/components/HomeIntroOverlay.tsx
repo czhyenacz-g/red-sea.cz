@@ -191,14 +191,6 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(239,68,68,0.16),_transparent_28%),linear-gradient(160deg,#162235_0%,#0e1723_45%,#090d15_100%)]" />
           <div
             className="relative flex h-full w-full max-w-4xl flex-col px-2 py-2 sm:px-4 sm:py-4"
-            onMouseEnter={() => setActive(true)}
-            onMouseLeave={() => setActive(false)}
-            onFocusCapture={() => setActive(true)}
-            onBlurCapture={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-                setActive(false);
-              }
-            }}
           >
             <div className="flex items-start justify-between gap-4 px-2 py-3 sm:px-0 sm:py-2">
               <div>
@@ -215,11 +207,22 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
               </button>
             </div>
             <div className="flex-1 space-y-5 overflow-auto px-2 py-4 sm:px-0 sm:py-6">
+              <div
+                onMouseEnter={() => setActive(true)}
+                onMouseLeave={() => setActive(false)}
+                onFocusCapture={() => setActive(true)}
+                onBlurCapture={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                    setActive(false);
+                  }
+                }}
+              >
               {introLines.map((line) => (
                 <p key={line} className="max-w-2xl text-base leading-8 text-slate-200 sm:text-lg">
                   {line}
                 </p>
               ))}
+              </div>
 
               <div className="space-y-3 pt-1">
                 {mode === "auto" ? (
@@ -244,7 +247,7 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
                   onClick={handleClose}
                   className="inline-flex rounded-full bg-[#ef4444] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#dc2626]"
                 >
-                  Přejít na akvária
+                  Přejít na Akvarijní systémy
                 </button>
               </div>
             </div>
