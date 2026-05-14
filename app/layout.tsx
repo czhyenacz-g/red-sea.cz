@@ -3,7 +3,6 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
 import { GOATCOUNTER_CODE } from "./config/analytics";
-import { BrandIntroDock } from "./components/BrandIntroDock";
 
 export const metadata: Metadata = {
   title: "Red Sea CZ — B2B velkoobchod akvarijní techniky",
@@ -30,7 +29,6 @@ export default function RootLayout({
     <html lang="cs">
       <body className="bg-white text-white antialiased">
         <div className="min-h-screen flex flex-col">
-          <BrandIntroDock />
           <div className="flex-1">{children}</div>
           <footer className="border-t border-slate-200 bg-white px-6 py-4">
             <div className="mx-auto flex w-full max-w-7xl flex-col gap-1 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
