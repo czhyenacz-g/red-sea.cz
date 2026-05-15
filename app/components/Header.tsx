@@ -36,8 +36,12 @@ export function Header() {
                 href={item.href}
                 className={`px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors rounded ${
                   pathname === item.href
-                    ? "text-gray-900 border-b-2 border-[#153156]"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    ? item.slug === "pro-partners"
+                      ? "text-amber-600 border-b-2 border-amber-500"
+                      : "text-gray-900 border-b-2 border-[#153156]"
+                    : item.slug === "pro-partners"
+                      ? "text-amber-600 hover:text-amber-700 hover:bg-amber-50"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                 }`}
               >
                 {item.label}

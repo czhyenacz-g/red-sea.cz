@@ -110,22 +110,11 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">Rychlý kontakt</p>
-          <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-2xl text-sm leading-6 text-slate-600">
-              Pokud potřebujete nabídku, dostupnost nebo velkoobchodní podmínky, napište nám přímo přes e-mail.
-            </p>
-            <a href="mailto:info@red-sea.cz?subject=Pro%20partnery" className="inline-flex rounded-full bg-[#ef4444] px-4 py-2 text-sm font-semibold text-white">
-              Kontaktovat nás
-            </a>
-          </div>
-          <div className="mt-5">
-            <Link href="/" className="text-sm font-medium text-[#153156] hover:underline">
-              Zpět na úvod
-            </Link>
-          </div>
-        </section>
+        <div className="pb-2">
+          <Link href="/" className="text-sm font-medium text-[#153156] hover:underline">
+            Zpět na úvod
+          </Link>
+        </div>
       </main>
     </div>
   );
