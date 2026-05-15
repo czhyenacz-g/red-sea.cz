@@ -6,6 +6,13 @@ import { Header } from "../components/Header";
 import { ProductImageLightbox } from "../components/ProductImageLightbox";
 import { SUPPLEMENTS_ITEMS, SUPPLEMENTS_INTRO, SUPPLEMENTS_TMP_IMAGES, SUPPLEMENTS_TITLE, type SupplementImage } from "../data/supplements";
 
+type LightboxState = {
+  src: string;
+  alt: string;
+  title: string;
+  label?: string | null;
+};
+
 function Card({
   title,
   text,
@@ -41,11 +48,9 @@ function Card({
 }
 
 export default function Page() {
-  const [lightbox, setLightbox] = useState<SupplementImage | null>(null);
-  const [lightboxTitle, setLightboxTitle] = useState<string | null>(null);
+  const [lightbox, setLightbox] = useState<LightboxState | null>(null);
 
   const heroImage = SUPPLEMENTS_TMP_IMAGES.find((image) => image.number === 38) ?? null;
-  const heroImageForLightbox = heroImage ? { src: heroImage.src, alt: heroImage.name } : null;
 
   return (
     <div className="min-h-screen bg-[#f6f2ea]">
@@ -65,7 +70,9 @@ export default function Page() {
           {heroImage ? (
             <button
               type="button"
-              onClick={() => heroImageForLightbox && setLightbox(heroImageForLightbox)}
+              onClick={() => {
+                setLightbox({ src: heroImage.src, alt: heroImage.name, title: heroImage.name, label: "38" });
+              }}
               className="group relative block overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_80px_-48px_rgba(15,23,42,0.35)] cursor-zoom-in"
             >
               <div className="absolute left-4 top-4 z-10 rounded-full border border-white/20 bg-slate-950/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white">
@@ -97,8 +104,7 @@ export default function Page() {
                 <button
                   type="button"
                   onClick={() => {
-                    setLightbox(image);
-                    setLightboxTitle(SUPPLEMENTS_ITEMS[1].title);
+                    setLightbox({ src: image.src, alt: image.alt, title: SUPPLEMENTS_ITEMS[1].title, label: image.alt });
                   }}
                   className="block w-full cursor-zoom-in bg-slate-50 p-4 text-left"
                 >
@@ -125,8 +131,7 @@ export default function Page() {
                 text={item.text}
                 image={item.image}
                 onOpen={item.image ? (image) => {
-                  setLightbox(image);
-                  setLightboxTitle(item.title);
+                  setLightbox({ src: image.src, alt: image.alt, title: item.title });
                 } : undefined}
               />
             ))}
@@ -142,9 +147,17 @@ export default function Page() {
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {SUPPLEMENTS_TMP_IMAGES.filter((image) => image.number !== 57).map((image) => (
               <article key={image.src} className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_18px_60px_-42px_rgba(15,23,42,0.35)]">
-                <div className="relative aspect-[4/3] bg-slate-50">
-                  <Image src={image.src} alt={image.name} fill sizes="(max-width: 1280px) 50vw, 25vw" className="object-contain p-4" />
-                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLightbox({ src: image.src, alt: image.name, title: `${image.number}. ${image.name}` });
+                  }}
+                  className="block w-full cursor-zoom-in bg-slate-50 text-left"
+                >
+                  <div className="relative aspect-[4/3] bg-slate-50">
+                    <Image src={image.src} alt={image.name} fill sizes="(max-width: 1280px) 50vw, 25vw" className="object-contain p-4" />
+                  </div>
+                </button>
                 <div className="border-t border-slate-100 px-4 py-3">
                   <p className="text-sm font-semibold text-amber-700">{image.number}.</p>
                   <p className="text-sm font-medium text-slate-700">{image.name}</p>
@@ -155,15 +168,16 @@ export default function Page() {
         </section>
       </main>
 
-        <ProductImageLightbox
+      <ProductImageLightbox
         open={Boolean(lightbox)}
         imageSrc={lightbox?.src ?? null}
         imageAlt={lightbox?.alt ?? ""}
         onClose={() => {
           setLightbox(null);
-          setLightboxTitle(null);
         }}
-        ariaLabel={lightbox ? `Zvětšený náhled ${lightboxTitle ?? lightbox.alt}` : "Zvětšený náhled obrázku"}
+        ariaLabel={lightbox ? `Zvětšený náhled ${lightbox.title}` : "Zvětšený náhled obrázku"}
+        title={lightbox?.title}
+        imageLabel={lightbox?.label ?? undefined}
       />
     </div>
   );

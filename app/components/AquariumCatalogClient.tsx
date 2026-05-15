@@ -4,6 +4,18 @@ import { useEffect, useMemo, useState } from "react";
 import { AquariumColorSwitcher } from "./AquariumColorSwitcher";
 import { AQUARIUM_GROUPS, type AquariumGroup, type AquariumProduct } from "../data/aquariums";
 
+function formatModelCount(count: number) {
+  if (count === 1) {
+    return "1 model";
+  }
+
+  if (count >= 2 && count <= 4) {
+    return `${count} modely`;
+  }
+
+  return `${count} modelů`;
+}
+
 function AquariumSidebar({
   groups,
   selectedGroupSlug,
@@ -18,7 +30,12 @@ function AquariumSidebar({
       <div className="rounded-[2rem] border border-slate-800/80 bg-slate-950/80 p-2.5 shadow-2xl backdrop-blur">
         <div className="mb-3 hidden px-2 pt-1 lg:block">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">Akvarijní systémy</p>
-          <p className="mt-2 text-sm leading-6 text-slate-400">Akvarijní designové komplety se vyznačují nejen dokonalým vzhledem, ale i snadnou obsluhovatelností.</p>
+          <p className="mt-2 text-sm leading-6 text-slate-400">
+            Akvarijní designové komplety se vyznačují nejen dokonalým vzhledem, ale i snadnou obsluhovatelností.
+            <span className="block text-amber-300">
+              Zde jsou pro přehlednost seskupeny do <strong>&quot;Rodin&quot;</strong>.
+            </span>
+          </p>
         </div>
 
         <div className="flex gap-3 overflow-x-auto pb-1 lg:flex-col lg:gap-3 lg:overflow-visible lg:pb-0">
@@ -37,20 +54,17 @@ function AquariumSidebar({
                     : "border-white/10 bg-white/5 text-white hover:border-white/20 hover:bg-white/8"
                 }`}
               >
-                <p className={`text-[11px] font-semibold uppercase tracking-[0.24em] ${active ? "text-slate-500" : "text-slate-400"}`}>
-                  Product family
-                </p>
                 <h3 className="mt-2.5 text-lg font-semibold tracking-tight">{group.name}</h3>
                 <p className={`mt-1.5 line-clamp-2 text-sm leading-5 ${active ? "text-slate-600" : "text-slate-400"}`}>
                   {group.sidebarSummary}
                 </p>
                 <div className="mt-3 flex items-center justify-between gap-3">
                   <span
-                    className={`rounded-full px-3 py-1 text-xs font-medium ${
+                  className={`rounded-full px-3 py-1 text-xs font-medium ${
                       active ? "bg-slate-100 text-slate-700" : "bg-white/10 text-slate-300"
                     }`}
                   >
-                    {group.products.length} modely
+                    {formatModelCount(group.products.length)}
                   </span>
                   <span
                     className={`inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] ${

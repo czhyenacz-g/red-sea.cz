@@ -229,7 +229,6 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
                   <>
                     <div className="flex items-center justify-between text-xs text-slate-300">
                       <span>Zavře se za {Math.max(1, Math.ceil(remainingMs / 1000))} s</span>
-                      <span>{Math.max(0, Math.min(100, Math.round((remainingMs / DURATION_MS) * 100)))}%</span>
                     </div>
                     <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
                       <div

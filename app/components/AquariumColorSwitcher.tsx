@@ -66,6 +66,7 @@ export function AquariumColorSwitcher({
   const hasImage = Boolean(selectedImage);
   const imageSrc = selectedImage?.src ?? null;
   const imageFilename = selectedImage?.src.split("/").pop() ?? "";
+  const volumeLabel = product.volume ?? product.specs.find((spec) => spec.label.toLowerCase() === "volume")?.value ?? null;
 
   useEffect(() => {
     setGalleryIndex(0);
@@ -93,6 +94,9 @@ export function AquariumColorSwitcher({
             {eyebrow ? <p className={`text-xs font-semibold uppercase tracking-[0.28em] ${theme.accent}`}>{eyebrow}</p> : null}
             <h2 className="max-w-2xl text-2xl font-semibold tracking-tight sm:text-3xl">{heading}</h2>
             <p className={`max-w-2xl text-sm leading-6 sm:text-base ${theme.muted}`}>{intro}</p>
+            {volumeLabel ? (
+              <p className={`text-sm font-medium uppercase tracking-[0.22em] ${theme.accent}`}>{volumeLabel}</p>
+            ) : null}
           </div>
 
           <div className="flex flex-wrap gap-3">
