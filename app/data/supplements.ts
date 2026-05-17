@@ -122,6 +122,14 @@ export const SEVEN_PART_FOUNDATION: ProgramSubBlock = {
       ],
     },
     {
+      label: "1 L",
+      bottles: [
+        { src: "/assets/supplements/foundation-a-1l.webp", alt: "Reef Foundation A 1 L" },
+        { src: "/assets/supplements/foundation-b-1l.webp", alt: "Reef Foundation B 1 L" },
+        { src: "/assets/supplements/foundation-c-1l.webp", alt: "Reef Foundation C 1 L" },
+      ],
+    },
+    {
       label: "5 L",
       bottles: [
         { src: "/assets/supplements/foundation-a-5l.webp", alt: "Reef Foundation A 5 L" },
