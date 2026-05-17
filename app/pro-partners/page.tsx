@@ -45,7 +45,7 @@ export default function Page() {
 
             <div className="rounded-[2rem] border border-amber-200 bg-amber-50 p-5 text-slate-800 shadow-sm">
               <p className="text-sm leading-7">
-                Koncovým zákazníkům produkty přímo neprodáváme. Rádi vás ale nasměrujeme na některého z našich ověřených partnerů.
+                Koncovým zákazníkům produkty přímo neprodáváme. Rádi vás ale nasměrujeme na některého z našich ověřených partnerů, který vám může poskytnout kompletní služby včetně servisu akvárií.
               </p>
             </div>
           </div>
