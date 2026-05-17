@@ -106,7 +106,6 @@ function SubBlock({
 export default function Page() {
   const [lightbox, setLightbox] = useState<LightboxState | null>(null);
 
-  const heroImage = SUPPLEMENTS_TMP_IMAGES.find((image) => image.number === 38) ?? null;
   const fourPartImageData = SUPPLEMENTS_ITEMS[0].image;
   const fourPartPrimary = Array.isArray(fourPartImageData) ? fourPartImageData[0] : fourPartImageData;
 
@@ -119,9 +118,9 @@ export default function Page() {
       <Header />
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
 
-        {/* Hero */}
-        <section className="grid gap-8 lg:grid-cols-[2fr_1fr] lg:items-center">
-          <div className="max-w-2xl">
+        {/* Hero + Complete 4-part Supplement Program */}
+        <section className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:items-start">
+          <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Přípravky</p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">{SUPPLEMENTS_TITLE}</h1>
             <div className="mt-5 space-y-4 text-base leading-7 text-slate-600">
@@ -129,45 +128,20 @@ export default function Page() {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
-          </div>
 
-          {heroImage ? (
-            <button
-              type="button"
-              onClick={() => openLightbox(heroImage.src, heroImage.name, heroImage.name, "38")}
-              className="group relative block overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_80px_-48px_rgba(15,23,42,0.35)] cursor-zoom-in"
-            >
-              <div className="absolute left-4 top-4 z-10 rounded-full border border-white/20 bg-slate-950/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white">
-                Supplement Program
+            <div className="mt-8 border-t border-slate-100 pt-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Reef Care Program</p>
+              <h2 className="mt-2 text-xl font-semibold tracking-tight text-slate-950">{SUPPLEMENTS_ITEMS[0].title}</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-600">{SUPPLEMENTS_ITEMS[0].text}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-500">{FOUR_PART_CLARIFICATION}</p>
+              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">
+                {FOUR_PART_SIZES.map((size) => (
+                  <span key={size.label} className="text-sm text-slate-500">
+                    <span className="font-semibold text-slate-700">{size.label}</span>
+                    {" · akvárium "}{size.volume}
+                  </span>
+                ))}
               </div>
-              <div className="relative aspect-[4/3]">
-                <Image
-                  src={heroImage.src}
-                  alt={heroImage.name}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                />
-              </div>
-            </button>
-          ) : null}
-        </section>
-
-        {/* Complete 4-part Supplement Program */}
-        <section className="mt-14 grid gap-8 lg:grid-cols-[2fr_1fr] lg:items-center">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Reef Care Program</p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">{SUPPLEMENTS_ITEMS[0].title}</h2>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600">{SUPPLEMENTS_ITEMS[0].text}</p>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600">{FOUR_PART_CLARIFICATION}</p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {FOUR_PART_SIZES.map((size) => (
-                <div key={size.label} className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 shadow-sm">
-                  <span className="text-sm font-semibold text-slate-900">{size.label}</span>
-                  <span className="text-slate-300">·</span>
-                  <span className="text-sm text-slate-500">akvárium {size.volume}</span>
-                </div>
-              ))}
             </div>
           </div>
 
@@ -175,15 +149,15 @@ export default function Page() {
             <button
               type="button"
               onClick={() => openLightbox(fourPartPrimary.src, fourPartPrimary.alt, SUPPLEMENTS_ITEMS[0].title)}
-              className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_18px_60px_-30px_rgba(15,23,42,0.25)] cursor-zoom-in"
+              className="group block overflow-hidden rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 cursor-zoom-in lg:self-start"
             >
-              <div className="relative aspect-[4/5] bg-gradient-to-br from-slate-50 via-white to-amber-50">
+              <div className="relative aspect-[4/5]">
                 <Image
                   src={fourPartPrimary.src}
                   alt={fourPartPrimary.alt}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                  className="object-contain p-6 transition-transform duration-300 group-hover:scale-[1.02]"
+                  sizes="(max-width: 1024px) 60vw, 33vw"
+                  className="object-contain p-8 transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </div>
             </button>
