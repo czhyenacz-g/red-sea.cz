@@ -218,7 +218,7 @@ export default function Page() {
 
           {/* 4-part program (#51–84) */}
           <div className="mb-10">
-            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-400">4-part program · #51–84</p>
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-400">4-part program · #80–113</p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {RCP_FOUR_PART_GALLERY.map((item) => (
                 <article key={item.id} className="overflow-hidden rounded-lg border border-slate-200 bg-white/70">
