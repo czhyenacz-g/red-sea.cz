@@ -87,6 +87,41 @@ export const SUPPLEMENTS_CATALOG_IMAGES: SupplementCatalogImage[] = [
   { number: 4, name: "Skeletal elements Reef Foundation ABC Plus Powder", src: "/assets/supplements/skeletal-elements-abc-plus-powder.webp" },
 ];
 
+export type ProgramSubBlock = {
+  title: string;
+  badge: string;
+  detail: string;
+  image: SupplementImage;
+  packageSizes: string[];
+};
+
+export type FourPartSize = {
+  label: string;
+  volume: string;
+};
+
+export const SEVEN_PART_FOUNDATION: ProgramSubBlock = {
+  title: "Foundation ABC",
+  badge: "Makroprvky",
+  detail: "Reef Foundation A / B / C",
+  image: { src: "/assets/supplements/foundation-abc-250x3.webp", alt: "Foundation ABC 250×3" },
+  packageSizes: ["500 ml", "1000 ml", "5000 ml", "Start pack 3×250 ml"],
+};
+
+export const SEVEN_PART_TRACE_COLORS: ProgramSubBlock = {
+  title: "Trace Colors ABCD",
+  badge: "Mikroprvky",
+  detail: "Trace Colors A / B / C / D",
+  image: { src: "/assets/supplements/trace-colors-abcd-pack.webp", alt: "Trace Colors ABCD Complete Pack" },
+  packageSizes: ["500 ml", "Start pack 4×100 ml"],
+};
+
+export const FOUR_PART_SIZES: FourPartSize[] = [
+  { label: "Size S", volume: "150 l" },
+  { label: "Size M", volume: "300 l" },
+  { label: "Size L", volume: "600 l" },
+];
+
 export const SUPPLEMENTS_TMP_IMAGES: SupplementTmpImage[] = [
   { number: 1, name: "Algae Control Pro Multi TestKit", src: "/supplements_tmp/Algae_Control_Pro_Multi_TestKit.webp" },
   { number: 2, name: "Algae Control Pro Multi TestKit box", src: "/supplements_tmp/Algae_Control_Pro_Multi_TestKit_box.webp" },
