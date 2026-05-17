@@ -45,7 +45,7 @@ function PackCard({
           onClick={() => onOpen?.(primaryImage)}
           className="block w-full border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-4 text-left cursor-zoom-in"
         >
-          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-slate-100 bg-white">
+          <div className="relative aspect-[3/2] overflow-hidden rounded-xl border border-slate-100 bg-white">
             <Image src={primaryImage.src} alt={primaryImage.alt} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-contain p-3" />
           </div>
         </button>
@@ -219,7 +219,7 @@ export default function Page() {
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">Starter pack, Colors starter pack, Skeletal elements</h2>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-3">
             {SUPPLEMENTS_ITEMS.slice(2).map((item) => (
               <PackCard
                 key={item.slug}
