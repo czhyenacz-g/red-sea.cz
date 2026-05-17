@@ -122,11 +122,19 @@ export const SEVEN_PART_FOUNDATION: ProgramSubBlock = {
       ],
     },
     {
+      label: "5 L",
+      bottles: [
+        { src: "/assets/supplements/foundation-a-5l.webp", alt: "Reef Foundation A 5 L" },
+        { src: "/assets/supplements/foundation-b-5l.webp", alt: "Reef Foundation B 5 L" },
+        { src: "/assets/supplements/foundation-c-5l.webp", alt: "Reef Foundation C 5 L" },
+      ],
+    },
+    {
       label: "Start pack 3×250 ml",
       image: { src: "/assets/supplements/foundation-abc-250x3.webp", alt: "Foundation ABC Start pack 3×250 ml" },
     },
   ],
-  packageSizes: ["500 ml", "1000 ml", "5000 ml"],
+  packageSizes: [],
 };
 
 export const SEVEN_PART_TRACE_COLORS: ProgramSubBlock = {
@@ -149,7 +157,7 @@ export const SEVEN_PART_TRACE_COLORS: ProgramSubBlock = {
       image: { src: "/assets/supplements/trace-colors-4x100ml-pack.webp", alt: "Trace Colors ABCD Start pack 4×100 ml" },
     },
   ],
-  packageSizes: ["500 ml"],
+  packageSizes: [],
 };
 
 export const FOUR_PART_SIZES: FourPartSize[] = [
