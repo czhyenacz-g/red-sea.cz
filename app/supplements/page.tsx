@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Header } from "../components/Header";
 import { ProductImageLightbox } from "../components/ProductImageLightbox";
 import { SUPPLEMENTS_ITEMS, SUPPLEMENTS_INTRO, SUPPLEMENTS_TMP_IMAGES, SUPPLEMENTS_TITLE, type SupplementImage } from "../data/supplements";
+import { RCP_FOUR_PART_GALLERY } from "../data/rcpFourPartGallery";
 
 type LightboxState = {
   src: string;
@@ -134,6 +135,35 @@ export default function Page() {
                   setLightbox({ src: image.src, alt: image.alt, title: item.title });
                 } : undefined}
               />
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-16">
+          <div className="mb-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Reef Care Program</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">Reef Care Program – galerie 4-part programu</h2>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {RCP_FOUR_PART_GALLERY.map((item) => (
+              <article key={item.id} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLightbox({ src: item.image.src, alt: item.image.alt, title: item.title, label: String(item.id) });
+                  }}
+                  className="block w-full cursor-zoom-in bg-slate-50 text-left"
+                >
+                  <div className="relative aspect-[4/3] bg-slate-50">
+                    <Image src={item.image.src} alt={item.image.alt} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw" className="object-contain p-3" />
+                  </div>
+                </button>
+                <div className="border-t border-slate-100 px-3 py-2.5">
+                  <p className="text-xs font-semibold text-amber-700">#{item.id}</p>
+                  <p className="mt-0.5 text-xs font-medium text-slate-700 leading-snug">{item.title}</p>
+                </div>
+              </article>
             ))}
           </div>
         </section>
