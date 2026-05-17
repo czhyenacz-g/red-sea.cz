@@ -72,21 +72,26 @@ function SubBlock({
       </span>
       <h3 className="mt-3 text-xl font-semibold tracking-tight text-slate-950">{block.title}</h3>
       <p className="mt-0.5 text-sm text-slate-500">{block.detail}</p>
-      <button
-        type="button"
-        onClick={() => onOpen(block.image, block.title)}
-        className="mt-5 block w-full cursor-zoom-in overflow-hidden rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 text-left"
-      >
-        <div className="relative aspect-[4/3]">
-          <Image
-            src={block.image.src}
-            alt={block.image.alt}
-            fill
-            sizes="(max-width: 640px) 100vw, 50vw"
-            className="object-contain p-6"
-          />
-        </div>
-      </button>
+      <div className="mt-5 grid grid-flow-col auto-cols-fr gap-2">
+        {block.bottles.map((bottle) => (
+          <button
+            key={bottle.src}
+            type="button"
+            onClick={() => onOpen(bottle, block.title)}
+            className="cursor-zoom-in overflow-hidden rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50"
+          >
+            <div className="relative aspect-[3/4]">
+              <Image
+                src={bottle.src}
+                alt={bottle.alt}
+                fill
+                sizes="(max-width: 640px) 33vw, 15vw"
+                className="object-contain p-2"
+              />
+            </div>
+          </button>
+        ))}
+      </div>
       <div className="mt-4 flex flex-wrap gap-1.5">
         {block.packageSizes.map((size) => (
           <span key={size} className="rounded border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-600">

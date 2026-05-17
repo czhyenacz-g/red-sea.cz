@@ -92,6 +92,7 @@ export type ProgramSubBlock = {
   badge: string;
   detail: string;
   image: SupplementImage;
+  bottles: SupplementImage[];
   packageSizes: string[];
 };
 
@@ -105,6 +106,11 @@ export const SEVEN_PART_FOUNDATION: ProgramSubBlock = {
   badge: "Makroprvky",
   detail: "Reef Foundation A / B / C",
   image: { src: "/assets/supplements/foundation-abc-250x3.webp", alt: "Foundation ABC 250×3" },
+  bottles: [
+    { src: "/assets/supplements/foundation-a-500ml.webp", alt: "Reef Foundation A 500 ml" },
+    { src: "/assets/supplements/foundation-b-500ml.webp", alt: "Reef Foundation B 500 ml" },
+    { src: "/assets/supplements/foundation-c-500ml.webp", alt: "Reef Foundation C 500 ml" },
+  ],
   packageSizes: ["500 ml", "1000 ml", "5000 ml", "Start pack 3×250 ml"],
 };
 
@@ -113,6 +119,12 @@ export const SEVEN_PART_TRACE_COLORS: ProgramSubBlock = {
   badge: "Mikroprvky",
   detail: "Trace Colors A / B / C / D",
   image: { src: "/assets/supplements/trace-colors-abcd-pack.webp", alt: "Trace Colors ABCD Complete Pack" },
+  bottles: [
+    { src: "/assets/supplements/trace-colors-a-500ml.webp", alt: "Trace Colors A 500 ml" },
+    { src: "/assets/supplements/trace-colors-b-500ml.webp", alt: "Trace Colors B 500 ml" },
+    { src: "/assets/supplements/trace-colors-c-500ml.webp", alt: "Trace Colors C 500 ml" },
+    { src: "/assets/supplements/trace-colors-d-500ml.webp", alt: "Trace Colors D 500 ml" },
+  ],
   packageSizes: ["500 ml", "Start pack 4×100 ml"],
 };
 
