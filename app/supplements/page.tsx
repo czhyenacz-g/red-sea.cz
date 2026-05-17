@@ -120,7 +120,7 @@ export default function Page() {
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
 
         {/* Hero */}
-        <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <section className="grid gap-8 lg:grid-cols-[2fr_1fr] lg:items-center">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Přípravky</p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">{SUPPLEMENTS_TITLE}</h1>
@@ -145,7 +145,7 @@ export default function Page() {
                   src={heroImage.src}
                   alt={heroImage.name}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </div>
@@ -154,7 +154,7 @@ export default function Page() {
         </section>
 
         {/* Complete 4-part Supplement Program */}
-        <section className="mt-14 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+        <section className="mt-14 grid gap-8 lg:grid-cols-[2fr_1fr] lg:items-center">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Reef Care Program</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">{SUPPLEMENTS_ITEMS[0].title}</h2>
@@ -182,7 +182,7 @@ export default function Page() {
                   src={fourPartPrimary.src}
                   alt={fourPartPrimary.alt}
                   fill
-                  sizes="(max-width: 1024px) 60vw, 30vw"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                   className="object-contain p-6 transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </div>
