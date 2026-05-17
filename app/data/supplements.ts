@@ -122,6 +122,9 @@ export const FOUR_PART_SIZES: FourPartSize[] = [
   { label: "Size L", volume: "600 l" },
 ];
 
+export const FOUR_PART_CLARIFICATION =
+  "4dílný systém je ve velikostech podle velikosti akvária: Size S pro 150 l, Size M pro 300 l a Size L pro 600 l.";
+
 export const SUPPLEMENTS_TMP_IMAGES: SupplementTmpImage[] = [
   { number: 1, name: "Algae Control Pro Multi TestKit", src: "/supplements_tmp/Algae_Control_Pro_Multi_TestKit.webp" },
   { number: 2, name: "Algae Control Pro Multi TestKit box", src: "/supplements_tmp/Algae_Control_Pro_Multi_TestKit_box.webp" },

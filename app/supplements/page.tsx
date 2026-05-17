@@ -12,6 +12,7 @@ import {
   SEVEN_PART_FOUNDATION,
   SEVEN_PART_TRACE_COLORS,
   FOUR_PART_SIZES,
+  FOUR_PART_CLARIFICATION,
   type SupplementImage,
   type ProgramSubBlock,
 } from "../data/supplements";
@@ -148,44 +149,40 @@ export default function Page() {
         </section>
 
         {/* Complete 4-part Supplement Program */}
-        <section className="mt-14">
-          <div className="mb-6">
+        <section className="mt-14 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Reef Care Program</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">{SUPPLEMENTS_ITEMS[0].title}</h2>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">{SUPPLEMENTS_ITEMS[0].text}</p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600">{SUPPLEMENTS_ITEMS[0].text}</p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600">{FOUR_PART_CLARIFICATION}</p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {FOUR_PART_SIZES.map((size) => (
+                <div key={size.label} className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 shadow-sm">
+                  <span className="text-sm font-semibold text-slate-900">{size.label}</span>
+                  <span className="text-slate-300">·</span>
+                  <span className="text-sm text-slate-500">akvárium {size.volume}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <article className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_80px_-48px_rgba(15,23,42,0.35)]">
-            {fourPartPrimary ? (
-              <button
-                type="button"
-                onClick={() => openLightbox(fourPartPrimary.src, fourPartPrimary.alt, SUPPLEMENTS_ITEMS[0].title)}
-                className="block w-full border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 p-5 text-left cursor-zoom-in"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-slate-100 bg-white">
-                  <Image
-                    src={fourPartPrimary.src}
-                    alt={fourPartPrimary.alt}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 75vw"
-                    className="object-contain p-6"
-                  />
-                </div>
-              </button>
-            ) : null}
-            <div className="p-5 sm:p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Dostupné velikosti</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {FOUR_PART_SIZES.map((size) => (
-                  <div key={size.label} className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5">
-                    <span className="text-sm font-semibold text-slate-900">{size.label}</span>
-                    <span className="text-slate-300">·</span>
-                    <span className="text-sm text-slate-500">{size.volume}</span>
-                  </div>
-                ))}
+          {fourPartPrimary ? (
+            <button
+              type="button"
+              onClick={() => openLightbox(fourPartPrimary.src, fourPartPrimary.alt, SUPPLEMENTS_ITEMS[0].title)}
+              className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_18px_60px_-30px_rgba(15,23,42,0.25)] cursor-zoom-in"
+            >
+              <div className="relative aspect-[4/5] bg-gradient-to-br from-slate-50 via-white to-amber-50">
+                <Image
+                  src={fourPartPrimary.src}
+                  alt={fourPartPrimary.alt}
+                  fill
+                  sizes="(max-width: 1024px) 60vw, 30vw"
+                  className="object-contain p-6 transition-transform duration-300 group-hover:scale-[1.02]"
+                />
               </div>
-            </div>
-          </article>
+            </button>
+          ) : null}
         </section>
 
         {/* Complete 7-part Supplement Program */}
