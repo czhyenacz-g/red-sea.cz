@@ -65,6 +65,9 @@ function SubBlock({
   block: ProgramSubBlock;
   onOpen: (image: SupplementImage, title: string) => void;
 }) {
+  const [activeView, setActiveView] = useState(0);
+  const view = block.views[activeView];
+
   return (
     <div className="flex flex-col p-6 lg:p-8">
       <span className="self-start rounded-full border border-amber-100 bg-amber-50 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-700">
@@ -72,29 +75,63 @@ function SubBlock({
       </span>
       <h3 className="mt-3 text-xl font-semibold tracking-tight text-slate-950">{block.title}</h3>
       <p className="mt-0.5 text-sm text-slate-500">{block.detail}</p>
-      <div className="mt-5 grid grid-cols-4 gap-2">
-        {block.bottles.map((bottle) => (
+
+      {view.bottles ? (
+        <div className="mt-5 grid grid-cols-4 gap-2">
+          {view.bottles.map((bottle) => (
+            <button
+              key={bottle.src}
+              type="button"
+              onClick={() => onOpen(bottle, block.title)}
+              className="cursor-zoom-in overflow-hidden rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50"
+            >
+              <div className="relative aspect-[3/4]">
+                <Image
+                  src={bottle.src}
+                  alt={bottle.alt}
+                  fill
+                  sizes="(max-width: 640px) 33vw, 15vw"
+                  className="object-contain p-2"
+                />
+              </div>
+            </button>
+          ))}
+        </div>
+      ) : view.image ? (
+        <button
+          type="button"
+          onClick={() => onOpen(view.image!, block.title)}
+          className="mt-5 block w-full cursor-zoom-in overflow-hidden rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 text-left"
+        >
+          <div className="relative aspect-[4/3]">
+            <Image
+              src={view.image.src}
+              alt={view.image.alt}
+              fill
+              sizes="(max-width: 640px) 100vw, 50vw"
+              className="object-contain p-6"
+            />
+          </div>
+        </button>
+      ) : null}
+
+      <div className="mt-4 flex flex-wrap gap-1.5">
+        {block.views.map((v, i) => (
           <button
-            key={bottle.src}
+            key={v.label}
             type="button"
-            onClick={() => onOpen(bottle, block.title)}
-            className="cursor-zoom-in overflow-hidden rounded-xl border border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50"
+            onClick={() => setActiveView(i)}
+            className={`rounded border px-2 py-0.5 text-[11px] font-medium transition-colors ${
+              i === activeView
+                ? "border-amber-600 bg-amber-600 text-white"
+                : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
+            }`}
           >
-            <div className="relative aspect-[3/4]">
-              <Image
-                src={bottle.src}
-                alt={bottle.alt}
-                fill
-                sizes="(max-width: 640px) 33vw, 15vw"
-                className="object-contain p-2"
-              />
-            </div>
+            {v.label}
           </button>
         ))}
-      </div>
-      <div className="mt-4 flex flex-wrap gap-1.5">
         {block.packageSizes.map((size) => (
-          <span key={size} className="rounded border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-600">
+          <span key={size} className="rounded border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] text-slate-400">
             {size}
           </span>
         ))}
