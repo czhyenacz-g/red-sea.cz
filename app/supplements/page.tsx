@@ -72,7 +72,7 @@ function SubBlock({
       </span>
       <h3 className="mt-3 text-xl font-semibold tracking-tight text-slate-950">{block.title}</h3>
       <p className="mt-0.5 text-sm text-slate-500">{block.detail}</p>
-      <div className="mt-5 grid grid-flow-col auto-cols-fr gap-2">
+      <div className="mt-5 grid grid-cols-4 gap-2">
         {block.bottles.map((bottle) => (
           <button
             key={bottle.src}
