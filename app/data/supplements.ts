@@ -114,7 +114,7 @@ export const SEVEN_PART_FOUNDATION: ProgramSubBlock = {
   image: { src: "/assets/supplements/foundation-abc-250x3.webp", alt: "Foundation ABC 250×3" },
   views: [
     {
-      label: "Lahve",
+      label: "Lahve 500 ml",
       bottles: [
         { src: "/assets/supplements/foundation-a-500ml.webp", alt: "Reef Foundation A 500 ml" },
         { src: "/assets/supplements/foundation-b-500ml.webp", alt: "Reef Foundation B 500 ml" },
@@ -136,7 +136,7 @@ export const SEVEN_PART_TRACE_COLORS: ProgramSubBlock = {
   image: { src: "/assets/supplements/trace-colors-abcd-pack.webp", alt: "Trace Colors ABCD Complete Pack" },
   views: [
     {
-      label: "Lahve",
+      label: "Lahve 500 ml",
       bottles: [
         { src: "/assets/supplements/trace-colors-a-500ml.webp", alt: "Trace Colors A 500 ml" },
         { src: "/assets/supplements/trace-colors-b-500ml.webp", alt: "Trace Colors B 500 ml" },
