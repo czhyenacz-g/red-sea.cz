@@ -31,10 +31,10 @@ export const SUPPLEMENTS_ITEMS: SupplementItem[] = [
     slug: "complete-4-part-supplement-program",
     title: "Complete 4-part Supplement Program",
     text: "Kompletní čtyř dílný sytém doplňování makro a mikro prvků",
-    image: {
-      src: "/assets/supplements/reef-foundation-abc-bucket.webp",
-      alt: "Reef Foundation ABC bucket",
-    },
+    image: [
+      { src: "/assets/supplements/rcp-4-part/rcp1234-3packs.webp", alt: "RCP1234 tři balení" },
+      { src: "/assets/supplements/rcp-4-part/rcp1234-bottles.webp", alt: "RCP1234 lahvičky" },
+    ],
   },
   {
     slug: "complete-7-part-supplement-program",

@@ -137,7 +137,7 @@ export default function Page() {
   const [lightbox, setLightbox] = useState<LightboxState | null>(null);
 
   const fourPartImageData = SUPPLEMENTS_ITEMS[0].image;
-  const fourPartPrimary = Array.isArray(fourPartImageData) ? fourPartImageData[0] : fourPartImageData;
+  const fourPartImages = Array.isArray(fourPartImageData) ? fourPartImageData : fourPartImageData ? [fourPartImageData] : [];
 
   function openLightbox(src: string, alt: string, title: string, label?: string) {
     setLightbox({ src, alt, title, label });
@@ -148,7 +148,7 @@ export default function Page() {
       <Header />
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
 
-        {/* Hero + Complete 4-part Supplement Program */}
+        {/* Hero — intro + starter kit */}
         <section className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:items-start">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Přípravky</p>
@@ -158,39 +158,62 @@ export default function Page() {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
+          </div>
 
-            <div className="mt-8 border-t border-slate-100 pt-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Reef Care Program</p>
-              <h2 className="mt-2 text-xl font-semibold tracking-tight text-slate-950">{SUPPLEMENTS_ITEMS[0].title}</h2>
-              <p className="mt-3 text-sm leading-6 text-slate-600">{SUPPLEMENTS_ITEMS[0].text}</p>
-              <p className="mt-2 text-sm leading-6 text-slate-500">{FOUR_PART_CLARIFICATION}</p>
-              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">
-                {FOUR_PART_SIZES.map((size) => (
-                  <span key={size.label} className="text-sm text-slate-500">
-                    <span className="font-semibold text-slate-700">{size.label}</span>
-                    {" · akvárium "}{size.volume}
-                  </span>
-                ))}
-              </div>
+          <button
+            type="button"
+            onClick={() => openLightbox("/assets/supplements/rcp-starter-kit.webp", "RCP Starter Kit", "Reef Care Program Starter Kit")}
+            className="group block rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 cursor-zoom-in lg:self-start p-4"
+          >
+            <Image
+              src="/assets/supplements/rcp-starter-kit.webp"
+              alt="RCP Starter Kit"
+              width={1308}
+              height={902}
+              sizes="(max-width: 1024px) 60vw, 33vw"
+              className="w-full h-auto rounded-xl transition-transform duration-300 group-hover:scale-[1.02]"
+            />
+          </button>
+        </section>
+
+        {/* Complete 4-part Supplement Program */}
+        <section className="mt-12 grid gap-10 lg:grid-cols-[3fr_2fr] lg:items-start">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Reef Care Program</p>
+            <h2 className="mt-2 text-xl font-semibold tracking-tight text-slate-950">{SUPPLEMENTS_ITEMS[0].title}</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-600">{SUPPLEMENTS_ITEMS[0].text}</p>
+            <p className="mt-2 text-sm leading-6 text-slate-500">{FOUR_PART_CLARIFICATION}</p>
+            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">
+              {FOUR_PART_SIZES.map((size) => (
+                <span key={size.label} className="text-sm text-slate-500">
+                  <span className="font-semibold text-slate-700">{size.label}</span>
+                  {" · akvárium "}{size.volume}
+                </span>
+              ))}
             </div>
           </div>
 
-          {fourPartPrimary ? (
-            <button
-              type="button"
-              onClick={() => openLightbox(fourPartPrimary.src, fourPartPrimary.alt, SUPPLEMENTS_ITEMS[0].title)}
-              className="group block overflow-hidden rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 cursor-zoom-in lg:self-start"
-            >
-              <div className="relative aspect-[4/5]">
-                <Image
-                  src={fourPartPrimary.src}
-                  alt={fourPartPrimary.alt}
-                  fill
-                  sizes="(max-width: 1024px) 60vw, 33vw"
-                  className="object-contain p-8 transition-transform duration-300 group-hover:scale-[1.02]"
-                />
-              </div>
-            </button>
+          {fourPartImages.length > 0 ? (
+            <div className={`grid gap-3 lg:self-start ${fourPartImages.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
+              {fourPartImages.map((img) => (
+                <button
+                  key={img.src}
+                  type="button"
+                  onClick={() => openLightbox(img.src, img.alt, SUPPLEMENTS_ITEMS[0].title)}
+                  className="group block overflow-hidden rounded-2xl border border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 cursor-zoom-in"
+                >
+                  <div className="relative aspect-[3/2]">
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      sizes="(max-width: 1024px) 45vw, 20vw"
+                      className="object-contain p-3 transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                </button>
+              ))}
+            </div>
           ) : null}
         </section>
 

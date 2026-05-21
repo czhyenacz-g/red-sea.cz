@@ -137,7 +137,7 @@ export default function Page() {
           </div>
 
           <div className="grid gap-5 lg:grid-cols-2">
-            {REEFBEAT_PRODUCTS.map((product) => (
+            {REEFBEAT_PRODUCTS.filter((p) => p.slug !== "reefdose").map((product) => (
               <ProductCard
                 key={product.slug}
                 title={product.title}
@@ -148,6 +148,42 @@ export default function Page() {
             ))}
           </div>
         </section>
+
+        {(() => {
+          const reefdose = REEFBEAT_PRODUCTS.find((p) => p.slug === "reefdose");
+          if (!reefdose) return null;
+          return (
+            <section className="mt-12">
+              <div className="mb-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Dávkovací čerpadla</p>
+                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">{reefdose.title}</h2>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{reefdose.text}</p>
+              </div>
+
+              <div className="grid gap-5 sm:grid-cols-2">
+                {reefdose.images.map((image) => (
+                  <button
+                    key={image.src}
+                    type="button"
+                    onClick={() => openLightbox(reefdose.title, image, reefdose.images)}
+                    className="group overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_80px_-48px_rgba(15,23,42,0.35)] cursor-zoom-in"
+                  >
+                    <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-sky-50 p-4">
+                      <div className="relative aspect-[3/2] overflow-hidden rounded-[1.5rem] border border-slate-100 bg-white">
+                        <Image src={image.src} alt={image.alt} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-contain p-4 transition-transform duration-300 group-hover:scale-[1.02]" />
+                      </div>
+                    </div>
+                    {image.label ? (
+                      <div className="px-5 py-3">
+                        <p className="text-sm font-semibold text-slate-700">{image.label}</p>
+                      </div>
+                    ) : null}
+                  </button>
+                ))}
+              </div>
+            </section>
+          );
+        })()}
       </main>
 
       <ProductImageLightbox

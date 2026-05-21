@@ -117,12 +117,14 @@ export const REEFBEAT_PRODUCTS: ReefbeatProduct[] = [
     text: "Dávkovací čerpadla pro přesné dávkování přípravků. Jsou k dispozici dvě provedení podle počtu dávkovacích hlav. ReefDose2 a ReefDose4.",
     images: [
       {
-        src: "/supplements_tmp/R35360_RCP_starter_kit.webp",
-        alt: "R35360 RCP starter kit",
+        src: "/assets/reefbeat/reefdose-2.webp",
+        alt: "ReefDose 2",
+        label: "ReefDose 2",
       },
       {
-        src: "/supplements_tmp/R35310_ReefDose_2.webp",
-        alt: "R35310 ReefDose 2",
+        src: "/assets/reefbeat/reefdose-4.webp",
+        alt: "ReefDose 4",
+        label: "ReefDose 4",
       },
     ],
   },
