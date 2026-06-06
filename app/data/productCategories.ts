@@ -29,6 +29,13 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     source: "Redsea.pages",
   },
   {
+    slug: "tests",
+    label: "Testy",
+    href: "/tests",
+    summary: "Přesné titrační testy pro mořskou akvaristiku – sady i jednotlivé testy pro měření Ca, KH, Mg, NO3, PO4, I2, K a Fe.",
+    source: "Redsea.pages",
+  },
+  {
     slug: "technical-equipment",
     label: "Technická zařízení",
     href: "/technical-equipment",
