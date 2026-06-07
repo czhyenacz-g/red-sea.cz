@@ -269,10 +269,12 @@ export const NUTRITION_ITEMS: SupplementItem[] = [
     slug: "kh-coralline-gro",
     title: "Red Sea KH Coralline Gro",
     text: "Přípravek podporuje růst vápenité řasy. Použití je zvláště vhodné u nových nádrží. Dodává se v balení 500 a 5 000 ml.",
+    image: { src: "/supplements_tmp/khCorallineGro_500ml.webp", alt: "KH Coralline Gro 500 ml" },
   },
   {
     slug: "aiptasia-x",
     title: "Aiptasia-X",
     text: "Přípravek je určen k přímému hubení skelných sasanek rodu Aiptasia. Aplikuje se pomocí přiložené injekční stříkačky. Dodává se v balení 60 a 500 ml.",
+    image: { src: "/supplements_tmp/Aiptasia-X_500ml.webp", alt: "Aiptasia-X 500 ml" },
   },
 ];
