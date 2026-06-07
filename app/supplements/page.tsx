@@ -54,7 +54,7 @@ function PackCard({
       ) : null}
       <div className="space-y-2 p-4">
         <h3 className="text-base font-semibold tracking-tight text-slate-950">{title}</h3>
-        <p className="text-sm leading-6 text-slate-600">{text}</p>
+        <p className="whitespace-pre-line text-sm leading-6 text-slate-600">{text}</p>
       </div>
     </article>
   );

@@ -255,26 +255,26 @@ export const NUTRITION_ITEMS: SupplementItem[] = [
   {
     slug: "reef-energy-plus",
     title: "Reef Energy Plus AB",
-    text: "Koncentrovaná výživa korálnatců pro jejich lepší růst, odolnost a vybarvení. Skládá se z organického komplexu rozpuštěných a suspendovaných jednoduchých stavebních bloků uhlohydrátů, aminokyselin, mastných kyselin a vitamínů. Reef Energy Plus je absorbován a spotřebován přímo korály. Dodává se v balení 250, 500, 1 000 a 5 000 ml.",
+    text: "Koncentrovaná výživa korálnatců pro jejich lepší růst, odolnost a vybarvení. Skládá se z organického komplexu rozpuštěných a suspendovaných jednoduchých stavebních bloků uhlohydrátů, aminokyselin, mastných kyselin a vitamínů. Reef Energy Plus je absorbován a spotřebován přímo korály.\nDodává se v balení 250, 500, 1 000 a 5 000 ml.",
     image: { src: "/supplements_tmp/Reef_Energy_Plus_500ml.webp", alt: "Reef Energy Plus 500 ml" },
   },
   {
     slug: "no3-po4-x",
     title: "Red Sea Algae Management NO3:PO4-X",
-    text: "Obsahuje komplex látek zajišťujících výživu redukčních bakterií provádějících stálou redukci dusičnanů na plynný dusík a absorpci a zhodnocení fosfátů. Dodává se v balení 100, 500, 1 000 a 5 000 ml.",
+    text: "Obsahuje komplex látek zajišťujících výživu redukčních bakterií provádějících stálou redukci dusičnanů na plynný dusík a absorpci a zhodnocení fosfátů.\nDodává se v balení 100, 500, 1 000 a 5 000 ml.",
     // source image #15 is a mismatch (Foundation Pro TestKit box); using #35 (Nopox_500ml)
     image: { src: "/supplements_tmp/Nopox_500ml.webp", alt: "NO3:PO4-X 500 ml" },
   },
   {
     slug: "kh-coralline-gro",
     title: "Red Sea KH Coralline Gro",
-    text: "Přípravek podporuje růst vápenité řasy. Použití je zvláště vhodné u nových nádrží. Dodává se v balení 500 a 5 000 ml.",
+    text: "Přípravek podporuje růst vápenité řasy. Použití je zvláště vhodné u nových nádrží.\nDodává se v balení 500 a 5 000 ml.",
     image: { src: "/supplements_tmp/khCorallineGro_500ml.webp", alt: "KH Coralline Gro 500 ml" },
   },
   {
     slug: "aiptasia-x",
     title: "Aiptasia-X",
-    text: "Přípravek je určen k přímému hubení skelných sasanek rodu Aiptasia. Aplikuje se pomocí přiložené injekční stříkačky. Dodává se v balení 60 a 500 ml.",
+    text: "Přípravek je určen k přímému hubení skelných sasanek rodu Aiptasia. Aplikuje se pomocí přiložené injekční stříkačky.\nDodává se v balení 60 a 500 ml.",
     image: { src: "/supplements_tmp/Aiptasia-X_500ml.webp", alt: "Aiptasia-X 500 ml" },
   },
 ];
