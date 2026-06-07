@@ -18,7 +18,6 @@ import {
   type SupplementImage,
   type ProgramSubBlock,
 } from "../data/supplements";
-import { TESTS_TITLE, TESTS_INTRO, TEST_GROUPS } from "../data/tests";
 import { RCP_FOUR_PART_GALLERY } from "../data/rcpFourPartGallery";
 
 type LightboxState = {
@@ -281,60 +280,6 @@ export default function Page() {
           </div>
         </section>
 
-        {/* Testy */}
-        <section className="mt-12">
-          <div className="mb-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Reef Care Program</p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">{TESTS_TITLE}</h2>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">{TESTS_INTRO}</p>
-          </div>
-
-          <div className="grid gap-5 sm:grid-cols-3">
-            {TEST_GROUPS.map((group) => (
-              <article key={group.slug} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_8px_32px_-12px_rgba(15,23,42,0.18)]">
-                {group.image && (
-                  <button
-                    type="button"
-                    onClick={() => openLightbox(group.image!.src, group.image!.alt, group.title, `#${group.image!.number}`)}
-                    className="block w-full border-b border-slate-100 bg-gradient-to-br from-slate-50 via-white to-amber-50 cursor-zoom-in p-4"
-                  >
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-slate-100 bg-white">
-                      <Image
-                        src={group.image.src}
-                        alt={group.image.alt}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-contain p-3"
-                      />
-                    </div>
-                  </button>
-                )}
-                <div className="p-4">
-                  <span className="inline-block rounded-full border border-amber-100 bg-amber-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-700">
-                    {group.badge}
-                  </span>
-                  <h3 className="mt-2 text-sm font-semibold leading-snug tracking-tight text-slate-950">{group.title}</h3>
-                  <p className="mt-1.5 text-xs leading-5 text-slate-600">{group.text}</p>
-
-                  {group.items.length > 0 && (
-                    <table className="mt-3 w-full border-collapse text-xs">
-                      <tbody>
-                        {group.items.map((item) => (
-                          <tr key={item.title} className="border-t border-slate-100">
-                            <td className="py-1.5 pr-2 text-slate-700 leading-snug">{item.title}</td>
-                            <td className="py-1.5 text-right font-semibold text-amber-500 whitespace-nowrap">
-                              {item.image ? `#${item.image.number}` : "—"}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
 
         {/* Reference gallery */}
         <div className="mt-16 border-t border-slate-200 pt-14">
