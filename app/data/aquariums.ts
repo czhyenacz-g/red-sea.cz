@@ -207,6 +207,11 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/170_w-doors.webp",
+            alt: "REEFER MAX 170 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-170-200-g3-white.webp",
             alt: "REEFER MAX 170 G3 shared white image with REEFER MAX 200 G3",
             label: "Standard",
@@ -216,6 +221,11 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/170_b-doors_no-label.webp",
+            alt: "REEFER MAX 170 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-170-200-g3-black.webp",
             alt: "REEFER MAX 170 G3 shared black image with REEFER MAX 200 G3",
@@ -242,6 +252,11 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/200_w-doors.webp",
+            alt: "REEFER MAX 200 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-170-200-g3-white.webp",
             alt: "REEFER MAX 200 G3 shared white image with REEFER MAX 170 G3",
             label: "Standard",
@@ -251,6 +266,11 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/200_b-doors_no-label.webp",
+            alt: "REEFER MAX 200 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-170-200-g3-black.webp",
             alt: "REEFER MAX 200 G3 shared black image with REEFER MAX 170 G3",
@@ -277,6 +297,11 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/250_w-doors.webp",
+            alt: "REEFER MAX 250 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-250-g3-white.webp",
             alt: "REEFER MAX 250 G3 with white cabinet",
           },
@@ -284,6 +309,11 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/250_b-doors_no-label.webp",
+            alt: "REEFER MAX 250 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-250-g3-black.webp",
             alt: "REEFER MAX 250 G3 with black cabinet",
@@ -308,6 +338,11 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/300_w-doors.webp",
+            alt: "REEFER MAX 300 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-300-g3-white.webp",
             alt: "REEFER MAX 300 G3 with white cabinet",
           },
@@ -315,6 +350,11 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/300_b-doors_no-label.webp",
+            alt: "REEFER MAX 300 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-300-g3-black.webp",
             alt: "REEFER MAX 300 G3 with black cabinet",
@@ -342,6 +382,11 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/350_w-doors.webp",
+            alt: "REEFER MAX 350 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-350-g3-white.webp",
             alt: "REEFER MAX 350 G3 with white cabinet",
             label: "Standard",
@@ -355,6 +400,11 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/350_b-doors_no-label.webp",
+            alt: "REEFER MAX 350 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-350-g3-black.webp",
             alt: "REEFER MAX 350 G3 with black cabinet",
@@ -385,6 +435,11 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/425_w-doors.webp",
+            alt: "REEFER MAX 425 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-425-g3-white.webp",
             alt: "REEFER MAX 425 G3 with white cabinet",
             label: "Standard",
@@ -398,6 +453,11 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/425_b-doors_no-label.webp",
+            alt: "REEFER MAX 425 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-425-g3-black.webp",
             alt: "REEFER MAX 425 G3 with black cabinet",
@@ -428,6 +488,11 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/525_w-doors.webp",
+            alt: "REEFER MAX 525 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-525-g3-white.webp",
             alt: "REEFER MAX 525 G3 with white cabinet",
             label: "Standard",
@@ -446,6 +511,11 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/525_b-doors_no-label.webp",
+            alt: "REEFER MAX 525 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-525-g3-black.webp",
             alt: "REEFER MAX 525 G3 with black cabinet",
@@ -481,6 +551,11 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/625_w-doors.webp",
+            alt: "REEFER MAX 625 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-625-g3-white.webp",
             alt: "REEFER MAX 625 G3 with white cabinet",
             label: "Standard",
@@ -499,6 +574,11 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/625_b-doors_no-label.webp",
+            alt: "REEFER MAX 625 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-625-g3-black.webp",
             alt: "REEFER MAX 625 G3 with black cabinet",
@@ -537,6 +617,11 @@ const reefMaxG3_180Products: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/750_w-doors.webp",
+            alt: "REEFER MAX 750 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-750-g3-white-standard.webp",
             alt: "REEFER MAX 750 G3 standard with white cabinet",
             label: "Standard",
@@ -558,6 +643,11 @@ const reefMaxG3_180Products: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/750_b-doors_no-label.webp",
+            alt: "REEFER MAX 750 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-750-g3-black-standard.webp",
             alt: "REEFER MAX 750 G3 standard with black cabinet",
@@ -599,6 +689,11 @@ const reefMaxSProducts: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/s-550-g2-_w-doors.webp",
+            alt: "REEFER MAX S-550 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-s-550-g3-white.webp",
             alt: "REEFER MAX S-550 G3 with white cabinet",
             label: "Standard",
@@ -612,6 +707,11 @@ const reefMaxSProducts: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/s-550-g2-_w-doors.webp",
+            alt: "REEFER MAX S-550 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-s-550-g3-black.webp",
             alt: "REEFER MAX S-550 G3 with black cabinet",
@@ -642,6 +742,11 @@ const reefMaxSProducts: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/s-700-g2-_w-doors.webp",
+            alt: "REEFER MAX S-700 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-s-700-g3-white.webp",
             alt: "REEFER MAX S-700 G3 with white cabinet",
             label: "Standard",
@@ -655,6 +760,11 @@ const reefMaxSProducts: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/s-700-g2-_w-doors.webp",
+            alt: "REEFER MAX S-700 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-s-700-g3-black.webp",
             alt: "REEFER MAX S-700 G3 with black cabinet",
@@ -685,6 +795,11 @@ const reefMaxSProducts: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/s850_w-doors.webp",
+            alt: "REEFER MAX S-850 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-s-850-g3-white.webp",
             alt: "REEFER MAX S-850 G3 with white cabinet",
             label: "Standard",
@@ -698,6 +813,11 @@ const reefMaxSProducts: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/s-850_b-doors_no-label.webp",
+            alt: "REEFER MAX S-850 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-s-850-g3-black.webp",
             alt: "REEFER MAX S-850 G3 with black cabinet",
@@ -728,6 +848,11 @@ const reefMaxSProducts: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/s1000_w-doors.webp",
+            alt: "REEFER MAX S-1000 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-s-1000-g3-white.webp",
             alt: "REEFER MAX S-1000 G3 with white cabinet",
             label: "Standard",
@@ -741,6 +866,11 @@ const reefMaxSProducts: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/s-1000_b-doors_no-label.webp",
+            alt: "REEFER MAX S-1000 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-s-1000-g3-black.webp",
             alt: "REEFER MAX S-1000 G3 with black cabinet",
@@ -774,6 +904,11 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/p350_w-doors.webp",
+            alt: "REEFER MAX Peninsula 350 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-peninsula-350-g3-white.webp",
             alt: "REEFER MAX Peninsula 350 G3 with white cabinet",
             label: "Standard",
@@ -787,6 +922,11 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/p350_b-doors_no-label.webp",
+            alt: "REEFER MAX Peninsula 350 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-peninsula-350-g3-black.webp",
             alt: "REEFER MAX Peninsula 350 G3 with black cabinet",
@@ -817,6 +957,11 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/p500_w-doors.webp",
+            alt: "REEFER MAX Peninsula 500 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-peninsula-500-g3-white.webp",
             alt: "REEFER MAX Peninsula 500 G3 with white cabinet",
             label: "Standard",
@@ -830,6 +975,11 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/p500_b-doors_no-label.webp",
+            alt: "REEFER MAX Peninsula 500 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-peninsula-500-g3-black.webp",
             alt: "REEFER MAX Peninsula 500 G3 with black cabinet",
@@ -863,6 +1013,11 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/ps-700_w-doors.webp",
+            alt: "REEFER MAX Peninsula S-700 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-s-peninsula-700-g3-white.webp",
             alt: "REEFER MAX Peninsula S-700 G3 with white cabinet",
             label: "Standard",
@@ -876,6 +1031,11 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/ps-700_b-doors_no-label.webp",
+            alt: "REEFER MAX Peninsula S-700 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-s-peninsula-700-g3-black.webp",
             alt: "REEFER MAX Peninsula S-700 G3 with black cabinet",
@@ -906,6 +1066,11 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
       white: {
         images: [
           {
+            src: "/assets/aquariums/reefer-g3/white-doors/ps-950_w-doors.webp",
+            alt: "REEFER MAX Peninsula S-950 G3 with closed white doors",
+            label: "With Doors",
+          },
+          {
             src: "/assets/aquariums/reefer-max-s-peninsula-950-g3-white.webp",
             alt: "REEFER MAX Peninsula S-950 G3 with white cabinet",
             label: "Standard",
@@ -919,6 +1084,11 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
       },
       black: {
         images: [
+          {
+            src: "/assets/aquariums/reefer-g3/black-doors/ps-950_b-doors_no-label.webp",
+            alt: "REEFER MAX Peninsula S-950 G3 with closed black doors",
+            label: "With Doors",
+          },
           {
             src: "/assets/aquariums/reefer-max-s-peninsula-950-g3-black.webp",
             alt: "REEFER MAX Peninsula S-950 G3 with black cabinet",
