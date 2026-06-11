@@ -168,7 +168,7 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
   }, [clearTimer]);
 
   const introLines = useMemo(
-    () => [COMPANY_INTRO.paragraphs[0], COMPANY_INTRO.paragraphs[1], COMPANY_INTRO.paragraphs[2]].filter(Boolean),
+    () => COMPANY_INTRO.paragraphs.filter(Boolean),
     []
   );
 
