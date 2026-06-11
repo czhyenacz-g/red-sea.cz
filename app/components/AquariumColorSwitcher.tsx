@@ -66,6 +66,8 @@ export function AquariumColorSwitcher({
   const hasImage = Boolean(selectedImage);
   const imageSrc = selectedImage?.src ?? null;
   const imageFilename = selectedImage?.src.split("/").pop() ?? "";
+  const isDeluxeImage = selectedImage?.label === "Deluxe / With Doors";
+  const deluxeImageIndex = selected.images.findIndex((img) => img.label === "Deluxe / With Doors");
   const volumeLabel = product.volume ?? product.specs.find((spec) => spec.label.toLowerCase() === "volume")?.value ?? null;
 
   useEffect(() => {
@@ -173,6 +175,32 @@ export function AquariumColorSwitcher({
             </div>
           ) : null}
 
+          {deluxeImageIndex !== -1 ? (
+            <div className={`rounded-2xl border px-4 py-3 ${theme.panel}`}>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-400">Deluxe edice</p>
+              <p className={`mt-1 text-sm leading-5 ${theme.muted}`}>
+                Tento model je dostupný také v Deluxe edici s namontovanými světly a rameny.
+              </p>
+              {galleryIndex !== deluxeImageIndex ? (
+                <button
+                  type="button"
+                  onClick={() => setGalleryIndex(deluxeImageIndex)}
+                  className="mt-2 text-sm font-semibold text-amber-400 hover:underline"
+                >
+                  Zobrazit Deluxe edici →
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setGalleryIndex(0)}
+                  className="mt-2 text-sm font-semibold text-amber-400 hover:underline"
+                >
+                  ← Zpět na Standard
+                </button>
+              )}
+            </div>
+          ) : null}
+
           {/*
           <div className={`rounded-3xl border p-4 md:p-5 ${theme.panel}`}>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-current/60">Vybraný model</p>
@@ -194,6 +222,11 @@ export function AquariumColorSwitcher({
           <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/10 via-transparent to-transparent blur-2xl" />
           <div className={`relative overflow-hidden rounded-[2rem] border p-3 shadow-2xl ${theme.panel} ${theme.imageFrame}`}>
             <div className={`relative aspect-[10/9] overflow-hidden rounded-[1.5rem] ${theme.imageBackdrop}`}>
+              {isDeluxeImage ? (
+                <div className="absolute bottom-4 left-4 z-20 rounded-full bg-amber-400 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-950 shadow-lg">
+                  Deluxe Edition
+                </div>
+              ) : null}
               {hasImage && imageSrc ? (
                 <DelayedImageTooltip label={imageFilename || product.name} className="absolute inset-0">
                   <>

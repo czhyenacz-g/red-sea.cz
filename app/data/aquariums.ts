@@ -504,7 +504,7 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
           },
           {
             src: "/assets/aquariums/reefer-525-g3-deluxe-white-incl-2-x-rl170-arms-doors.webp",
-            alt: "REEFER MAX 525 G3 deluxe with doors and white cabinet",
+            alt: "REEFER MAX 525 G3 Deluxe Edition with white cabinet and doors",
             label: "Deluxe / With Doors",
           },
         ],
@@ -528,7 +528,7 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
           },
           {
             src: "/assets/aquariums/reefer-525-g3-deluxe-black-incl-2-x-rl170-arms-doors.webp",
-            alt: "REEFER MAX 525 G3 deluxe with doors and black cabinet",
+            alt: "REEFER MAX 525 G3 Deluxe Edition with black cabinet and doors",
             label: "Deluxe / With Doors",
           },
         ],
@@ -567,7 +567,7 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
           },
           {
             src: "/assets/aquariums/reefer-625-g3-deluxe-white-incl-3-x-rl115-arms-doors.webp",
-            alt: "REEFER MAX 625 G3 deluxe with doors and white cabinet",
+            alt: "REEFER MAX 625 G3 Deluxe Edition with white cabinet and doors",
             label: "Deluxe / With Doors",
           },
         ],
@@ -591,7 +591,7 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
           },
           {
             src: "/assets/aquariums/reefer-625-g3-deluxe-black-incl-3-x-rl115-arms-doors.webp",
-            alt: "REEFER MAX 625 G3 deluxe with doors and black cabinet",
+            alt: "REEFER MAX 625 G3 Deluxe Edition with black cabinet and doors",
             label: "Deluxe / With Doors",
           },
         ],
@@ -628,16 +628,15 @@ const reefMaxG3_180Products: AquariumProduct[] = [
             sourceNote: "Standard source asset from RMAX 750 G3_White.png.",
           },
           {
-            src: "/assets/aquariums/reefer-max-750-g3-white-deluxe-doors.webp",
-            alt: "REEFER MAX 750 G3 deluxe with doors and white cabinet",
-            label: "Deluxe / With Doors",
-            sourceNote: "Source asset from REEFER 750 G3 Deluxe - White (incl. 4 X RL115 & arms)_Doors.png.",
-          },
-          {
             src: "/assets/aquariums/reefer-max-750-g3-white-without-doors.webp",
             alt: "REEFER MAX 750 G3 without doors and white cabinet",
             label: "Without Doors",
             sourceNote: "Source asset from 750 G3_W.png.",
+          },
+          {
+            src: "/assets/aquariums/reefer-max-750-g3-white-deluxe-doors.webp",
+            alt: "REEFER MAX 750 G3 Deluxe Edition with white cabinet and doors",
+            label: "Deluxe / With Doors",
           },
         ],
       },
@@ -655,16 +654,15 @@ const reefMaxG3_180Products: AquariumProduct[] = [
             sourceNote: "Standard source asset from RMAX 750 G3_Black.png.",
           },
           {
-            src: "/assets/aquariums/reefer-max-750-g3-black-deluxe-doors.webp",
-            alt: "REEFER MAX 750 G3 deluxe with doors and black cabinet",
-            label: "Deluxe / With Doors",
-            sourceNote: "Source asset from REEFER 750 G3 Deluxe - Black (incl. 4 X RL115 & arms)_Doors.png.",
-          },
-          {
             src: "/assets/aquariums/reefer-max-750-g3-black-without-doors.webp",
             alt: "REEFER MAX 750 G3 without doors and black cabinet",
             label: "Without Doors",
             sourceNote: "Source asset from 750 G3_B.png.",
+          },
+          {
+            src: "/assets/aquariums/reefer-max-750-g3-black-deluxe-doors.webp",
+            alt: "REEFER MAX 750 G3 Deluxe Edition with black cabinet and doors",
+            label: "Deluxe / With Doors",
           },
         ],
       },
