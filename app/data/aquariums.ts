@@ -969,6 +969,11 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
             alt: "REEFER MAX Peninsula 500 G3 without doors and white cabinet",
             label: "Without Doors",
           },
+          {
+            src: "/assets/aquariums/reefer-max-peninsula-500-g3-white-deluxe-doors.webp",
+            alt: "REEFER MAX Peninsula 500 G3 Deluxe Edition with white cabinet and doors",
+            label: "Deluxe / With Doors",
+          },
         ],
       },
       black: {
@@ -987,6 +992,11 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
             src: "/assets/aquariums/p500-g3-b.webp",
             alt: "REEFER MAX Peninsula 500 G3 without doors and black cabinet",
             label: "Without Doors",
+          },
+          {
+            src: "/assets/aquariums/reefer-max-peninsula-500-g3-black-deluxe-doors.webp",
+            alt: "REEFER MAX Peninsula 500 G3 Deluxe Edition with black cabinet and doors",
+            label: "Deluxe / With Doors",
           },
         ],
       },
