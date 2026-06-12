@@ -228,7 +228,7 @@ export function HomeIntroOverlay({ children }: HomeIntroOverlayProps) {
                 {mode === "auto" ? (
                   <>
                     <div className="flex items-center justify-between text-xs text-slate-300">
-                      <span>Zavře se za {Math.max(1, Math.ceil(remainingMs / 1000))} s</span>
+                      <span>Zavře se za {Math.max(1, Math.ceil(remainingMs / 1000))} s <span className="opacity-50">(nechte kurzor mimo text)</span></span>
                     </div>
                     <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
                       <div
