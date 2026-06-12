@@ -7,7 +7,7 @@ import { COMPANY_INTRO } from "../data/company";
 
 const STORAGE_KEY = "redsea-home-intro-dismissed";
 const SHOWN_KEY = "redsea-home-intro-shown";
-const DURATION_MS = 6000;
+const DURATION_MS = 20000;
 
 type HomeIntroOverlayProps = {
   children: ReactNode;

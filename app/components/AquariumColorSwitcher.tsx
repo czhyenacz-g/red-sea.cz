@@ -179,7 +179,7 @@ export function AquariumColorSwitcher({
             <div className={`rounded-2xl border px-4 py-3 ${theme.panel}`}>
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-400">Deluxe edice</p>
               <p className={`mt-1 text-sm leading-5 ${theme.muted}`}>
-                Tento model je dostupný také v Deluxe edici s namontovanými světly a rameny.
+                Tento model je dostupný také v Deluxe edici — světla a instalační ramena jsou součástí dodávky.
               </p>
               {galleryIndex !== deluxeImageIndex ? (
                 <button
