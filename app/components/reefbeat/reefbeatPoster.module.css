@@ -1,0 +1,520 @@
+/* ReefBeat interaktivní plakát
+ *
+ * Vrstvy (z-index):
+ *   background 0 · connections 1 · products 2 · active product 10 · tooltip 20 · edit panel 30
+ *
+ * Aktivní produkt řídí React stav (hover / focus / tap), ne čisté :hover —
+ * poster dostane [data-active], aktivní produkt [data-active="true"].
+ */
+
+.section {
+  --rb-cyan: 42, 210, 255;
+  --rb-blue: 0, 140, 255;
+  --rb-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --rb-duration: 240ms;
+
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 45%, rgba(0, 90, 200, 0.18), transparent 70%),
+    linear-gradient(180deg, #02060f 0%, #040b1a 55%, #02060f 100%);
+  color: #fff;
+  padding: 28px 0 40px;
+}
+
+.intro {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 16px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px 32px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgb(var(--rb-cyan));
+}
+
+.title {
+  margin-top: 6px;
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.lead {
+  margin-top: 8px;
+  max-width: 44rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(226, 238, 255, 0.72);
+}
+
+.hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: rgba(226, 238, 255, 0.6);
+}
+
+.hint::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgb(var(--rb-cyan));
+  box-shadow: 0 0 10px rgba(var(--rb-cyan), 0.8);
+}
+
+.hintMobile {
+  display: none;
+}
+
+.stage {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ---------- Poster container = zdroj souřadnic ---------- */
+
+.poster {
+  --poster-h: var(--poster-h-d);
+  --bg-top: var(--bg-top-d);
+
+  position: relative;
+  width: 100%;
+  aspect-ratio: 100 / var(--poster-h);
+  border-radius: 18px;
+  box-shadow:
+    0 0 0 1px rgba(var(--rb-cyan), 0.12),
+    0 40px 120px -40px rgba(var(--rb-blue), 0.45);
+  isolation: isolate;
+  touch-action: manipulation;
+}
+
+.background {
+  position: absolute;
+  left: 0;
+  top: calc(var(--bg-top) / var(--poster-h) * 100%);
+  width: 100%;
+  z-index: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  animation: rbFadeIn 300ms ease-out both;
+  transition: filter var(--rb-duration) var(--rb-ease);
+}
+
+.background img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.poster[data-active] .background {
+  filter: brightness(0.9);
+}
+
+/* ---------- Connections ---------- */
+
+.connections {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.connectionsMobile {
+  display: none;
+}
+
+.line,
+.pulse {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  transition:
+    opacity var(--rb-duration) var(--rb-ease),
+    stroke-width var(--rb-duration) var(--rb-ease);
+}
+
+.line {
+  stroke: rgb(var(--rb-cyan));
+  stroke-width: 1.75;
+  opacity: 0.22;
+}
+
+.pulse {
+  stroke: #d9f7ff;
+  stroke-width: 3;
+  stroke-dasharray: 18 220;
+  opacity: 0;
+}
+
+.line[data-active="true"] {
+  opacity: 1;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 4px rgba(var(--rb-cyan), 0.9));
+}
+
+.pulse[data-active="true"] {
+  opacity: 0.85;
+  animation: rbPulse 1.6s linear infinite;
+}
+
+/* ---------- Products ---------- */
+
+.product {
+  --x: var(--x-d);
+  --y: var(--y-d);
+  --w: var(--w-d);
+
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  width: calc(var(--w) * 1%);
+  translate: -50% -50%;
+  z-index: 2;
+  display: block;
+  cursor: pointer;
+  border-radius: 12px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  animation: rbProductIn 420ms var(--rb-ease) both;
+  animation-delay: calc(150ms + var(--i) * 65ms);
+}
+
+.product[data-active="true"] {
+  z-index: 10;
+}
+
+/* jemná záře za aktivním produktem — CSS vrstva, ne součást PNG */
+.product::before {
+  content: "";
+  position: absolute;
+  inset: -22%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--rb-cyan), 0.22), transparent 65%);
+  opacity: 0;
+  transition: opacity var(--rb-duration) var(--rb-ease);
+  pointer-events: none;
+}
+
+.product[data-active="true"]::before {
+  opacity: 1;
+}
+
+.visual {
+  display: block;
+  transform: translate3d(var(--px, 0px), var(--py, 0px), 0) scale(1);
+  transform-origin: 50% 60%;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45));
+  transition:
+    transform var(--rb-duration) var(--rb-ease),
+    filter var(--rb-duration) var(--rb-ease),
+    opacity var(--rb-duration) var(--rb-ease);
+  will-change: transform;
+}
+
+.visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.product[data-active="true"] .visual {
+  transform: translate3d(var(--px, 0px), calc(var(--py, 0px) - 6px), 0) scale(1.1);
+  filter: brightness(1.08) drop-shadow(0 0 12px rgba(39, 210, 255, 0.65)) drop-shadow(0 0 26px rgba(0, 140, 255, 0.35));
+}
+
+.poster[data-active] .product:not([data-active="true"]) .visual {
+  opacity: 0.55;
+  filter: brightness(0.72) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45));
+}
+
+.product:focus-visible .visual {
+  outline: 2px solid rgba(var(--rb-cyan), 0.9);
+  outline-offset: 6px;
+  border-radius: 10px;
+}
+
+/* ---------- Tooltip ---------- */
+
+.tooltip {
+  position: absolute;
+  z-index: 20;
+  width: max-content;
+  max-width: min(290px, calc(100% - 16px));
+  padding: 14px 16px 13px;
+  border-radius: 12px;
+  background: rgba(4, 12, 28, 0.82);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  backdrop-filter: blur(12px) saturate(1.3);
+  border: 1px solid rgba(var(--rb-cyan), 0.45);
+  box-shadow:
+    0 0 18px rgba(var(--rb-cyan), 0.18),
+    0 18px 40px -12px rgba(0, 0, 0, 0.7);
+  color: #fff;
+  animation: rbTooltipIn 200ms var(--rb-ease) both;
+}
+
+.tooltip[data-measuring="true"] {
+  visibility: hidden;
+  animation: none;
+}
+
+.tooltipName {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.tooltipText {
+  margin-top: 4px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(226, 238, 255, 0.82);
+}
+
+.tooltipCta {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgb(var(--rb-cyan));
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.tooltipCta:hover,
+.tooltipCta:focus-visible {
+  color: #9ee9ff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Dev edit mode ---------- */
+
+.editing .product {
+  outline: 1px dashed rgba(var(--rb-cyan), 0.7);
+  cursor: grab;
+  touch-action: none;
+}
+
+.editing .product:active {
+  cursor: grabbing;
+}
+
+.editLabel {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  translate: -50% -4px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.8);
+  font: 11px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #9ee9ff;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.editPanel {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 60;
+  width: min(360px, calc(100vw - 24px));
+  max-height: min(70vh, 620px);
+  overflow: auto;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(3, 8, 20, 0.95);
+  border: 1px solid rgba(var(--rb-cyan), 0.4);
+  font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #dbeafe;
+}
+
+.editPanel h3 {
+  font-weight: 700;
+  color: rgb(var(--rb-cyan));
+  margin-bottom: 6px;
+}
+
+.editRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.editButtons {
+  display: flex;
+  gap: 4px;
+}
+
+.editPanel button {
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(var(--rb-cyan), 0.4);
+  background: rgba(var(--rb-cyan), 0.08);
+  color: #fff;
+  cursor: pointer;
+}
+
+.editPanel button:hover {
+  background: rgba(var(--rb-cyan), 0.2);
+}
+
+.editPanel textarea {
+  width: 100%;
+  height: 150px;
+  margin-top: 8px;
+  padding: 6px;
+  border-radius: 6px;
+  background: #000;
+  color: #9ee9ff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font: inherit;
+  resize: vertical;
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes rbFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rbProductIn {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes rbTooltipIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rbPulse {
+  from {
+    stroke-dashoffset: 238;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------- Mobile (< 900 px) ---------- */
+
+@media (max-width: 899.98px) {
+  .section {
+    padding: 20px 0 28px;
+  }
+
+  .poster {
+    --poster-h: var(--poster-h-m);
+    --bg-top: var(--bg-top-m);
+    border-radius: 14px;
+  }
+
+  .background {
+    border-radius: 10px;
+  }
+
+  .product {
+    --x: var(--x-m);
+    --y: var(--y-m);
+    --w: var(--w-m);
+  }
+
+  .product[data-active="true"] .visual {
+    transform: translate3d(0, -4px, 0) scale(1.08);
+  }
+
+  .connectionsDesktop {
+    display: none;
+  }
+
+  .connectionsMobile {
+    display: block;
+  }
+}
+
+@media (hover: none) {
+  .hintDesktop {
+    display: none;
+  }
+
+  .hintMobile {
+    display: inline-flex;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .section {
+    --rb-duration: 1ms;
+  }
+
+  .background,
+  .product,
+  .tooltip {
+    animation: none;
+  }
+
+  .pulse[data-active="true"] {
+    animation: none;
+    opacity: 0;
+  }
+
+  .product[data-active="true"] .visual {
+    transform: none;
+  }
+}

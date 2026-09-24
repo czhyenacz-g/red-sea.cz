@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { ProductImageLightbox } from "../components/ProductImageLightbox";
+import { ReefBeatPoster } from "../components/reefbeat/ReefBeatPoster";
 import { REEFBEAT_APP_SCREENSHOTS, REEFBEAT_HERO_IMAGE, REEFBEAT_INTRO, REEFBEAT_PRODUCTS, type ReefbeatImage } from "../data/reefbeatProducts";
 
 function ProductCard({
@@ -75,11 +76,12 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-[#f6f2ea]">
       <Header />
+      <ReefBeatPoster />
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <section className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Inteligentní technická zařízení</p>
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Inteligentní technická zařízení</h1>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Inteligentní technická zařízení</h2>
             <p className="mt-5 text-base leading-7 text-slate-600">{REEFBEAT_INTRO}</p>
           </div>
 
