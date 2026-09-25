@@ -104,6 +104,8 @@
     0 40px 120px -40px rgba(var(--rb-blue), 0.45);
   isolation: isolate;
   touch-action: manipulation;
+  /* cqw jednotky → písmo category karty se škáluje s posterem */
+  container-type: inline-size;
 }
 
 .background {
@@ -245,6 +247,83 @@
 .product[data-active="true"] .visual {
   transform: translate3d(var(--px, 0px), calc(var(--py, 0px) - 6px), 0) scale(1.1);
   filter: brightness(1.08) drop-shadow(0 0 12px rgba(39, 210, 255, 0.65)) drop-shadow(0 0 26px rgba(0, 140, 255, 0.35));
+}
+
+/* ---------- Category karta (type: "category") ---------- */
+
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45em;
+  padding: 1.05em 1.1em 1.15em;
+  border-radius: 0.9em;
+  /* velikost písma podle šířky karty (var(--w) = % šířky posteru) */
+  font-size: clamp(9px, calc(var(--w) * 0.068cqw), 16px);
+  text-align: left;
+  color: #fff;
+  /* dost kryté, aby neprosvítal kruh a čára zapečené v back.png */
+  background: linear-gradient(160deg, rgba(8, 26, 52, 0.86), rgba(3, 10, 24, 0.9));
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(var(--rb-cyan), 0.32);
+  box-shadow:
+    0 0 1.4em rgba(var(--rb-blue), 0.18),
+    inset 0 0 1.2em rgba(var(--rb-cyan), 0.05);
+  transition:
+    border-color var(--rb-duration) var(--rb-ease),
+    box-shadow var(--rb-duration) var(--rb-ease);
+}
+
+.categoryIcon {
+  width: 2.5em;
+  height: auto;
+  margin-bottom: 0.15em;
+  stroke: rgb(var(--rb-cyan));
+  filter: drop-shadow(0 0 0.35em rgba(var(--rb-cyan), 0.45));
+}
+
+.categoryBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45em;
+}
+
+.categoryTitle {
+  font-size: 1.12em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.categoryText {
+  font-size: 0.84em;
+  line-height: 1.45;
+  color: rgba(226, 238, 255, 0.74);
+}
+
+/* stejné chování jako produkty, jen decentnější scale a glow — karta nemá přebít techniku */
+.product[data-type="category"][data-active="true"] .visual {
+  transform: translate3d(var(--px, 0px), calc(var(--py, 0px) - 4px), 0) scale(1.07);
+  filter: brightness(1.05) drop-shadow(0 0 10px rgba(39, 210, 255, 0.35));
+}
+
+/* široká karta: glow jen těsně kolem, jinak by (i neviditelný) rozšiřoval stránku do strany */
+.product[data-type="category"]::before {
+  inset: -14% -5%;
+}
+
+/* ztlumení karty jasem, ne průhledností — přes kartu nesmí prosvítat kruh z back.png */
+.poster[data-active] .product[data-type="category"]:not([data-active="true"]) .visual {
+  opacity: 1;
+  filter: brightness(0.62) saturate(0.8);
+}
+
+.product[data-type="category"][data-active="true"] .categoryCard {
+  border-color: rgba(var(--rb-cyan), 0.7);
+  box-shadow:
+    0 0 1.8em rgba(var(--rb-blue), 0.35),
+    inset 0 0 1.2em rgba(var(--rb-cyan), 0.08);
 }
 
 .poster[data-active] .product:not([data-active="true"]) .visual {
@@ -607,6 +686,19 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  /* mobil: category karta jako široký pruh pod produkty — ikona vlevo, text vpravo */
+  .categoryCard {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.9em;
+    font-size: clamp(11px, calc(var(--w) * 0.068cqw), 14px);
+  }
+
+  .categoryIcon {
+    flex: none;
+    margin-bottom: 0;
+  }
+
   /* mobil: vždy obrázek ↓ text */
   .detail[data-reversed="true"] .detailMedia {
     order: 0;
@@ -649,7 +741,8 @@
     opacity: 0;
   }
 
-  .product[data-active="true"] .visual {
+  .product[data-active="true"] .visual,
+  .product[data-type="category"][data-active="true"] .visual {
     transform: none;
   }
 }

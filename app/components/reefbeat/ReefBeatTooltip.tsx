@@ -1,11 +1,11 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
-import type { ReefBeatPlacement, ReefBeatPosterProduct } from "../../data/reefbeatPoster";
+import type { ReefBeatPlacement, ReefBeatPosterItem } from "../../data/reefbeatPoster";
 import styles from "./reefbeatPoster.module.css";
 
 type Props = {
-  product: ReefBeatPosterProduct;
+  product: ReefBeatPosterItem;
   placement: ReefBeatPlacement;
   ctaLabel: string;
   anchorEl: HTMLElement | null;
@@ -14,7 +14,7 @@ type Props = {
   layoutKey: string;
   onPointerEnter: () => void;
   onPointerLeave: () => void;
-  /** klik na CTA → poster zruší aktivní stav (scroll na sekci řeší nativní anchor) */
+  /** klik na CTA produktu → poster zruší aktivní stav (scroll na sekci řeší nativní anchor) */
   onNavigate: () => void;
 };
 
@@ -98,10 +98,16 @@ export function ReefBeatTooltip({
     >
       <p className={styles.tooltipName}>{product.name}</p>
       <p className={styles.tooltipText}>{product.description}</p>
-      <a className={styles.tooltipCta} href={`#${product.targetId}`} onClick={onNavigate}>
-        {ctaLabel}
-        <span className={styles.srOnly}> – detail {product.name}</span>
-      </a>
+      {product.type === "category" ? (
+        <a className={styles.tooltipCta} href={product.href}>
+          {product.cta}
+        </a>
+      ) : (
+        <a className={styles.tooltipCta} href={`#${product.targetId}`} onClick={onNavigate}>
+          {ctaLabel}
+          <span className={styles.srOnly}> – detail {product.name}</span>
+        </a>
+      )}
     </div>
   );
 }

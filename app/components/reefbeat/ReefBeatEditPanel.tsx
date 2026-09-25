@@ -3,19 +3,19 @@
 // Development-only layout editor pro /reefbeat?edit=1 — v produkci se nenačítá.
 
 import { useState } from "react";
-import type { ReefBeatBreakpoint, ReefBeatPosition, ReefBeatPosterProduct } from "../../data/reefbeatPoster";
+import type { ReefBeatBreakpoint, ReefBeatPosition, ReefBeatPosterItem } from "../../data/reefbeatPoster";
 import styles from "./reefbeatPoster.module.css";
 
 type Props = {
   breakpoint: ReefBeatBreakpoint;
-  products: ReefBeatPosterProduct[];
+  products: ReefBeatPosterItem[];
   positions: Record<string, Record<ReefBeatBreakpoint, ReefBeatPosition>>;
   onResize: (id: string, delta: number) => void;
   onReset: () => void;
 };
 
 export function formatPositionsJson(
-  products: ReefBeatPosterProduct[],
+  products: ReefBeatPosterItem[],
   positions: Record<string, Record<ReefBeatBreakpoint, ReefBeatPosition>>
 ) {
   const out: Record<string, Record<ReefBeatBreakpoint, ReefBeatPosition>> = {};

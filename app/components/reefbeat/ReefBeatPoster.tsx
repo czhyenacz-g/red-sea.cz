@@ -17,12 +17,12 @@ import {
   REEFBEAT_POSTER_BACKGROUND,
   REEFBEAT_POSTER_BREAKPOINT,
   REEFBEAT_POSTER_LAYOUTS,
-  REEFBEAT_POSTER_PRODUCTS,
+  REEFBEAT_POSTER_ITEMS,
   REEFBEAT_POSTER_SETTINGS,
   REEFBEAT_POSTER_TEXT,
   type ReefBeatBreakpoint,
   type ReefBeatPosition,
-  type ReefBeatPosterProduct,
+  type ReefBeatPosterItem,
 } from "../../data/reefbeatPoster";
 import { ReefBeatConnections } from "./ReefBeatConnections";
 import { ReefBeatProduct } from "./ReefBeatProduct";
@@ -45,7 +45,7 @@ const PARALLAX_MAX = 4;
 
 function initialPositions(): Positions {
   return Object.fromEntries(
-    REEFBEAT_POSTER_PRODUCTS.map((p) => [p.id, { desktop: { ...p.position.desktop }, mobile: { ...p.position.mobile } }])
+    REEFBEAT_POSTER_ITEMS.map((p) => [p.id, { desktop: { ...p.position.desktop }, mobile: { ...p.position.mobile } }])
   );
 }
 
@@ -156,7 +156,7 @@ export function ReefBeatPoster() {
     el.style.removeProperty("--py");
   };
 
-  const handlersFor = (product: ReefBeatPosterProduct) => {
+  const handlersFor = (product: ReefBeatPosterItem) => {
     const id = product.id;
     return {
       onPointerEnter: (e: ReactPointerEvent<HTMLAnchorElement>) => {
@@ -215,8 +215,9 @@ export function ReefBeatPoster() {
           setActiveId(id);
           return;
         }
-        // myš / klávesnice: href="#targetId" udělá scroll + hash, my jen uklidíme stav
-        handleNavigate(product.targetId, NAVIGATE_HIGHLIGHT);
+        // myš / klávesnice: href="#targetId" udělá scroll + hash, my jen uklidíme stav;
+        // category karta vede na jinou stránku, tam není co uklízet
+        if (product.type === "product") handleNavigate(product.targetId, NAVIGATE_HIGHLIGHT);
       },
       onFocus: () => {
         if (Date.now() < hoverLockedUntil.current) return;
@@ -235,7 +236,7 @@ export function ReefBeatPoster() {
     drag.current = null;
   };
 
-  const activeProduct = REEFBEAT_POSTER_PRODUCTS.find((p) => p.id === activeId) ?? null;
+  const activeProduct = REEFBEAT_POSTER_ITEMS.find((p) => p.id === activeId) ?? null;
   const activePos = activeProduct ? positions[activeProduct.id][breakpoint] : null;
 
   const posterStyle = {
@@ -285,14 +286,14 @@ export function ReefBeatPoster() {
                   key={bp}
                   breakpoint={bp}
                   layout={REEFBEAT_POSTER_LAYOUTS[bp]}
-                  products={REEFBEAT_POSTER_PRODUCTS}
+                  products={REEFBEAT_POSTER_ITEMS}
                   positions={positions}
                   activeId={activeId}
                 />
               ))
             : null}
 
-          {REEFBEAT_POSTER_PRODUCTS.map((product, index) => {
+          {REEFBEAT_POSTER_ITEMS.map((product, index) => {
             const pos = positions[product.id][breakpoint];
             return (
               <ReefBeatProduct
@@ -322,7 +323,7 @@ export function ReefBeatPoster() {
               layoutKey={`${breakpoint}:${activePos.x}:${activePos.y}:${activePos.width}`}
               onPointerEnter={cancelLeave}
               onPointerLeave={scheduleLeave}
-              onNavigate={() => handleNavigate(activeProduct.targetId, 0)}
+              onNavigate={() => activeProduct.type === "product" && handleNavigate(activeProduct.targetId, 0)}
             />
           ) : null}
         </div>
@@ -331,7 +332,7 @@ export function ReefBeatPoster() {
       {editing && ReefBeatEditPanel ? (
         <ReefBeatEditPanel
           breakpoint={breakpoint}
-          products={REEFBEAT_POSTER_PRODUCTS}
+          products={REEFBEAT_POSTER_ITEMS}
           positions={positions}
           onResize={resize}
           onReset={() => setPositions(initialPositions())}

@@ -3,21 +3,21 @@ import {
   type ReefBeatBreakpoint,
   type ReefBeatLayout,
   type ReefBeatPosition,
-  type ReefBeatPosterProduct,
+  type ReefBeatPosterItem,
 } from "../../data/reefbeatPoster";
 import styles from "./reefbeatPoster.module.css";
 
 type Props = {
   breakpoint: ReefBeatBreakpoint;
   layout: ReefBeatLayout;
-  products: ReefBeatPosterProduct[];
+  products: ReefBeatPosterItem[];
   positions: Record<string, Record<ReefBeatBreakpoint, ReefBeatPosition>>;
   activeId: string | null;
 };
 
 // Souřadnice SVG: šířka = 100, výška = layout.height (stejné jednotky jako poster container).
 function buildPath(
-  product: ReefBeatPosterProduct,
+  product: ReefBeatPosterItem,
   position: ReefBeatPosition,
   layout: ReefBeatLayout,
   breakpoint: ReefBeatBreakpoint
@@ -47,6 +47,7 @@ export function ReefBeatConnections({ breakpoint, layout, products, positions, a
       focusable="false"
     >
       {products.map((product) => {
+        if (product.hideConnectionOn?.includes(breakpoint)) return null;
         const d = buildPath(product, positions[product.id][breakpoint], layout, breakpoint);
         const active = product.id === activeId;
         return (
