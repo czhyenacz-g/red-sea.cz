@@ -40,9 +40,7 @@ export const ReefBeatProduct = forwardRef<HTMLAnchorElement, Props>(function Ree
   return (
     <a
       ref={ref}
-      href={product.url}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={`#${product.targetId}`}
       className={styles.product}
       style={style}
       data-reefbeat-product={product.id}
@@ -64,7 +62,7 @@ export const ReefBeatProduct = forwardRef<HTMLAnchorElement, Props>(function Ree
         />
       </span>
       <span id={descriptionId} className={styles.srOnly}>
-        {product.description} Odkaz vede na oficiální stránku Red Sea.
+        {product.description} Odkaz přejde na detail produktu níže na stránce.
       </span>
       {editing && editLabel ? <span className={styles.editLabel}>{editLabel}</span> : null}
     </a>

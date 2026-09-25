@@ -22,6 +22,7 @@ import {
   REEFBEAT_POSTER_TEXT,
   type ReefBeatBreakpoint,
   type ReefBeatPosition,
+  type ReefBeatPosterProduct,
 } from "../../data/reefbeatPoster";
 import { ReefBeatConnections } from "./ReefBeatConnections";
 import { ReefBeatProduct } from "./ReefBeatProduct";
@@ -36,6 +37,10 @@ const IS_DEV = process.env.NODE_ENV === "development";
 const ReefBeatEditPanel = IS_DEV ? dynamic(() => import("./ReefBeatEditPanel"), { ssr: false }) : null;
 
 const LEAVE_DELAY = 180;
+// po kliku na interní odkaz: jak dlouho ještě nechat produkt zvýrazněný a jak dlouho ignorovat hover
+// (během smooth scrollu jinak produkty „projíždějí“ pod kurzorem a aktivovaly by se)
+const NAVIGATE_HIGHLIGHT = 280;
+const NAVIGATE_HOVER_LOCK = 1200;
 const PARALLAX_MAX = 4;
 
 function initialPositions(): Positions {
@@ -71,6 +76,7 @@ export function ReefBeatPoster() {
   const productRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const leaveTimer = useRef<number | undefined>(undefined);
   const lastPointerType = useRef<string | null>(null);
+  const hoverLockedUntil = useRef(0);
   const drag = useRef<{ id: string; startX: number; startY: number; origin: ReefBeatPosition; moved: boolean } | null>(null);
 
   // Edit mode: pouze development + ?edit=1
@@ -86,6 +92,17 @@ export function ReefBeatPoster() {
   }, []);
 
   useEffect(() => () => window.clearTimeout(leaveTimer.current), []);
+
+  // Klik na produkt / CTA → nativní anchor scroll na #targetId; aktivní stav jen krátce dobliká.
+  // Fokus se přesune na cílovou sekci (tabIndex -1), aby klávesnice pokračovala od detailu.
+  const handleNavigate = useCallback((targetId: string, delay: number) => {
+    hoverLockedUntil.current = Date.now() + NAVIGATE_HOVER_LOCK;
+    window.clearTimeout(leaveTimer.current);
+    leaveTimer.current = window.setTimeout(() => {
+      setActiveId(null);
+      document.getElementById(targetId)?.focus({ preventScroll: true });
+    }, delay);
+  }, []);
 
   // Tap / klik mimo produkt a tooltip → zavřít; Escape → zavřít
   useEffect(() => {
@@ -139,73 +156,80 @@ export function ReefBeatPoster() {
     el.style.removeProperty("--py");
   };
 
-  const handlersFor = (id: string) => ({
-    onPointerEnter: (e: ReactPointerEvent<HTMLAnchorElement>) => {
-      if (e.pointerType !== "mouse") return;
-      cancelLeave();
-      setActiveId(id);
-    },
-    onPointerLeave: (e: ReactPointerEvent<HTMLAnchorElement>) => {
-      resetParallax(e.currentTarget);
-      if (e.pointerType !== "mouse" || drag.current) return;
-      scheduleLeave();
-    },
-    onPointerDown: (e: ReactPointerEvent<HTMLAnchorElement>) => {
-      lastPointerType.current = e.pointerType;
-      if (!editing || e.button !== 0) return;
-      e.preventDefault();
-      try {
-        e.currentTarget.setPointerCapture(e.pointerId);
-      } catch {
-        // pointer už nemusí být aktivní — drag funguje i bez capture
-      }
-      drag.current = { id, startX: e.clientX, startY: e.clientY, origin: positions[id][breakpoint], moved: false };
-      setActiveId(id);
-    },
-    onPointerMove: (e: ReactPointerEvent<HTMLAnchorElement>) => {
-      const d = drag.current;
-      const poster = posterRef.current;
-      if (editing && d && d.id === id && poster) {
-        const rect = poster.getBoundingClientRect();
-        const dx = ((e.clientX - d.startX) / rect.width) * 100;
-        const dy = ((e.clientY - d.startY) / rect.height) * 100;
-        if (Math.abs(dx) + Math.abs(dy) > 0.1) d.moved = true;
-        updatePosition(id, (p) => ({ ...p, x: round1(d.origin.x + dx), y: round1(d.origin.y + dy) }));
-        return;
-      }
-      // jemný parallax jen pro myš
-      if (editing || reducedMotion || e.pointerType !== "mouse" || activeId !== id) return;
-      const r = e.currentTarget.getBoundingClientRect();
-      const nx = (e.clientX - r.left) / r.width - 0.5;
-      const ny = (e.clientY - r.top) / r.height - 0.5;
-      e.currentTarget.style.setProperty("--px", `${(nx * 2 * PARALLAX_MAX).toFixed(2)}px`);
-      e.currentTarget.style.setProperty("--py", `${(ny * 2 * PARALLAX_MAX).toFixed(2)}px`);
-    },
-    onClick: (e: ReactMouseEvent<HTMLAnchorElement>) => {
-      const pointerType = lastPointerType.current;
-      lastPointerType.current = null;
-      // edit mode: klik nikdy neotevírá odkaz (drag)
-      if (editing) {
-        e.preventDefault();
-        return;
-      }
-      // dotyk: tap jen aktivuje produkt; odkaz otevírá CTA v tooltipu
-      if (pointerType === "touch" || pointerType === "pen") {
-        e.preventDefault();
+  const handlersFor = (product: ReefBeatPosterProduct) => {
+    const id = product.id;
+    return {
+      onPointerEnter: (e: ReactPointerEvent<HTMLAnchorElement>) => {
+        if (e.pointerType !== "mouse" || Date.now() < hoverLockedUntil.current) return;
         cancelLeave();
         setActiveId(id);
-      }
-    },
-    onFocus: () => {
-      cancelLeave();
-      setActiveId(id);
-    },
-    onBlur: (e: ReactFocusEvent<HTMLAnchorElement>) => {
-      const next = e.relatedTarget as Element | null;
-      if (next?.closest("[data-reefbeat-product], [data-reefbeat-tooltip]")) return;
-      setActiveId((current) => (current === id ? null : current));
-    },
-  });
+      },
+      onPointerLeave: (e: ReactPointerEvent<HTMLAnchorElement>) => {
+        resetParallax(e.currentTarget);
+        if (e.pointerType !== "mouse" || drag.current) return;
+        scheduleLeave();
+      },
+      onPointerDown: (e: ReactPointerEvent<HTMLAnchorElement>) => {
+        lastPointerType.current = e.pointerType;
+        if (!editing || e.button !== 0) return;
+        e.preventDefault();
+        try {
+          e.currentTarget.setPointerCapture(e.pointerId);
+        } catch {
+          // pointer už nemusí být aktivní — drag funguje i bez capture
+        }
+        drag.current = { id, startX: e.clientX, startY: e.clientY, origin: positions[id][breakpoint], moved: false };
+        setActiveId(id);
+      },
+      onPointerMove: (e: ReactPointerEvent<HTMLAnchorElement>) => {
+        const d = drag.current;
+        const poster = posterRef.current;
+        if (editing && d && d.id === id && poster) {
+          const rect = poster.getBoundingClientRect();
+          const dx = ((e.clientX - d.startX) / rect.width) * 100;
+          const dy = ((e.clientY - d.startY) / rect.height) * 100;
+          if (Math.abs(dx) + Math.abs(dy) > 0.1) d.moved = true;
+          updatePosition(id, (p) => ({ ...p, x: round1(d.origin.x + dx), y: round1(d.origin.y + dy) }));
+          return;
+        }
+        // jemný parallax jen pro myš
+        if (editing || reducedMotion || e.pointerType !== "mouse" || activeId !== id) return;
+        const r = e.currentTarget.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width - 0.5;
+        const ny = (e.clientY - r.top) / r.height - 0.5;
+        e.currentTarget.style.setProperty("--px", `${(nx * 2 * PARALLAX_MAX).toFixed(2)}px`);
+        e.currentTarget.style.setProperty("--py", `${(ny * 2 * PARALLAX_MAX).toFixed(2)}px`);
+      },
+      onClick: (e: ReactMouseEvent<HTMLAnchorElement>) => {
+        const pointerType = lastPointerType.current;
+        lastPointerType.current = null;
+        // edit mode: klik nikdy neotevírá odkaz (drag)
+        if (editing) {
+          e.preventDefault();
+          return;
+        }
+        // dotyk: tap jen aktivuje produkt; odkaz otevírá CTA v tooltipu
+        if (pointerType === "touch" || pointerType === "pen") {
+          e.preventDefault();
+          cancelLeave();
+          setActiveId(id);
+          return;
+        }
+        // myš / klávesnice: href="#targetId" udělá scroll + hash, my jen uklidíme stav
+        handleNavigate(product.targetId, NAVIGATE_HIGHLIGHT);
+      },
+      onFocus: () => {
+        if (Date.now() < hoverLockedUntil.current) return;
+        cancelLeave();
+        setActiveId(id);
+      },
+      onBlur: (e: ReactFocusEvent<HTMLAnchorElement>) => {
+        const next = e.relatedTarget as Element | null;
+        if (next?.closest("[data-reefbeat-product], [data-reefbeat-tooltip]")) return;
+        setActiveId((current) => (current === id ? null : current));
+      },
+    };
+  };
 
   const endDrag = () => {
     drag.current = null;
@@ -282,7 +306,7 @@ export function ReefBeatPoster() {
                 active={product.id === activeId}
                 editing={editing}
                 editLabel={`x ${pos.x.toFixed(1)} · y ${pos.y.toFixed(1)} · w ${pos.width.toFixed(1)}`}
-                {...handlersFor(product.id)}
+                {...handlersFor(product)}
               />
             );
           })}
@@ -298,6 +322,7 @@ export function ReefBeatPoster() {
               layoutKey={`${breakpoint}:${activePos.x}:${activePos.y}:${activePos.width}`}
               onPointerEnter={cancelLeave}
               onPointerLeave={scheduleLeave}
+              onNavigate={() => handleNavigate(activeProduct.targetId, 0)}
             />
           ) : null}
         </div>

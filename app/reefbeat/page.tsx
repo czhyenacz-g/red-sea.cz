@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { ProductImageLightbox } from "../components/ProductImageLightbox";
+import { ReefBeatDetails } from "../components/reefbeat/ReefBeatDetails";
 import { ReefBeatPoster } from "../components/reefbeat/ReefBeatPoster";
 import { REEFBEAT_APP_SCREENSHOTS, REEFBEAT_HERO_IMAGE, REEFBEAT_INTRO, REEFBEAT_PRODUCTS, type ReefbeatImage } from "../data/reefbeatProducts";
 
@@ -77,6 +78,7 @@ export default function Page() {
     <div className="min-h-screen bg-[#f6f2ea]">
       <Header />
       <ReefBeatPoster />
+      <ReefBeatDetails />
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <section className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div className="max-w-2xl">

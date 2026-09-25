@@ -14,9 +14,11 @@ type Props = {
   layoutKey: string;
   onPointerEnter: () => void;
   onPointerLeave: () => void;
+  /** klik na CTA → poster zruší aktivní stav (scroll na sekci řeší nativní anchor) */
+  onNavigate: () => void;
 };
 
-const GAP = 14;
+const GAP = 18;
 const EDGE = 8;
 
 const FALLBACKS: Record<ReefBeatPlacement, ReefBeatPlacement[]> = {
@@ -39,6 +41,7 @@ export function ReefBeatTooltip({
   layoutKey,
   onPointerEnter,
   onPointerLeave,
+  onNavigate,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState<{ left: number; top: number } | null>(null);
@@ -95,9 +98,9 @@ export function ReefBeatTooltip({
     >
       <p className={styles.tooltipName}>{product.name}</p>
       <p className={styles.tooltipText}>{product.description}</p>
-      <a className={styles.tooltipCta} href={product.url} target="_blank" rel="noopener noreferrer">
+      <a className={styles.tooltipCta} href={`#${product.targetId}`} onClick={onNavigate}>
         {ctaLabel}
-        <span className={styles.srOnly}> – {product.name} na redseafish.com (otevře se v novém okně)</span>
+        <span className={styles.srOnly}> – detail {product.name}</span>
       </a>
     </div>
   );

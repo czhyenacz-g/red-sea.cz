@@ -13,19 +13,24 @@
   --rb-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --rb-duration: 240ms;
 
+  /* Safe area kolem plakátu: místo pro hover scale (~10 %), glow, tooltip a focus ring.
+   * Záměrně bez overflow:hidden — ořez řeší jen samotné pozadí (.background). */
+  --rb-safe-x: clamp(16px, 5vw, 72px);
+  --rb-safe-y: clamp(24px, 4vw, 64px);
+  --rb-max: 1500px;
+
   position: relative;
-  overflow: hidden;
   background:
     radial-gradient(ellipse 70% 55% at 50% 45%, rgba(0, 90, 200, 0.18), transparent 70%),
-    linear-gradient(180deg, #02060f 0%, #040b1a 55%, #02060f 100%);
+    linear-gradient(180deg, #02060f 0%, #040b1a 55%, #050b13 100%);
   color: #fff;
-  padding: 28px 0 40px;
+  padding: var(--rb-safe-y) var(--rb-safe-x);
 }
 
 .intro {
-  max-width: 1600px;
+  max-width: var(--rb-max);
   margin: 0 auto;
-  padding: 0 16px 20px;
+  padding: 0 0 clamp(20px, 2.5vw, 32px);
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -79,9 +84,9 @@
 }
 
 .stage {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0 16px;
+  width: 100%;
+  max-width: var(--rb-max);
+  margin-inline: auto;
 }
 
 /* ---------- Poster container = zdroj souřadnic ---------- */
@@ -320,6 +325,127 @@
   border: 0;
 }
 
+/* ---------- Detailní sekce (cíle #targetId) ---------- */
+
+.details {
+  --rb-cyan: 42, 210, 255;
+  color: #fff;
+}
+
+.detail {
+  /* sticky #site-header má ~95 px + 24 px vzduch */
+  scroll-margin-top: 120px;
+  padding: clamp(48px, 8vw, 112px) clamp(20px, 5vw, 72px);
+  background:
+    radial-gradient(ellipse 55% 70% at 22% 50%, rgba(0, 120, 220, 0.12), transparent 70%),
+    #050b13;
+  outline: none;
+}
+
+.detail:nth-child(even) {
+  background:
+    radial-gradient(ellipse 55% 70% at 78% 50%, rgba(42, 210, 255, 0.08), transparent 70%),
+    #08111c;
+}
+
+.detailInner {
+  max-width: 1200px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 96px);
+}
+
+.detail[data-reversed="true"] .detailMedia {
+  order: 2;
+}
+
+.detailMedia {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: clamp(12px, 3vw, 40px);
+}
+
+.detailMedia::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--rb-cyan), 0.16), transparent 62%);
+  pointer-events: none;
+}
+
+.detailMedia img {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.55));
+}
+
+.detailBody .eyebrow {
+  margin-bottom: 10px;
+}
+
+.detailTitle {
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.detailIntro {
+  margin-top: 16px;
+  max-width: 34rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: rgba(226, 238, 255, 0.78);
+}
+
+.detailPoints {
+  margin-top: 24px;
+  display: grid;
+  gap: 12px;
+}
+
+.detailPoints li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(226, 238, 255, 0.9);
+}
+
+.detailPoints li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgb(var(--rb-cyan));
+  box-shadow: 0 0 10px rgba(var(--rb-cyan), 0.7);
+}
+
+.detailOfficial {
+  display: inline-block;
+  margin-top: 28px;
+  font-size: 0.85rem;
+  color: rgba(226, 238, 255, 0.6);
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--rb-cyan), 0.4);
+  text-underline-offset: 4px;
+  transition: color 180ms ease-out;
+}
+
+.detailOfficial:hover,
+.detailOfficial:focus-visible {
+  color: rgb(var(--rb-cyan));
+}
+
 /* ---------- Dev edit mode ---------- */
 
 .editing .product {
@@ -453,10 +579,6 @@
 /* ---------- Mobile (< 900 px) ---------- */
 
 @media (max-width: 899.98px) {
-  .section {
-    padding: 20px 0 28px;
-  }
-
   .poster {
     --poster-h: var(--poster-h-m);
     --bg-top: var(--bg-top-m);
@@ -479,6 +601,19 @@
 
   .connectionsDesktop {
     display: none;
+  }
+
+  .detailInner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* mobil: vždy obrázek ↓ text */
+  .detail[data-reversed="true"] .detailMedia {
+    order: 0;
+  }
+
+  .detailMedia img {
+    max-width: 360px;
   }
 
   .connectionsMobile {

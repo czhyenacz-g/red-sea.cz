@@ -25,7 +25,14 @@ export type ReefBeatPosterProduct = {
   imageHeight: number;
   alt: string;
   description: string;
-  url: string;
+  /** ID detailní sekce na stejné stránce — poster odkazuje výhradně sem (#targetId). */
+  targetId: string;
+  /** Oficiální stránka Red Sea — jen jako sekundární odkaz v detailní sekci. */
+  officialUrl: string;
+  detail: {
+    intro: string;
+    points: string[];
+  };
   position: Record<ReefBeatBreakpoint, ReefBeatPosition>;
   /** Preferovaná strana tooltipu; pokud se nevejde, automaticky se překlopí. */
   tooltipPlacement: Record<ReefBeatBreakpoint, ReefBeatPlacement>;
@@ -68,7 +75,8 @@ export const REEFBEAT_POSTER_TEXT = {
     "ReefBeat propojuje chytrá zařízení Red Sea do jednoho ekosystému a umožňuje jejich nastavení, automatizaci a monitoring z jedné aplikace.",
   hintDesktop: "Najetím na zařízení zjistíte, jak zapadá do chytrého reef akvária.",
   hintMobile: "Klepněte na zařízení pro více informací.",
-  cta: "Zjistit více →",
+  cta: "Zjistit více ↓",
+  officialLink: "Oficiální informace ↗",
 };
 
 export const REEFBEAT_POSTER_PRODUCTS: ReefBeatPosterProduct[] = [
@@ -80,10 +88,15 @@ export const REEFBEAT_POSTER_PRODUCTS: ReefBeatPosterProduct[] = [
     imageHeight: 1024,
     alt: "Red Sea ReefLED",
     description: "Chytré REEF-SPEC LED osvětlení.",
-    url: "https://redseafish.com/smart-hardware/reefled/",
+    targetId: "reefled",
+    officialUrl: "https://redseafish.com/smart-hardware/reefled/",
+    detail: {
+      intro: "Chytré LED osvětlení navržené pro reef akvária a ovládané přes ReefBeat.",
+      points: ["Nastavení světelného programu", "Denní cyklus osvětlení", "Ovládání z aplikace ReefBeat"],
+    },
     position: {
-      desktop: { x: 11.5, y: 24.5, width: 15 },
-      mobile: { x: 17, y: 13.5, width: 30 },
+      desktop: { x: 13.5, y: 24.5, width: 15 },
+      mobile: { x: 18, y: 13.5, width: 29 },
     },
     tooltipPlacement: { desktop: "right", mobile: "bottom" },
     anchor: { x: 28.6, y: 31.9 },
@@ -96,10 +109,15 @@ export const REEFBEAT_POSTER_PRODUCTS: ReefBeatPosterProduct[] = [
     imageHeight: 887,
     alt: "Red Sea ReefWave",
     description: "Chytré proudové čerpadlo pro přirozenou cirkulaci vody.",
-    url: "https://redseafish.com/smart-hardware/reefwave/",
+    targetId: "reefwave",
+    officialUrl: "https://redseafish.com/smart-hardware/reefwave/",
+    detail: {
+      intro: "Chytré proudové čerpadlo pro tvorbu přirozenější cirkulace vody v reef akváriu.",
+      points: ["Různé režimy proudění", "Plánování přes ReefBeat", "Propojení s režimy Feed / Maintenance"],
+    },
     position: {
-      desktop: { x: 88.5, y: 27, width: 16 },
-      mobile: { x: 83, y: 13.5, width: 30 },
+      desktop: { x: 86.5, y: 27, width: 16 },
+      mobile: { x: 82, y: 13.5, width: 29 },
     },
     tooltipPlacement: { desktop: "left", mobile: "bottom" },
     anchor: { x: 70.7, y: 31.9 },
@@ -112,10 +130,15 @@ export const REEFBEAT_POSTER_PRODUCTS: ReefBeatPosterProduct[] = [
     imageHeight: 770,
     alt: "Red Sea ReefDose 4",
     description: "Přesné automatické dávkování doplňků.",
-    url: "https://redseafish.com/smart-hardware/reefdose/",
+    targetId: "reefdose",
+    officialUrl: "https://redseafish.com/smart-hardware/reefdose/",
+    detail: {
+      intro: "Automatické dávkování doplňků v přesně nastavených intervalech.",
+      points: ["Více dávkovacích hlav", "Plánování dávek", "Řízení přes ReefBeat"],
+    },
     position: {
-      desktop: { x: 10, y: 58.5, width: 17 },
-      mobile: { x: 50, y: 13.5, width: 30 },
+      desktop: { x: 12, y: 58.5, width: 17 },
+      mobile: { x: 50, y: 13.5, width: 29 },
     },
     tooltipPlacement: { desktop: "right", mobile: "bottom" },
     anchor: { x: 28.6, y: 45.3 },
@@ -128,10 +151,15 @@ export const REEFBEAT_POSTER_PRODUCTS: ReefBeatPosterProduct[] = [
     imageHeight: 1374,
     alt: "Red Sea ReefMat",
     description: "Automatický fleece filtr pro mechanickou filtraci vody.",
-    url: "https://redseafish.com/smart-hardware/reefmat/",
+    targetId: "reefmat",
+    officialUrl: "https://redseafish.com/smart-hardware/reefmat/",
+    detail: {
+      intro: "Automatický fleece filtr, který průběžně odstraňuje nečistoty z vody.",
+      points: ["Automatický posun filtrační role", "Méně ruční údržby", "Monitoring přes ReefBeat"],
+    },
     position: {
       desktop: { x: 23.4, y: 72, width: 9 },
-      mobile: { x: 17, y: 85.5, width: 20 },
+      mobile: { x: 18, y: 85.5, width: 20 },
     },
     tooltipPlacement: { desktop: "right", mobile: "top" },
     anchor: { x: 41.7, y: 55.7 },
@@ -144,10 +172,15 @@ export const REEFBEAT_POSTER_PRODUCTS: ReefBeatPosterProduct[] = [
     imageHeight: 1024,
     alt: "Red Sea ReefATO+",
     description: "Automatické doplňování vody, monitoring teploty a detekce úniku.",
-    url: "https://redseafish.com/smart-hardware/reefato_plus/",
+    targetId: "reefato",
+    officialUrl: "https://redseafish.com/smart-hardware/reefato_plus/",
+    detail: {
+      intro: "Systém pro automatické doplňování odpařené vody a monitoring některých provozních stavů akvária.",
+      points: ["Automatické doplňování vody", "Monitoring", "Upozornění přes ReefBeat"],
+    },
     position: {
-      desktop: { x: 90, y: 59, width: 15 },
-      mobile: { x: 83, y: 85.5, width: 30 },
+      desktop: { x: 88, y: 59, width: 15 },
+      mobile: { x: 82, y: 85.5, width: 29 },
     },
     tooltipPlacement: { desktop: "left", mobile: "top" },
     anchor: { x: 70.7, y: 46.2 },
@@ -160,10 +193,15 @@ export const REEFBEAT_POSTER_PRODUCTS: ReefBeatPosterProduct[] = [
     imageHeight: 1024,
     alt: "Red Sea ReefControl Power",
     description: "Chytré napájecí centrum ovládané přes ReefBeat.",
-    url: "https://redseafish.com/smart-hardware/reefcontrol-power/",
+    targetId: "reefcontrol-power",
+    officialUrl: "https://redseafish.com/smart-hardware/reefcontrol-power/",
+    detail: {
+      intro: "Chytré napájecí centrum umožňující zapínání a vypínání připojených zařízení přes ReefBeat.",
+      points: ["Řízení připojených zařízení", "Časové plány", "Automatizace", "Možnost řídit i zařízení jiných výrobců"],
+    },
     position: {
-      desktop: { x: 78.5, y: 73, width: 15 },
-      mobile: { x: 50, y: 85.5, width: 30 },
+      desktop: { x: 77.5, y: 73, width: 15 },
+      mobile: { x: 50, y: 85.5, width: 29 },
     },
     tooltipPlacement: { desktop: "top", mobile: "top" },
     anchor: { x: 64.2, y: 56 },
