@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* /reefbeat: interní odkazy plakátu (#reefled …) scrollují plynule; při reduced motion skokem */
+/* /reefbeat, /reefsense: interní anchor odkazy scrollují plynule; při reduced motion skokem */
 @media (prefers-reduced-motion: no-preference) {
-  html:has(.reefbeat-poster) {
+  html:has(.reefbeat-poster),
+  html:has(.reefsense-page) {
     scroll-behavior: smooth;
   }
 }

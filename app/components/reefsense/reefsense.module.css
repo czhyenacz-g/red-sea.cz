@@ -1,0 +1,1591 @@
+/* /reefsense — „nervový systém akvária“
+ * Vizuálně navazuje na /reefbeat (deep ocean, cyan glow), ale je editorial/story, ne plakát.
+ * Animace: CSS + IntersectionObserver (ReefSenseReveal) — bez knihoven.
+ */
+
+.page {
+  --rs-cyan: 42, 210, 255;
+  --rs-blue: 0, 140, 255;
+  --rs-red: 226, 35, 26;
+  --rs-ink: #eaf4ff;
+  --rs-muted: rgba(214, 230, 250, 0.72);
+  --rs-faint: rgba(214, 230, 250, 0.5);
+  --rs-bg-0: #02060d;
+  --rs-bg-1: #050b13;
+  --rs-bg-2: #08111c;
+  --rs-line: rgba(var(--rs-cyan), 0.18);
+  --rs-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --rs-gutter: clamp(20px, 5vw, 72px);
+
+  background: var(--rs-bg-0);
+  color: var(--rs-ink);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.page a:focus-visible,
+.page button:focus-visible,
+.page [tabindex="0"]:focus-visible {
+  outline: 2px solid rgb(var(--rs-cyan));
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Typografie & layout ---------- */
+
+.container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--rs-gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(64px, 9vw, 136px);
+  scroll-margin-top: 96px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgb(var(--rs-cyan));
+}
+
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgb(var(--rs-cyan));
+  box-shadow: 0 0 12px rgba(var(--rs-cyan), 0.9);
+}
+
+.h2 {
+  font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.h2Small {
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.h3 {
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.accent {
+  background: linear-gradient(90deg, #7fe6ff, rgb(var(--rs-cyan)) 45%, #4c9dff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lead {
+  margin-top: 20px;
+  max-width: 40rem;
+  font-size: clamp(1.05rem, 1rem + 0.35vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--rs-muted);
+}
+
+.text {
+  margin-top: 14px;
+  max-width: 36rem;
+  color: var(--rs-muted);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 110px);
+}
+
+.splitWide {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+}
+
+.splitReverse > :first-child {
+  order: 2;
+}
+
+/* ---------- Tlačítka ---------- */
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+  margin-top: 32px;
+}
+
+.btnPrimary,
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 200ms var(--rs-ease),
+    box-shadow 200ms var(--rs-ease),
+    border-color 200ms var(--rs-ease),
+    color 200ms var(--rs-ease);
+}
+
+.btnPrimary {
+  color: #021018;
+  background: linear-gradient(180deg, #7fe6ff, rgb(var(--rs-cyan)));
+  box-shadow: 0 0 0 1px rgba(var(--rs-cyan), 0.4), 0 10px 30px -10px rgba(var(--rs-cyan), 0.7);
+}
+
+.btnPrimary:hover {
+  box-shadow: 0 0 0 1px rgba(var(--rs-cyan), 0.7), 0 14px 38px -8px rgba(var(--rs-cyan), 0.85);
+}
+
+.btnGhost {
+  color: var(--rs-ink);
+  border: 1px solid rgba(var(--rs-cyan), 0.35);
+  background: rgba(var(--rs-cyan), 0.04);
+}
+
+.btnGhost:hover {
+  border-color: rgba(var(--rs-cyan), 0.75);
+  background: rgba(var(--rs-cyan), 0.1);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 60% 70% at 72% 45%, rgba(var(--rs-blue), 0.22), transparent 70%),
+    radial-gradient(ellipse 40% 50% at 15% 10%, rgba(var(--rs-cyan), 0.08), transparent 70%),
+    linear-gradient(180deg, #02060d, #040a14 70%, var(--rs-bg-1));
+}
+
+.heroInner {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: clamp(20px, 3vw, 36px) var(--rs-gutter) clamp(56px, 8vw, 110px);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-areas:
+    "crumbs crumbs"
+    "copy stage";
+  align-items: center;
+  gap: 24px clamp(24px, 4vw, 64px);
+}
+
+.crumbs {
+  grid-area: crumbs;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-size: 16px;
+}
+
+.crumbs a {
+  color: var(--rs-faint);
+  text-decoration: none;
+  padding: 6px 0;
+  transition: color 180ms ease-out;
+}
+
+.crumbs a:hover {
+  color: rgb(var(--rs-cyan));
+}
+
+.heroCopy {
+  grid-area: copy;
+  padding-block: clamp(16px, 4vw, 48px);
+}
+
+.heroTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.heroTitleTop {
+  font-size: clamp(3rem, 1.6rem + 4vw, 6rem);
+  background: linear-gradient(180deg, #ffffff 30%, #9fdcff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.heroTitleBottom {
+  display: block;
+  font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.9rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: rgb(var(--rs-cyan));
+}
+
+.heroTitleBottom::first-letter {
+  text-transform: uppercase;
+}
+
+.heroLead {
+  margin-top: 26px;
+  max-width: 33rem;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+  color: var(--rs-muted);
+}
+
+.heroStage {
+  grid-area: stage;
+  position: relative;
+  aspect-ratio: 100 / 62;
+  width: 100%;
+}
+
+.heroReef {
+  position: absolute;
+  inset: 4% 0 20% 6%;
+  z-index: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  /* měkké okraje ze všech stran — fotka se rozplyne do pozadí */
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 52%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 52%, transparent 100%);
+}
+
+.heroReef img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.62) saturate(1.1) blur(0.5px);
+  transform: scale(1.04);
+  animation: rsDrift 18s ease-in-out infinite alternate;
+}
+
+.heroNerve {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.nerveBase,
+.nervePulse {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+}
+
+.nerveBase {
+  stroke: rgba(var(--rs-cyan), 0.45);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 4px rgba(var(--rs-cyan), 0.6));
+}
+
+.nervePulse {
+  stroke: #d9f7ff;
+  stroke-width: 2.5;
+  stroke-dasharray: 26 400;
+  animation: rsNerve 3.6s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(var(--rs-cyan), 0.9));
+}
+
+.heroDot {
+  position: absolute;
+  z-index: 3;
+  width: 12px;
+  height: 12px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: rgb(var(--rs-cyan));
+  box-shadow: 0 0 0 0 rgba(var(--rs-cyan), 0.6);
+  animation: rsPing 2.4s ease-out infinite;
+}
+
+.heroItem {
+  position: absolute;
+  z-index: 2;
+  filter: drop-shadow(0 24px 34px rgba(0, 0, 0, 0.6));
+}
+
+.heroItem img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.heroController {
+  left: 24%;
+  top: 3%;
+  width: 44%;
+}
+
+.heroProbes {
+  left: 0;
+  bottom: 0;
+  width: 38%;
+}
+
+.heroApp {
+  right: 0;
+  bottom: 6%;
+  width: 36%;
+  opacity: 0.92;
+}
+
+/* ---------- Rail (hlavní osa + reakce) ---------- */
+
+.axis {
+  background: linear-gradient(180deg, var(--rs-bg-1), var(--rs-bg-0));
+}
+
+.rail {
+  --rail-count: 5;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--rail-count), minmax(0, 1fr));
+  gap: 16px;
+  margin-top: clamp(40px, 6vw, 72px);
+  counter-reset: rail;
+}
+
+.rail::before,
+.rail::after {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: calc(100% / var(--rail-count) / 2);
+  right: calc(100% / var(--rail-count) / 2);
+  height: 2px;
+  border-radius: 2px;
+}
+
+.rail::before {
+  background: var(--rs-line);
+}
+
+.rail::after {
+  background: linear-gradient(90deg, rgb(var(--rs-cyan)), #7cc4ff);
+  box-shadow: 0 0 12px rgba(var(--rs-cyan), 0.7);
+  transform-origin: left center;
+}
+
+.railNode {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.railDot {
+  position: relative;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  background: var(--rs-bg-0);
+  border: 2px solid rgb(var(--rs-cyan));
+  box-shadow: 0 0 0 6px rgba(var(--rs-cyan), 0.08), 0 0 18px rgba(var(--rs-cyan), 0.7);
+}
+
+.railDot::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: rgb(var(--rs-cyan));
+}
+
+.railLabel {
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.railRole {
+  font-size: 16px;
+  color: var(--rs-faint);
+}
+
+.railReaction {
+  margin-top: clamp(48px, 7vw, 88px);
+}
+
+/* ---------- Akvárium mluví ---------- */
+
+.talk {
+  background:
+    radial-gradient(ellipse 50% 60% at 80% 50%, rgba(var(--rs-blue), 0.12), transparent 70%),
+    var(--rs-bg-1);
+}
+
+.signals {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.signal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 72px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 1px solid var(--rs-line);
+  background: linear-gradient(160deg, rgba(var(--rs-cyan), 0.06), rgba(var(--rs-cyan), 0.01));
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.signalIcon {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  color: rgb(var(--rs-cyan));
+}
+
+.signalPulse {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgb(var(--rs-cyan));
+  animation: rsPing 2.6s ease-out infinite;
+  animation-delay: calc(var(--step) * 0.4s);
+}
+
+/* ---------- Oči a uši reefu ---------- */
+
+.family {
+  background: var(--rs-bg-2);
+}
+
+.familyHead {
+  max-width: 44rem;
+}
+
+.familyBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 88px);
+  margin-top: clamp(40px, 6vw, 72px);
+}
+
+.familyVisual {
+  position: relative;
+}
+
+.familyVisual::before {
+  content: "";
+  position: absolute;
+  inset: -10% 0;
+  background: radial-gradient(ellipse at center, rgba(var(--rs-cyan), 0.14), transparent 65%);
+  pointer-events: none;
+}
+
+.familyVisual img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.55));
+}
+
+.groups {
+  display: grid;
+  gap: 28px;
+}
+
+.group {
+  padding-top: 20px;
+  border-top: 1px solid var(--rs-line);
+}
+
+.groupTitle {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgb(var(--rs-cyan));
+}
+
+.group ul {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.group li {
+  display: flex;
+  flex-direction: column;
+}
+
+.groupLabel {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.groupName {
+  font-size: 16px;
+  color: var(--rs-faint);
+}
+
+/* ---------- Editorial bloky sond ---------- */
+
+.sensor {
+  padding-block: clamp(56px, 8vw, 120px);
+  scroll-margin-top: 96px;
+  background: var(--rs-bg-1);
+}
+
+.sensor:nth-child(even) {
+  background:
+    radial-gradient(ellipse 50% 70% at 75% 50%, rgba(var(--rs-cyan), 0.06), transparent 70%),
+    var(--rs-bg-2);
+}
+
+.sensorInner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--rs-gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(36px, 6vw, 96px);
+}
+
+.sensor[data-reversed="true"] .sensorInner {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+}
+
+.sensor[data-reversed="true"] .sensorMedia {
+  order: 2;
+}
+
+.sensorMedia {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.sensorMedia::before {
+  content: "";
+  position: absolute;
+  inset: -8% 0;
+  background: radial-gradient(ellipse at center, rgba(var(--rs-blue), 0.2), transparent 65%);
+  pointer-events: none;
+}
+
+.sensorMedia img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 26px 36px rgba(0, 0, 0, 0.55));
+}
+
+.sensorMediaMulti {
+  align-items: flex-end;
+  gap: clamp(24px, 5vw, 64px);
+}
+
+.sensorMediaMulti img {
+  width: auto;
+  height: clamp(220px, 28vw, 340px);
+}
+
+.sensorKicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--rs-faint);
+}
+
+.kickerIcon {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  color: rgb(var(--rs-cyan));
+}
+
+.sensorLead {
+  margin-top: 16px;
+  font-size: clamp(1.1rem, 1rem + 0.45vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--rs-ink);
+}
+
+.note {
+  margin-top: 20px;
+  padding-left: 14px;
+  border-left: 2px solid rgba(var(--rs-cyan), 0.5);
+  font-size: 16px;
+  color: var(--rs-faint);
+}
+
+.miniFlowWrap {
+  margin-top: 26px;
+}
+
+.miniFlowLabel {
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rs-faint);
+}
+
+.miniFlow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.miniFlow li {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.miniFlow li + li::before {
+  content: "→";
+  color: rgb(var(--rs-cyan));
+}
+
+.miniFlowAlt {
+  margin-top: 8px;
+  font-size: 16px;
+  color: var(--rs-faint);
+}
+
+/* ---------- Role (metafora) ---------- */
+
+.roles {
+  background:
+    radial-gradient(ellipse 70% 80% at 50% 0%, rgba(var(--rs-blue), 0.14), transparent 70%),
+    var(--rs-bg-0);
+  padding-block: clamp(56px, 8vw, 110px);
+}
+
+.roleList {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.role {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(var(--rs-cyan), 0.4);
+}
+
+.roleName {
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.3rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.roleProduct {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--rs-cyan));
+}
+
+.roleText {
+  margin-top: 8px;
+  font-size: 16px;
+  color: var(--rs-muted);
+}
+
+/* ---------- ReefControl ---------- */
+
+.brain {
+  background: var(--rs-bg-1);
+}
+
+.bigStat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(24px, 4vw, 44px);
+  border-radius: 24px;
+  border: 1px solid var(--rs-line);
+  background: radial-gradient(ellipse at 20% 20%, rgba(var(--rs-cyan), 0.12), transparent 70%);
+}
+
+.bigStatValue {
+  font-size: clamp(4rem, 2.5rem + 6vw, 8rem);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  background: linear-gradient(180deg, #ffffff, rgb(var(--rs-cyan)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bigStatLabel {
+  max-width: 20rem;
+  font-size: 1.05rem;
+  color: var(--rs-muted);
+}
+
+.models {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 36px);
+  margin-top: clamp(48px, 7vw, 88px);
+}
+
+.model {
+  padding: clamp(20px, 3vw, 36px);
+  border-radius: 24px;
+  border: 1px solid var(--rs-line);
+  background: linear-gradient(180deg, rgba(var(--rs-cyan), 0.05), rgba(var(--rs-cyan), 0.01));
+}
+
+.model .h3 {
+  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.9rem);
+}
+
+.modelMedia {
+  margin-bottom: 22px;
+}
+
+.modelMedia img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  margin-top: 36px;
+  color: var(--rs-muted);
+}
+
+.facts li,
+.checks li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.facts li::before,
+.checks li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(var(--rs-cyan));
+  box-shadow: 0 0 10px rgba(var(--rs-cyan), 0.7);
+}
+
+.checks {
+  display: grid;
+  gap: 12px;
+  margin-top: 26px;
+  color: var(--rs-ink);
+}
+
+/* ---------- ReefBeat ---------- */
+
+.app {
+  background:
+    radial-gradient(ellipse 55% 60% at 70% 40%, rgba(var(--rs-blue), 0.16), transparent 70%),
+    var(--rs-bg-2);
+}
+
+.appVisual img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.55));
+}
+
+.demo {
+  margin-top: clamp(48px, 7vw, 88px);
+}
+
+.demoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+}
+
+.reading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid var(--rs-line);
+  background: rgba(3, 12, 26, 0.7);
+}
+
+.readingLabel {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rs-faint);
+}
+
+.readingValue {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.readingValue small {
+  margin-left: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--rs-faint);
+}
+
+.spark {
+  width: 100%;
+  height: 28px;
+  margin-top: 6px;
+}
+
+.spark path {
+  fill: none;
+  stroke: rgb(var(--rs-cyan));
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+}
+
+.readingAlert {
+  border-color: rgba(var(--rs-red), 0.55);
+  background: linear-gradient(160deg, rgba(var(--rs-red), 0.14), rgba(3, 12, 26, 0.7));
+}
+
+.readingAlert .readingLabel {
+  color: #ff8a80;
+}
+
+.alertText {
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.demoCaption {
+  margin-top: 12px;
+  font-size: 16px;
+  color: var(--rs-faint);
+}
+
+/* ---------- Nestačí jen vědět ---------- */
+
+.react {
+  background:
+    radial-gradient(ellipse 60% 60% at 20% 30%, rgba(var(--rs-cyan), 0.08), transparent 70%),
+    var(--rs-bg-0);
+}
+
+.powerVisual img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
+}
+
+/* ---------- Scénáře ---------- */
+
+.scenarios {
+  background: var(--rs-bg-1);
+}
+
+.scenarioShell {
+  margin-top: clamp(36px, 5vw, 56px);
+  border-radius: 28px;
+  border: 1px solid var(--rs-line);
+  background:
+    radial-gradient(ellipse 60% 80% at 100% 0%, rgba(var(--rs-blue), 0.14), transparent 70%),
+    rgba(2, 8, 18, 0.7);
+  overflow: hidden;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px;
+  border-bottom: 1px solid var(--rs-line);
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--rs-muted);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 200ms var(--rs-ease),
+    color 200ms var(--rs-ease),
+    border-color 200ms var(--rs-ease);
+}
+
+.tab:hover {
+  color: var(--rs-ink);
+  background: rgba(var(--rs-cyan), 0.06);
+}
+
+.tab[aria-selected="true"] {
+  color: var(--rs-ink);
+  border-color: rgba(var(--rs-cyan), 0.55);
+  background: rgba(var(--rs-cyan), 0.12);
+  box-shadow: 0 0 20px rgba(var(--rs-cyan), 0.18);
+}
+
+.tabIcon {
+  width: 22px;
+  height: 22px;
+  color: rgb(var(--rs-cyan));
+}
+
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+  padding: clamp(24px, 4vw, 52px);
+}
+
+.panelCopy .h3 {
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.4rem);
+}
+
+.panelNote {
+  grid-column: 1 / -1;
+  font-size: 16px;
+  color: var(--rs-faint);
+}
+
+.path {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pathStep {
+  position: relative;
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0 12px 28px;
+  animation: rsStepOn 520ms var(--rs-ease) both;
+  animation-delay: calc(var(--step) * 380ms);
+}
+
+/* svislá dráha a uzel */
+.pathStep::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(var(--rs-cyan), 0.7), rgba(var(--rs-cyan), 0.25));
+}
+
+.pathStep:first-child::before {
+  top: 50%;
+}
+
+.pathStep:last-child::before {
+  bottom: 50%;
+}
+
+.pathStep::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  translate: 0 -50%;
+  border-radius: 50%;
+  background: var(--rs-bg-0);
+  border: 2px solid rgb(var(--rs-cyan));
+  box-shadow: 0 0 14px rgba(var(--rs-cyan), 0.75);
+}
+
+.pathKind {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rs-faint);
+}
+
+.pathLabel {
+  justify-self: start;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--rs-line);
+  background: rgba(var(--rs-cyan), 0.05);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.pathStep[data-kind="control"] .pathLabel {
+  border-color: rgba(var(--rs-blue), 0.6);
+  background: rgba(var(--rs-blue), 0.14);
+}
+
+.pathStep[data-kind="notify"] .pathLabel {
+  border-color: rgba(var(--rs-red), 0.5);
+  background: rgba(var(--rs-red), 0.1);
+}
+
+.pathStep[data-kind="trigger"] .pathLabel {
+  border-style: dashed;
+  background: transparent;
+  color: var(--rs-muted);
+}
+
+.pathOutcomes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.outcome {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(var(--rs-cyan), 0.7);
+  background: rgba(var(--rs-cyan), 0.16);
+  box-shadow: 0 0 22px rgba(var(--rs-cyan), 0.3);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ---------- Digitální / porty / Bluetooth ---------- */
+
+.digital {
+  background: var(--rs-bg-2);
+}
+
+.signalCompare {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.signalRow {
+  padding: 22px 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.signalRowDigital {
+  border-color: rgba(var(--rs-cyan), 0.35);
+  background: rgba(var(--rs-cyan), 0.05);
+}
+
+.signalTag {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rs-faint);
+}
+
+.signalRowDigital .signalTag {
+  color: rgb(var(--rs-cyan));
+}
+
+.signalLine {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.signalLine svg {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 26px;
+}
+
+.signalEnd {
+  flex: none;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 16px;
+}
+
+.noise path,
+.bits path {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.noise path {
+  stroke: rgba(255, 170, 140, 0.7);
+  stroke-width: 1.5;
+}
+
+.bits path {
+  stroke: rgb(var(--rs-cyan));
+  stroke-width: 3;
+  stroke-dasharray: 10 8;
+  animation: rsBits 1.2s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(var(--rs-cyan), 0.8));
+}
+
+.signalText {
+  margin-top: 12px;
+  font-size: 16px;
+  color: var(--rs-muted);
+}
+
+.ports {
+  background: var(--rs-bg-1);
+}
+
+.portVisual {
+  display: grid;
+  justify-items: center;
+  gap: 24px;
+}
+
+.portVisual img {
+  width: min(100%, 380px);
+  height: auto;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.55));
+}
+
+.portList {
+  display: grid;
+  gap: 10px;
+  width: min(100%, 380px);
+}
+
+.portList li {
+  display: grid;
+  grid-template-columns: auto minmax(24px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+}
+
+.portId {
+  font-variant-numeric: tabular-nums;
+  color: var(--rs-faint);
+}
+
+.portArrow {
+  height: 2px;
+  background: linear-gradient(90deg, rgba(var(--rs-cyan), 0.2), rgb(var(--rs-cyan)));
+  border-radius: 2px;
+}
+
+.remote {
+  background: var(--rs-bg-2);
+  padding-block: clamp(48px, 7vw, 96px);
+}
+
+.remoteCard {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  padding: clamp(24px, 4vw, 48px);
+  border-radius: 28px;
+  border: 1px solid var(--rs-line);
+  background: radial-gradient(ellipse 60% 80% at 0% 0%, rgba(var(--rs-cyan), 0.08), transparent 70%);
+}
+
+.remoteCard .miniFlow {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.remoteCard .miniFlow li + li::before {
+  content: "↓";
+}
+
+.remoteCard .miniFlow li {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ---------- Finále ---------- */
+
+.finale {
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 100%, rgba(var(--rs-blue), 0.22), transparent 70%),
+    var(--rs-bg-0);
+  padding-block: clamp(80px, 12vw, 170px);
+  text-align: center;
+}
+
+.finaleInner {
+  max-width: 880px;
+  margin-inline: auto;
+  padding-inline: var(--rs-gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.finaleInner .lead {
+  margin-inline: auto;
+}
+
+.finaleInner .heroActions {
+  justify-content: center;
+}
+
+.official {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 6px 0;
+  font-size: 16px;
+  color: var(--rs-faint);
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--rs-cyan), 0.4);
+  text-underline-offset: 4px;
+}
+
+.official:hover {
+  color: rgb(var(--rs-cyan));
+}
+
+/* ---------- Reveal (jen když běží ReefSenseReveal) ---------- */
+
+:global(html[data-rs-reveal]) .page [data-reveal] {
+  transition:
+    opacity 700ms var(--rs-ease),
+    transform 700ms var(--rs-ease);
+}
+
+:global(html[data-rs-reveal]) .page [data-reveal]:not([data-visible]) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* postupné rozsvícení osy a reakce */
+:global(html[data-rs-reveal]) .page .rail[data-visible]::after {
+  animation: rsRailFill 1.6s var(--rs-ease) both 200ms;
+}
+
+:global(html[data-rs-reveal]) .page .rail[data-visible] .railNode {
+  animation: rsStepOn 600ms var(--rs-ease) both;
+  animation-delay: calc(200ms + var(--step) * 300ms);
+}
+
+:global(html[data-rs-reveal]) .page .signals[data-visible] .signal,
+:global(html[data-rs-reveal]) .page .roleList[data-visible] .role,
+:global(html[data-rs-reveal]) .page .demo[data-visible] .reading,
+:global(html[data-rs-reveal]) .page .portVisual[data-visible] .portList li {
+  animation: rsFadeUp 600ms var(--rs-ease) both;
+  animation-delay: calc(var(--step) * 90ms);
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes rsFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rsStepOn {
+  from {
+    opacity: 0.25;
+    filter: saturate(0.2) brightness(0.7);
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+@keyframes rsRailFill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes rsNerve {
+  from {
+    stroke-dashoffset: 426;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes rsBits {
+  from {
+    stroke-dashoffset: 36;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes rsPing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(42, 210, 255, 0.55);
+  }
+  80%,
+  100% {
+    box-shadow: 0 0 0 14px rgba(42, 210, 255, 0);
+  }
+}
+
+@keyframes rsDrift {
+  from {
+    transform: scale(1.04) translateX(0);
+  }
+  to {
+    transform: scale(1.08) translateX(-1.5%);
+  }
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 1023.98px) {
+  .heroInner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "crumbs"
+      "copy"
+      "stage";
+  }
+
+  .heroStage {
+    max-width: 760px;
+    justify-self: center;
+  }
+
+  .roleList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Mobil ---------- */
+
+@media (max-width: 767.98px) {
+  .page {
+    font-size: 16px;
+  }
+
+  .split,
+  .splitWide,
+  .familyBody,
+  .sensorInner,
+  .sensor[data-reversed="true"] .sensorInner,
+  .models,
+  .remoteCard {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .splitReverse > :first-child,
+  .sensor[data-reversed="true"] .sensorMedia {
+    order: 0;
+  }
+
+  /* osy vertikálně */
+  .rail {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .rail::before,
+  .rail::after {
+    top: 12px;
+    bottom: 12px;
+    left: 11px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+
+  .rail::after {
+    transform-origin: center top;
+  }
+
+  .railNode {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 18px;
+    row-gap: 2px;
+    align-items: center;
+    text-align: left;
+  }
+
+  .railDot {
+    grid-row: 1 / span 2;
+    margin-bottom: 0;
+  }
+
+  .railRole {
+    font-size: 16px;
+  }
+
+  .roleList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .signals {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .miniFlow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .miniFlow li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .miniFlow li + li::before {
+    content: "↓";
+  }
+
+  .pathStep {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .tab {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: center;
+  }
+
+  .heroActions > * {
+    flex: 1 1 auto;
+  }
+
+  .facts {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 767.98px) {
+  :global(html[data-rs-reveal]) .page .rail[data-visible]::after {
+    animation-name: rsRailFillY;
+  }
+}
+
+@keyframes rsRailFillY {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .heroReef img,
+  .nervePulse,
+  .heroDot,
+  .signalPulse,
+  .bits path,
+  .pathStep {
+    animation: none;
+  }
+
+  .nervePulse {
+    opacity: 0;
+  }
+}
