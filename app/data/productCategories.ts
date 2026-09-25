@@ -3,7 +3,8 @@ export type ProductCategory = {
   label: string;
   href: string;
   summary: string;
-  source: "Redsea.pages";
+  /** Redsea.pages = původní podklady; red-sea.cz = sekce vytvořená přímo pro web */
+  source: "Redsea.pages" | "red-sea.cz";
 };
 
 export const PRODUCT_CATEGORIES: ProductCategory[] = [
@@ -36,17 +37,24 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     source: "Redsea.pages",
   },
   {
-    slug: "technical-equipment",
-    label: "Technická zařízení",
-    href: "/technical-equipment",
-    summary: "NanoMat roller filter – malý pásový mechanický předfiltr určený pro akvária řady Nano Max. REEFER AC Skimmer vysoce účinný odpěňovač v provedení podle výkonu 300,600,900.",
-    source: "Redsea.pages",
-  },
-  {
     slug: "reefbeat",
     label: "Inteligentní technická zařízení",
     href: "/reefbeat",
     summary: "Zařízení z této skupiny se dají ovládat přes aplikaci The ReefBeat Ecosystem na mobilních telefonech či tabletech a uživatel je tak může ovládat či kontrolovat na dálku.",
+    source: "Redsea.pages",
+  },
+  {
+    slug: "reefsense",
+    label: "ReefSense",
+    href: "/reefsense",
+    summary: "Digitální sondy a senzory ReefSense s ReefControl – monitoring, upozornění a automatické reakce akvária.",
+    source: "red-sea.cz",
+  },
+  {
+    slug: "technical-equipment",
+    label: "Technická zařízení",
+    href: "/technical-equipment",
+    summary: "NanoMat roller filter – malý pásový mechanický předfiltr určený pro akvária řady Nano Max. REEFER AC Skimmer vysoce účinný odpěňovač v provedení podle výkonu 300,600,900.",
     source: "Redsea.pages",
   },
   {

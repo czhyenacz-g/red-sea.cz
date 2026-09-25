@@ -34,10 +34,22 @@ function AquariumIcon() {
   );
 }
 
+function SensorIcon() {
+  return (
+    <svg className={styles.categoryIcon} viewBox="0 0 48 40" fill="none" aria-hidden="true" focusable="false">
+      <path d="M8 30h16" strokeWidth="2" strokeLinecap="round" />
+      <rect x="24" y="25" width="10" height="10" rx="2" strokeWidth="2" />
+      <path d="M34 30h8" strokeWidth="2" strokeLinecap="round" />
+      <path d="M22 18a7 7 0 0 1 14 0M18 14a13 13 0 0 1 22 0" strokeWidth="1.6" strokeLinecap="round" opacity="0.8" />
+      <circle cx="29" cy="18" r="1.6" strokeWidth="1.6" />
+    </svg>
+  );
+}
+
 function CategoryCard({ item }: { item: ReefBeatPosterCategory }) {
   return (
     <span className={styles.categoryCard}>
-      <AquariumIcon />
+      {item.icon === "sensor" ? <SensorIcon /> : <AquariumIcon />}
       <span className={styles.categoryBody}>
         <span className={styles.categoryTitle}>{item.name}</span>
         <span className={styles.categoryText}>{item.summary}</span>
@@ -94,7 +106,7 @@ export const ReefBeatProduct = forwardRef<HTMLAnchorElement, Props>(function Ree
       </span>
       <span id={descriptionId} className={styles.srOnly}>
         {product.description}{" "}
-        {isCategory ? "Odkaz vede na přehled akvarijních systémů." : "Odkaz přejde na detail produktu níže na stránce."}
+        {isCategory ? `Odkaz vede na stránku ${product.name}.` : "Odkaz přejde na detail produktu níže na stránce."}
       </span>
       {editing && editLabel ? <span className={styles.editLabel}>{editLabel}</span> : null}
     </a>

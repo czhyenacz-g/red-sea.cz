@@ -38,6 +38,8 @@ type ReefBeatPosterItemBase = {
 
 export type ReefBeatPosterCategory = ReefBeatPosterItemBase & {
   type: "category";
+  /** Liniová ikona na kartě. */
+  icon: "aquarium" | "sensor";
   /** Krátký text přímo na kartě v plakátu. */
   summary: string;
   cta: string;
@@ -104,13 +106,14 @@ export const REEFBEAT_POSTER_TEXT = {
 export const REEFBEAT_POSTER_ITEMS: ReefBeatPosterItem[] = [
   {
     type: "category",
-    id: "aquariums",
-    name: "Akvarijní systémy",
-    summary: "Designové akvarijní komplety spojují čistý vzhled se snadnou obsluhou.",
+    id: "reefsense",
+    icon: "sensor",
+    name: "ReefSense",
+    summary: "Digitální sondy a senzory – oči a uši vašeho reefu.",
     description:
-      "Akvarijní designové komplety se vyznačují nejen dokonalým vzhledem, ale i snadnou obsluhovatelností.",
-    cta: "Prohlédnout akvária →",
-    href: "https://red-sea-cz.vercel.app/aquariums",
+      "ReefSense sleduje pH, teplotu, salinitu, ORP, hladinu i únik vody. S ReefControl pak akvárium může samo upozornit i zareagovat.",
+    cta: "Poznat ReefSense →",
+    href: "/reefsense",
     position: {
       desktop: { x: 13.5, y: 24.5, width: 14 },
       mobile: { x: 50, y: 88.8, width: 88 },
