@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "../components/Header";
+import { AUDIENCE_LINKS } from "../data/partners";
 
 const audienceItems = [
   "Akvaristiky a mořské akvaristiky",
@@ -14,17 +15,6 @@ const offerItems = [
   "Podporu při výběru produktů",
   "Dlouhodobé partnerství",
   "Doporučení ověřených prodejců koncovým zákazníkům",
-];
-
-const partnerLinks = [
-  {
-    name: "Pepinův útes",
-    href: "https://www.morskeakvarium.eu/",
-  },
-  {
-    name: "Akvárium Uruguajská",
-    href: "https://www.morskeakvarium.cz/",
-  },
 ];
 
 export default function Page() {
@@ -45,12 +35,16 @@ export default function Page() {
 
             <div className="rounded-[2rem] border border-amber-200 bg-amber-50 p-5 text-slate-800 shadow-sm">
               <p className="text-sm leading-7">
-                Koncovým zákazníkům produkty přímo neprodáváme. Rádi vás ale nasměrujeme na některého z našich ověřených partnerů, který vám může poskytnout kompletní služby včetně servisu akvárií.
+                Koncovým zákazníkům produkty přímo neprodáváme. Ověřené prodejce najdete na stránce{" "}
+                <Link href={AUDIENCE_LINKS.customers.href} className="font-semibold text-[#153156] underline underline-offset-4">
+                  Kde koupit
+                </Link>
+                .
               </p>
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_-48px_rgba(15,23,42,0.35)]">
+          <div id="kontakt" className="scroll-mt-28 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_-48px_rgba(15,23,42,0.35)]">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">Kontakt pro partnery</p>
             <p className="mt-3 text-sm leading-6 text-slate-600">
               Pokud provozujete akvaristiku, mořskou akvaristiku, servis akvárií, veřejné akvárium, ZOO nebo podobný provoz, napište nám.
@@ -90,24 +84,18 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">Naši aktuální partneři</p>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              {partnerLinks.map((partner) => (
-                <a
-                  key={partner.href}
-                  href={partner.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-colors hover:border-amber-300 hover:bg-amber-50"
-                >
-                  <p className="text-base font-semibold tracking-tight text-slate-950">{partner.name}</p>
-                  <p className="mt-2 text-sm text-slate-600 group-hover:text-slate-700">{partner.href.replace(/^https?:\/\//, "")}</p>
-                </a>
-              ))}
-            </div>
+        {/* B2C cesta je oddělená — koncoví zákazníci jdou na /kde-koupit */}
+        <section className="flex flex-col gap-5 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div>
+            <h2 className="text-xl font-semibold tracking-tight text-slate-950">Hledáte prodejce produktů Red Sea?</h2>
+            <p className="mt-1 text-sm leading-6 text-slate-600">Nákup, poradenství a podle rozsahu služeb i instalaci zajistí naši prodejní partneři.</p>
           </div>
+          <Link
+            href={AUDIENCE_LINKS.customers.href}
+            className="inline-flex min-h-12 shrink-0 items-center self-start rounded-full bg-[#153156] px-6 text-sm font-semibold text-white transition-colors hover:bg-[#0f2745] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#153156] sm:self-auto"
+          >
+            {AUDIENCE_LINKS.customers.label} →
+          </Link>
         </section>
 
         <div className="pb-2">
