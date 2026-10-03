@@ -4,15 +4,20 @@ import { AquariumReferenceGallery } from "./AquariumReferenceGallery";
 import { REEFER_G3_MAX_GALLERY } from "../data/reeferG3MaxGallery";
 import { REEFER_G3_GALLERY } from "../data/reeferG3Gallery";
 
-export function AquariumsPageContent() {
+/** Referenční galerie jsou interní podklad — zobrazují se jen s `?internal=1`. */
+export function AquariumsPageContent({ showInternal = false }: { showInternal?: boolean }) {
   return (
     <div className="min-h-screen flex flex-col bg-slate-950">
       <Header />
       <main className="flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <div className="mx-auto w-full max-w-7xl">
           <AquariumCatalogClient />
-          <AquariumReferenceGallery title="REEFER G3 MAX — referenční galerie" groups={REEFER_G3_MAX_GALLERY} />
-          <AquariumReferenceGallery title="REEFER G3 — referenční galerie" groups={REEFER_G3_GALLERY} />
+          {showInternal ? (
+            <>
+              <AquariumReferenceGallery title="REEFER G3 MAX — referenční galerie" groups={REEFER_G3_MAX_GALLERY} />
+              <AquariumReferenceGallery title="REEFER G3 — referenční galerie" groups={REEFER_G3_GALLERY} />
+            </>
+          ) : null}
         </div>
       </main>
     </div>
