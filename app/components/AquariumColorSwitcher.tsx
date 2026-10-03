@@ -21,7 +21,14 @@ type AquariumColorSwitcherProps = {
 const SWITCHER_OPTIONS: Array<{ color: CabinetColor; label: string }> = [
   { color: "white", label: "Bílá skříňka" },
   { color: "black", label: "Černá skříňka" },
+  { color: "oak", label: "Dubová skříňka" },
 ];
+
+const SWATCH_CLASS: Record<CabinetColor, { active: string; idle: string }> = {
+  white: { active: "bg-slate-950", idle: "bg-white" },
+  black: { active: "bg-white", idle: "bg-slate-900" },
+  oak: { active: "bg-[#c9a77c]", idle: "bg-[#b08a5b]" },
+};
 
 export function AquariumColorSwitcher({
   product,
@@ -37,7 +44,11 @@ export function AquariumColorSwitcher({
   const [selectedColor, setSelectedColor] = useState<CabinetColor>("white");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
-  const selected = useMemo(() => product.variants[selectedColor], [product.variants, selectedColor]);
+  const colorOptions = SWITCHER_OPTIONS.filter((option) => product.variants[option.color]);
+  const selected = useMemo(
+    () => product.variants[selectedColor] ?? product.variants.white,
+    [product.variants, selectedColor],
+  );
   const selectedImage = selected.images[galleryIndex] ?? selected.images[0] ?? null;
 
   const theme =
@@ -74,6 +85,12 @@ export function AquariumColorSwitcher({
     setGalleryIndex(0);
   }, [product.slug, selectedColor]);
 
+  useEffect(() => {
+    if (!product.variants[selectedColor]) {
+      setSelectedColor("white");
+    }
+  }, [product.variants, selectedColor]);
+
   const handlePrevImage = () => {
     if (!selected.images.length) {
       return;
@@ -102,7 +119,7 @@ export function AquariumColorSwitcher({
           </div>
 
           <div className="flex flex-wrap gap-3">
-            {SWITCHER_OPTIONS.map((option) => {
+            {colorOptions.map((option) => {
               const active = selectedColor === option.color;
               return (
                 <button
@@ -114,7 +131,7 @@ export function AquariumColorSwitcher({
                 >
                   <span
                     className={`h-2.5 w-2.5 rounded-full ${
-                      option.color === "white" ? (active ? "bg-slate-950" : "bg-white") : active ? "bg-white" : "bg-slate-900"
+                      active ? SWATCH_CLASS[option.color].active : SWATCH_CLASS[option.color].idle
                     }`}
                   />
                   {option.label}

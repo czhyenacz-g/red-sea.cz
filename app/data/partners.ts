@@ -27,7 +27,7 @@ export const RETAIL_PARTNERS: RetailPartner[] = [
   {
     id: "pepinuv-utes",
     name: "Pepinův útes",
-    services: "Prodej a odborné poradenství",
+    services: "Obchod • import mořských živočichů",
     note: "Návštěva prodejny po předchozí telefonické domluvě.",
     url: "https://www.morskeakvarium.eu/",
     city: "Kutná Hora",

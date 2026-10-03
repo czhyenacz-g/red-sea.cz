@@ -35,13 +35,13 @@ export function ReefSenseSensors() {
         </div>
       </section>
 
-      {/* Oči a uši reefu */}
+      {/* Oči a uši mořského akvária */}
       <section className={`${styles.section} ${styles.family}`} aria-labelledby="family-title">
         <div className={styles.container}>
           <div className={styles.familyHead} data-reveal="">
             <p className={styles.eyebrow}>ReefSense</p>
             <h2 id="family-title" className={styles.h2}>
-              Oči a uši reefu
+              Oči a uši mořského akvária
             </h2>
             <p className={styles.lead}>
               ReefSense je rodina digitálních sond a senzorů, které sledují stav akvária v reálném čase.

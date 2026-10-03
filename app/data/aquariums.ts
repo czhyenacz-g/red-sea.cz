@@ -1,4 +1,4 @@
-export type CabinetColor = "white" | "black";
+export type CabinetColor = "white" | "black" | "oak";
 
 export type AquariumStatus = "ready" | "placeholder";
 
@@ -29,7 +29,8 @@ export type AquariumProduct = {
   shortDescription: string;
   longDescription?: string;
   highlights?: string[];
-  variants: Record<CabinetColor, AquariumVariant>;
+  /** Dubová skříňka existuje jen u některých řad (REEF-FRAME). */
+  variants: Record<"white" | "black", AquariumVariant> & Partial<Record<"oak", AquariumVariant>>;
   specs: Array<{ label: string; value: string }>;
 };
 
@@ -1114,6 +1115,242 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
   },
 ];
 
+const REEF_FRAME_SUMMARY = "Novinka: nový design a třetí barva skříňky – dub.";
+
+const REEF_FRAME_DESCRIPTION =
+  "Nová akvária REEF-FRAME se vyznačují novým designem a také tím, že kromě bílé a černé nabízejí i třetí barvu skříňky – dub.";
+
+const reefFrameProducts: AquariumProduct[] = [
+  {
+    slug: "reef-frame-max-170",
+    name: "REEF-FRAME MAX 170",
+    series: "REEF-FRAME",
+    groupSlug: "reef-frame",
+    status: "ready",
+    source: {
+      status: "provided-text",
+      note: "Obrázky z podkladů Red Sea (Dropbox, 09/2026).",
+    },
+    shortDescription: REEF_FRAME_SUMMARY,
+    variants: {
+      white: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-170-white.webp",
+            alt: "REEF-FRAME MAX 170 s bílou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-170-white-doors.webp",
+            alt: "REEF-FRAME 170 se zavřenými bílými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+      black: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-170-black.webp",
+            alt: "REEF-FRAME MAX 170 s černou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-170-black-doors.webp",
+            alt: "REEF-FRAME 170 se zavřenými černými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+      oak: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-170-oak.webp",
+            alt: "REEF-FRAME MAX 170 s dubovou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-170-oak-doors.webp",
+            alt: "REEF-FRAME 170 se zavřenými dubovými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+    },
+    specs: [],
+  },
+  {
+    slug: "reef-frame-max-250",
+    name: "REEF-FRAME MAX 250",
+    series: "REEF-FRAME",
+    groupSlug: "reef-frame",
+    status: "ready",
+    source: {
+      status: "provided-text",
+      note: "Obrázky z podkladů Red Sea (Dropbox, 09/2026).",
+    },
+    shortDescription: REEF_FRAME_SUMMARY,
+    variants: {
+      white: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-250-white.webp",
+            alt: "REEF-FRAME MAX 250 s bílou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-250-white-doors.webp",
+            alt: "REEF-FRAME 250 se zavřenými bílými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+      black: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-250-black.webp",
+            alt: "REEF-FRAME MAX 250 s černou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-250-black-doors.webp",
+            alt: "REEF-FRAME 250 se zavřenými černými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+      oak: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-250-oak.webp",
+            alt: "REEF-FRAME MAX 250 s dubovou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-250-oak-doors.webp",
+            alt: "REEF-FRAME 250 se zavřenými dubovými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+    },
+    specs: [],
+  },
+  {
+    slug: "reef-frame-max-350",
+    name: "REEF-FRAME MAX 350",
+    series: "REEF-FRAME",
+    groupSlug: "reef-frame",
+    status: "ready",
+    source: {
+      status: "provided-text",
+      note: "Obrázky z podkladů Red Sea (Dropbox, 09/2026).",
+    },
+    shortDescription: REEF_FRAME_SUMMARY,
+    variants: {
+      white: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-350-white.webp",
+            alt: "REEF-FRAME MAX 350 s bílou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-350-white-doors.webp",
+            alt: "REEF-FRAME 350 se zavřenými bílými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+      black: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-350-black.webp",
+            alt: "REEF-FRAME MAX 350 s černou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-350-black-doors.webp",
+            alt: "REEF-FRAME 350 se zavřenými černými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+      oak: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-350-oak.webp",
+            alt: "REEF-FRAME MAX 350 s dubovou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-350-oak-doors.webp",
+            alt: "REEF-FRAME 350 se zavřenými dubovými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+    },
+    specs: [],
+  },
+  {
+    slug: "reef-frame-max-500",
+    name: "REEF-FRAME MAX 500",
+    series: "REEF-FRAME",
+    groupSlug: "reef-frame",
+    status: "ready",
+    source: {
+      status: "provided-text",
+      note: "Obrázky z podkladů Red Sea (Dropbox, 09/2026).",
+    },
+    shortDescription: REEF_FRAME_SUMMARY,
+    variants: {
+      white: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-500-white.webp",
+            alt: "REEF-FRAME MAX 500 s bílou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-500-white-doors.webp",
+            alt: "REEF-FRAME 500 se zavřenými bílými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+      black: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-500-black.webp",
+            alt: "REEF-FRAME MAX 500 s černou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-500-black-doors.webp",
+            alt: "REEF-FRAME 500 se zavřenými černými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+      oak: {
+        images: [
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-500-oak.webp",
+            alt: "REEF-FRAME MAX 500 s dubovou skříňkou",
+            label: "Standard",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-500-oak-doors.webp",
+            alt: "REEF-FRAME 500 se zavřenými dubovými dvířky",
+            label: "With Doors",
+          },
+        ],
+      },
+    },
+    specs: [],
+  },
+];
+
 export const AQUARIUM_GROUPS: AquariumGroup[] = [
   {
     slug: "max-nano-g2",
@@ -1125,6 +1362,17 @@ export const AQUARIUM_GROUPS: AquariumGroup[] = [
     sidebarSummary: MAX_NANO_GROUP_SIDEBAR_SUMMARY,
     fullDescription: MAX_NANO_GROUP_FULL_DESCRIPTION,
     products: maxNanoProducts,
+  },
+  {
+    slug: "reef-frame",
+    name: "REEF-FRAME",
+    source: {
+      status: "provided-text",
+      note: "Popis podle zákazníka, obrázky z podkladů Red Sea.",
+    },
+    sidebarSummary: REEF_FRAME_SUMMARY,
+    fullDescription: REEF_FRAME_DESCRIPTION,
+    products: reefFrameProducts,
   },
   {
     slug: "reefer-max-g3-60-90",

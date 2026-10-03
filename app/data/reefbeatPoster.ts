@@ -109,7 +109,7 @@ export const REEFBEAT_POSTER_ITEMS: ReefBeatPosterItem[] = [
     id: "reefsense",
     icon: "sensor",
     name: "ReefSense",
-    summary: "Digitální sondy a senzory – oči a uši vašeho reefu.",
+    summary: "Digitální sondy a senzory – oči a uši mořského akvária.",
     description:
       "ReefSense sleduje pH, teplotu, salinitu, ORP, hladinu i únik vody. S ReefControl pak akvárium může samo upozornit i zareagovat.",
     cta: "Poznat ReefSense →",
@@ -170,17 +170,17 @@ export const REEFBEAT_POSTER_ITEMS: ReefBeatPosterItem[] = [
   {
     type: "product",
     id: "reefdose",
-    name: "ReefDose 4",
+    name: "ReefDose",
     image: "/reefbeatposter/3.png",
     imageWidth: 2043,
     imageHeight: 770,
-    alt: "Red Sea ReefDose 4",
+    alt: "Red Sea ReefDose",
     description: "Přesné automatické dávkování doplňků.",
     targetId: "reefdose",
     officialUrl: "https://redseafish.com/smart-hardware/reefdose/",
     detail: {
       intro: "Automatické dávkování doplňků v přesně nastavených intervalech.",
-      points: ["Více dávkovacích hlav", "Plánování dávek", "Řízení přes ReefBeat"],
+      points: ["2 nebo 4 dávkovací hlavy", "Plánování dávek", "Řízení přes ReefBeat"],
     },
     position: {
       desktop: { x: 12, y: 58.5, width: 17 },
@@ -197,11 +197,11 @@ export const REEFBEAT_POSTER_ITEMS: ReefBeatPosterItem[] = [
     imageWidth: 1145,
     imageHeight: 1374,
     alt: "Red Sea ReefMat",
-    description: "Automatický fleece filtr pro mechanickou filtraci vody.",
+    description: "Automatický pásový filtr pro mechanickou filtraci vody.",
     targetId: "reefmat",
     officialUrl: "https://redseafish.com/smart-hardware/reefmat/",
     detail: {
-      intro: "Automatický fleece filtr, který průběžně odstraňuje nečistoty z vody.",
+      intro: "Automatický pásový filtr, který průběžně odstraňuje nečistoty z vody a zabraňuje tak jejich vyluhování do vody.",
       points: ["Automatický posun filtrační role", "Méně ruční údržby", "Monitoring přes ReefBeat"],
     },
     position: {

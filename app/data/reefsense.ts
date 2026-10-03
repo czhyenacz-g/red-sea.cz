@@ -38,7 +38,7 @@ export const REEFSENSE_OFFICIAL_URL = "https://redseafish.com/smart-hardware/ree
 export const REEFSENSE_HERO = {
   eyebrow: "ReefSense · ReefControl",
   titleTop: "ReefSense",
-  titleBottom: "oči a uši vašeho reefu",
+  titleBottom: "oči a uši mořského akvária",
   lead: "Sledujte klíčové parametry vody, dostávejte upozornění a nechte akvárium reagovat dřív, než problém vůbec uvidíte.",
   ctaPrimary: "Jak systém funguje ↓",
   ctaSecondary: "Zpět na ReefBeat",
