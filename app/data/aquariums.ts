@@ -1136,42 +1136,42 @@ const reefFrameProducts: AquariumProduct[] = [
       white: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-170-white.webp",
-            alt: "REEF-FRAME MAX 170 s bílou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-170-white-doors.webp",
             alt: "REEF-FRAME 170 se zavřenými bílými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-170-white.webp",
+            alt: "REEF-FRAME MAX 170 s bílou skříňkou",
+            label: "Standard",
           },
         ],
       },
       black: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-170-black.webp",
-            alt: "REEF-FRAME MAX 170 s černou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-170-black-doors.webp",
             alt: "REEF-FRAME 170 se zavřenými černými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-170-black.webp",
+            alt: "REEF-FRAME MAX 170 s černou skříňkou",
+            label: "Standard",
           },
         ],
       },
       oak: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-170-oak.webp",
-            alt: "REEF-FRAME MAX 170 s dubovou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-170-oak-doors.webp",
             alt: "REEF-FRAME 170 se zavřenými dubovými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-170-oak.webp",
+            alt: "REEF-FRAME MAX 170 s dubovou skříňkou",
+            label: "Standard",
           },
         ],
       },
@@ -1193,42 +1193,42 @@ const reefFrameProducts: AquariumProduct[] = [
       white: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-250-white.webp",
-            alt: "REEF-FRAME MAX 250 s bílou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-250-white-doors.webp",
             alt: "REEF-FRAME 250 se zavřenými bílými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-250-white.webp",
+            alt: "REEF-FRAME MAX 250 s bílou skříňkou",
+            label: "Standard",
           },
         ],
       },
       black: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-250-black.webp",
-            alt: "REEF-FRAME MAX 250 s černou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-250-black-doors.webp",
             alt: "REEF-FRAME 250 se zavřenými černými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-250-black.webp",
+            alt: "REEF-FRAME MAX 250 s černou skříňkou",
+            label: "Standard",
           },
         ],
       },
       oak: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-250-oak.webp",
-            alt: "REEF-FRAME MAX 250 s dubovou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-250-oak-doors.webp",
             alt: "REEF-FRAME 250 se zavřenými dubovými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-250-oak.webp",
+            alt: "REEF-FRAME MAX 250 s dubovou skříňkou",
+            label: "Standard",
           },
         ],
       },
@@ -1250,42 +1250,42 @@ const reefFrameProducts: AquariumProduct[] = [
       white: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-350-white.webp",
-            alt: "REEF-FRAME MAX 350 s bílou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-350-white-doors.webp",
             alt: "REEF-FRAME 350 se zavřenými bílými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-350-white.webp",
+            alt: "REEF-FRAME MAX 350 s bílou skříňkou",
+            label: "Standard",
           },
         ],
       },
       black: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-350-black.webp",
-            alt: "REEF-FRAME MAX 350 s černou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-350-black-doors.webp",
             alt: "REEF-FRAME 350 se zavřenými černými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-350-black.webp",
+            alt: "REEF-FRAME MAX 350 s černou skříňkou",
+            label: "Standard",
           },
         ],
       },
       oak: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-350-oak.webp",
-            alt: "REEF-FRAME MAX 350 s dubovou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-350-oak-doors.webp",
             alt: "REEF-FRAME 350 se zavřenými dubovými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-350-oak.webp",
+            alt: "REEF-FRAME MAX 350 s dubovou skříňkou",
+            label: "Standard",
           },
         ],
       },
@@ -1307,42 +1307,42 @@ const reefFrameProducts: AquariumProduct[] = [
       white: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-500-white.webp",
-            alt: "REEF-FRAME MAX 500 s bílou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-500-white-doors.webp",
             alt: "REEF-FRAME 500 se zavřenými bílými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-500-white.webp",
+            alt: "REEF-FRAME MAX 500 s bílou skříňkou",
+            label: "Standard",
           },
         ],
       },
       black: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-500-black.webp",
-            alt: "REEF-FRAME MAX 500 s černou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-500-black-doors.webp",
             alt: "REEF-FRAME 500 se zavřenými černými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-500-black.webp",
+            alt: "REEF-FRAME MAX 500 s černou skříňkou",
+            label: "Standard",
           },
         ],
       },
       oak: {
         images: [
           {
-            src: "/assets/aquariums/reef-frame/rf-max-500-oak.webp",
-            alt: "REEF-FRAME MAX 500 s dubovou skříňkou",
-            label: "Standard",
-          },
-          {
             src: "/assets/aquariums/reef-frame/rf-500-oak-doors.webp",
             alt: "REEF-FRAME 500 se zavřenými dubovými dvířky",
             label: "With Doors",
+          },
+          {
+            src: "/assets/aquariums/reef-frame/rf-max-500-oak.webp",
+            alt: "REEF-FRAME MAX 500 s dubovou skříňkou",
+            label: "Standard",
           },
         ],
       },
