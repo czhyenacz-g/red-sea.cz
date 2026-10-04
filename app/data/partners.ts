@@ -38,7 +38,7 @@ export const RETAIL_PARTNERS: RetailPartner[] = [
   },
   {
     id: "akvarium-uruguajska",
-    name: "Akvárium Uruguajská",
+    name: "Akvárium Uruguayská",
     services: "Prodej • instalace • servis akvárií",
     url: "https://www.morskeakvarium.cz/",
     city: "Praha – Vinohrady",
