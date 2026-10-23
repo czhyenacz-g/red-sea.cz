@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { DelayedImageTooltip } from "./DelayedImageTooltip";
 import { ProductImageLightbox } from "./ProductImageLightbox";
@@ -215,6 +216,19 @@ export function AquariumColorSwitcher({
                   ← Zpět na Standard
                 </button>
               )}
+            </div>
+          ) : null}
+
+          {product.g3PlusController ? (
+            <div className={`rounded-2xl border px-4 py-3 ${theme.panel}`}>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-400">Nově i jako G3+</p>
+              <p className={`mt-1 text-sm leading-5 ${theme.muted}`}>
+                Součástí G3+ je řídicí systém ReefSense – ReefControl {product.g3PlusController} – a ATO modul
+                s teplotním senzorem.
+              </p>
+              <Link href="/reefsense" className="mt-2 inline-block text-sm font-semibold text-amber-400 hover:underline">
+                Více o ReefSense →
+              </Link>
             </div>
           ) : null}
 

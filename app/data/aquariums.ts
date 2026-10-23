@@ -29,6 +29,8 @@ export type AquariumProduct = {
   shortDescription: string;
   longDescription?: string;
   highlights?: string[];
+  /** Model se prodává i jako G3+ (s ReefControl a ATO modulem) – určuje, který ReefControl je součástí. */
+  g3PlusController?: "Pro" | "Lite";
   /** Dubová skříňka existuje jen u některých řad (REEF-FRAME). */
   variants: Record<"white" | "black", AquariumVariant> & Partial<Record<"oak", AquariumVariant>>;
   specs: Array<{ label: string; value: string }>;
@@ -243,6 +245,7 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
     name: "REEFER MAX 200 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-60-90",
+    g3PlusController: "Lite",
     status: "ready",
     source: {
       status: "provided-text",
@@ -329,6 +332,7 @@ const reefMaxG3_60_90Products: AquariumProduct[] = [
     name: "REEFER MAX 300 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-60-90",
+    g3PlusController: "Lite",
     status: "ready",
     source: {
       status: "provided-text",
@@ -426,6 +430,7 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
     name: "REEFER MAX 425 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-120-150",
+    g3PlusController: "Pro",
     status: "ready",
     source: {
       status: "provided-text",
@@ -542,6 +547,7 @@ const reefMaxG3_120_150Products: AquariumProduct[] = [
     name: "REEFER MAX 625 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-120-150",
+    g3PlusController: "Pro",
     status: "ready",
     source: {
       status: "provided-text",
@@ -608,6 +614,7 @@ const reefMaxG3_180Products: AquariumProduct[] = [
     name: "REEFER MAX 750 G3",
     series: "REEFER MAX G3",
     groupSlug: "reefer-max-g3-180",
+    g3PlusController: "Pro",
     status: "ready",
     source: {
       status: "provided-text",
@@ -678,6 +685,7 @@ const reefMaxSProducts: AquariumProduct[] = [
     name: "REEFER MAX S-550 G3",
     series: "REEFER MAX S G3",
     groupSlug: "reefer-max-s-g3",
+    g3PlusController: "Pro",
     status: "ready",
     source: {
       status: "provided-text",
@@ -731,6 +739,7 @@ const reefMaxSProducts: AquariumProduct[] = [
     name: "REEFER MAX S-700 G3",
     series: "REEFER MAX S G3",
     groupSlug: "reefer-max-s-g3",
+    g3PlusController: "Pro",
     status: "ready",
     source: {
       status: "provided-text",
@@ -784,6 +793,7 @@ const reefMaxSProducts: AquariumProduct[] = [
     name: "REEFER MAX S-850 G3",
     series: "REEFER MAX S G3",
     groupSlug: "reefer-max-s-g3",
+    g3PlusController: "Pro",
     status: "ready",
     source: {
       status: "provided-text",
@@ -837,6 +847,7 @@ const reefMaxSProducts: AquariumProduct[] = [
     name: "REEFER MAX S-1000 G3",
     series: "REEFER MAX S G3",
     groupSlug: "reefer-max-s-g3",
+    g3PlusController: "Pro",
     status: "ready",
     source: {
       status: "provided-text",
@@ -893,6 +904,7 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
     name: "REEFER MAX Peninsula 350 G3",
     series: "REEFER MAX Peninsula G3",
     groupSlug: "reefer-max-peninsula-g3",
+    g3PlusController: "Lite",
     status: "ready",
     source: {
       status: "provided-text",
@@ -946,6 +958,7 @@ const reefMaxPeninsulaProducts: AquariumProduct[] = [
     name: "REEFER MAX Peninsula 500 G3",
     series: "REEFER MAX Peninsula G3",
     groupSlug: "reefer-max-peninsula-g3",
+    g3PlusController: "Pro",
     status: "ready",
     source: {
       status: "provided-text",
@@ -1012,6 +1025,7 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
     name: "REEFER MAX Peninsula S-700 G3",
     series: "REEFER MAX S Peninsula G3",
     groupSlug: "reefer-max-s-peninsula-g3",
+    g3PlusController: "Pro",
     status: "ready",
     source: {
       status: "provided-text",
@@ -1065,6 +1079,7 @@ const reefMaxSPeninsulaProducts: AquariumProduct[] = [
     name: "REEFER MAX Peninsula S-950 G3",
     series: "REEFER MAX S Peninsula G3",
     groupSlug: "reefer-max-s-peninsula-g3",
+    g3PlusController: "Pro",
     status: "ready",
     source: {
       status: "provided-text",
