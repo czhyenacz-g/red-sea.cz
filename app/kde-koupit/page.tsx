@@ -107,8 +107,8 @@ export default function Page() {
             <div className="relative mx-auto w-full max-w-xl">
               <div className="absolute inset-x-8 bottom-4 h-10 rounded-[50%] bg-slate-900/15 blur-2xl" />
               <Image
-                src="/assets/aquariums/reefer-max-525-g3-white.webp"
-                alt="Akvarijní systém Red Sea REEFER MAX 525 G3"
+                src="/assets/aquariums/reefer-max-625-g3-white.webp"
+                alt="Akvarijní systém Red Sea REEFER 625 G3+"
                 width={2342}
                 height={1960}
                 priority

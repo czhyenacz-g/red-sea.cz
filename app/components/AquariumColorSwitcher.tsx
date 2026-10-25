@@ -46,10 +46,11 @@ export function AquariumColorSwitcher({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const colorOptions = SWITCHER_OPTIONS.filter((option) => product.variants[option.color]);
-  const selected = useMemo(
-    () => product.variants[selectedColor] ?? product.variants.white,
-    [product.variants, selectedColor],
-  );
+  // Řada Deluxe se už neprodává – její obrázky skrýváme (data necháváme pro případný návrat).
+  const selected = useMemo(() => {
+    const variant = product.variants[selectedColor] ?? product.variants.white;
+    return { ...variant, images: variant.images.filter((img) => img.label !== "Deluxe / With Doors") };
+  }, [product.variants, selectedColor]);
   const selectedImage = selected.images[galleryIndex] ?? selected.images[0] ?? null;
 
   const theme =
@@ -221,10 +222,9 @@ export function AquariumColorSwitcher({
 
           {product.g3PlusController ? (
             <div className={`rounded-2xl border px-4 py-3 ${theme.panel}`}>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-400">Nově i jako G3+</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-400">Součástí balení</p>
               <p className={`mt-1 text-sm leading-5 ${theme.muted}`}>
-                Součástí G3+ je řídicí systém ReefSense – ReefControl {product.g3PlusController} – a ATO modul
-                s teplotním senzorem.
+                Řídicí systém ReefSense – ReefControl {product.g3PlusController} – a ATO modul s teplotním senzorem.
               </p>
               <Link href="/reefsense" className="mt-2 inline-block text-sm font-semibold text-amber-400 hover:underline">
                 Více o ReefSense →
