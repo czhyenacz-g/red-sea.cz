@@ -50,6 +50,16 @@ export default function Page() {
               Pokud provozujete akvaristiku, mořskou akvaristiku, servis akvárií, veřejné akvárium, ZOO nebo podobný provoz, napište nám.
               Rádi s vámi probereme možnosti spolupráce, dostupnost produktů a velkoobchodní podmínky.
             </p>
+            <address className="mt-4 text-sm not-italic leading-6 text-slate-700">
+              <span className="block font-semibold text-slate-900">Ing. Hynek Dařbujan</span>
+              <span className="block">Jabloňová 1385, 286 01 Čáslav</span>
+              <span className="block">
+                Tel:{" "}
+                <a href="tel:+420603248034" className="font-medium text-[#153156] hover:underline">
+                  +420 603 248 034
+                </a>
+              </span>
+            </address>
             <a
               href="mailto:info@red-sea.cz?subject=Pro%20partnery"
               className="mt-6 inline-flex rounded-full bg-[#153156] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0f2745]"
