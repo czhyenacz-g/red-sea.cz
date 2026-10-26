@@ -28,7 +28,7 @@ function buildPath(
   const ax = product.anchor.x;
   const ay = layout.backgroundTop + (product.anchor.y / 100) * backgroundHeight;
 
-  // desktop: vodorovná S-křivka jako čáry v back.png; mobil: svislá (produkty jsou nad/pod pozadím)
+  // desktop: vodorovná S-křivka jako čáry v back.webp; mobil: svislá (produkty jsou nad/pod pozadím)
   if (breakpoint === "desktop") {
     const mx = (px + ax) / 2;
     return `M${px},${py} C${mx},${py} ${mx},${ay} ${ax},${ay}`;

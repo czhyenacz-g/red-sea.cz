@@ -65,7 +65,7 @@ export type ReefBeatPosterProduct = ReefBeatPosterItemBase & {
 export type ReefBeatPosterItem = ReefBeatPosterProduct | ReefBeatPosterCategory;
 
 export type ReefBeatLayout = {
-  /** Výška containeru v jednotkách, kde šířka = 100 (desktop = poměr stran back.png). */
+  /** Výška containeru v jednotkách, kde šířka = 100 (desktop = poměr stran back.webp). */
   height: number;
   /** Svislý offset pozadí v containeru ve stejných jednotkách. */
   backgroundTop: number;
@@ -74,7 +74,7 @@ export type ReefBeatLayout = {
 export const REEFBEAT_POSTER_BREAKPOINT = 900;
 
 export const REEFBEAT_POSTER_BACKGROUND = {
-  src: "/reefbeatposter/back.png",
+  src: "/reefbeatposter/back.webp",
   width: 1536,
   height: 1024,
   alt: "Reef akvárium propojené s chytrými zařízeními Red Sea přes aplikaci ReefBeat",
